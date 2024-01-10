@@ -1,0 +1,15 @@
+/* custom css */
+
+img {}
+
+.home-text-overlay {
+    position: relative;
+
+
+}
+
+.container-image {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+}
