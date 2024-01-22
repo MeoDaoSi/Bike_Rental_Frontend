@@ -9,8 +9,9 @@ export const Home = () => {
         <img src={background} alt="" className="absolute top-0 left-0 h-full w-full object-cover" />
         <div className="relative z-30 mx-auto max-w-screen-xl flex gap-20">
           <div className="w-2/3">
-            <span className="text-orange-600 uppercase font-medium mb-4 block">EXPLORE. DISCOVER. TRAVEL</span>
-            <h1 className="text-7xl text-white font-extrabold">JOURNEY TO EXPLORE NATURE</h1>
+            <span className="text-orange-600 uppercase font-medium mb-4 block">DU LỊCH - KHÁM PHÁ - TRẢI NGHIỆM</span>
+            <h1 className="text-5xl text-white font-extrabold">DỊCH VỤ </h1>
+            <h1 className="text-5xl text-white font-extrabold"> THUÊ XE TỐT NHẤT VIỆT NAM </h1>
             <div className="flex items-center gap-3 text-white my-6 text-4xl">
               <span>....</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
@@ -19,19 +20,19 @@ export const Home = () => {
               <span>....</span>
             </div>
             <p className="text-slate-200">
-              Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi. Optio ullamco nullam purus volutpat optio ullamco nullam purus volutpat.
+              Chúng tôi hiểu cảm giác của người đi thuê xe máy phải bỏ ra một số tiền để có được một chiếc xe đủ tốt, không gặp rắc rối khi đi trên đường. Tuy nhiên thật khó để tìm được một đơn vị cung cấp dịch vụ cho thuê xe uy tín, chất lượng hiện nay. MOTOGO - tiên phong trở thành đơn vị số 1 về cung cấp dịch vụ thuê xe máy tự lái tại Việt Nam.
             </p>
             <div className="flex gap-8 mt-10">
               <button className="text-white h-12 bg-orange-700 w-44">
                 Read More
               </button>
-              <button className="text-white h-12 bg-blue-500 w-44">
+              <button className="text-white h-12 bg-gray-600 w-44">
                 See all offert
               </button>
             </div>
           </div>
           <div className="w-1/3">
-            <form action="" className="bg-blue-500 p-10">
+            <form action="" className="bg-gray-600 p-10">
               <div className="flex flex-col mb-4">
                 <label htmlFor="" className="text-white text-sm mb-2">Search Destination*</label>
                 <input type="text" className="h-12 bg-white px-4 placeholder:text-sm placeholder:text-slate-400" placeholder="no fo people" />
@@ -63,8 +64,8 @@ export const Home = () => {
                 <input type="text" className="h-12 bg-white px-4 placeholder:text-sm placeholder:text-slate-800" placeholder="jj/mm/yyy" />
               </div>
 
-              <button className="text-white h-12 bg-orange-500 w-full mt-5">
-                Reserver
+              <button className="font-bold h-12 bg-yellow w-full mt-5">
+                THUÊ XE
               </button>
             </form>
           </div>

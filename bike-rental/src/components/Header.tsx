@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react'
-import logo from '../assets/images/logo2.jpg'
 
 interface Props {
 
@@ -8,7 +7,7 @@ interface Props {
 export const Header: FunctionComponent<Props> = () => {
   return (
     <>
-      <header className="pb-6 bg-slate-600">
+      <header className="pb-6 dark:bg-gray-600 fixed w-full z-40">
         <div className="mx-auto border-b border-slate-500 mb-6">
           <div className="flex justify-between max-w-screen-xl mx-auto py-2">
             <div className="flex items-center gap-10 text-xs text-slate-200">
@@ -51,48 +50,30 @@ export const Header: FunctionComponent<Props> = () => {
           </div>
         </div>
         <div className="mx-auto max-w-screen-xl flex items-center w-full justify-between">
-          <a href="" className="font-bold text-3xl text-white">Travel</a>
+          <a href="" className="font-bold text-3xl text-white"><img src="https://motogo.vn/wp-content/themes/motogo/images/logo.svg" alt="" /></a>
           <nav className="flex gap-12">
 
             <a href="" className="text-white uppercase relative pr-6">Home
-              <span className="w-0 h-0 absolute right-0 top-2
-        border-l-[5px] border-l-transparent
-        border-t-[8px] border-t-white
-        border-r-[5px] border-r-transparent"></span>
+              
             </a>
             <a href="" className="text-white uppercase relative pr-6">About
-              <span className="w-0 h-0 absolute right-0 top-2
-        border-l-[5px] border-l-transparent
-        border-t-[8px] border-t-white
-        border-r-[5px] border-r-transparent"></span>
+              
             </a>
             <a href="" className="text-white uppercase relative pr-6">Tours
-              <span className="w-0 h-0 absolute right-0 top-2
-        border-l-[5px] border-l-transparent
-        border-t-[8px] border-t-white
-        border-r-[5px] border-r-transparent"></span>
+              
             </a>
             <a href="" className="text-white uppercase relative pr-6">Pages
-              <span className="w-0 h-0 absolute right-0 top-2
-        border-l-[5px] border-l-transparent
-        border-t-[8px] border-t-white
-        border-r-[5px] border-r-transparent"></span>
+              
             </a>
             <a href="" className="text-white uppercase relative pr-6">Blog
-              <span className="w-0 h-0 absolute right-0 top-2
-        border-l-[5px] border-l-transparent
-        border-t-[8px] border-t-white
-        border-r-[5px] border-r-transparent"></span>
+              
             </a>
             <a href="" className="text-white uppercase relative pr-6">Contact
-              <span className="w-0 h-0 absolute right-0 top-2
-        border-l-[5px] border-l-transparent
-        border-t-[8px] border-t-white
-        border-r-[5px] border-r-transparent"></span>
+              
             </a>
           </nav>
-          <button className="uppercase text-white text-sm bg-orange-600 pt-2 pb-3 px-6">
-            Book now
+          <button className="font-bold text-sm bg-yellow-500 pt-2 pb-3 px-6">
+            THUÊ NGAY
           </button>
         </div>
       </header>

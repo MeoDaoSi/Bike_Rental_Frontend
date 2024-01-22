@@ -1,9 +1,9 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes, Router } from 'react-router-dom';
-import { Button } from './components/ui/Button';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { Admin } from './pages/Admin';
 
 
 export const App = () => {
@@ -13,6 +13,9 @@ export const App = () => {
       <Routes>
         <Route path='/'>
           <Route index element={<Home />} />
+        </Route>
+        <Route path='/admin'>
+          <Route index element={<Admin />} />
         </Route>
       </Routes>
       <Footer />
