@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react'
+import logo from '../assets/images/logo2.jpg'
 
 interface Props {
 
@@ -7,68 +8,94 @@ interface Props {
 export const Header: FunctionComponent<Props> = () => {
   return (
     <>
-      <nav className="px-4 lg:px-6 py-2.5">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <a href="/" className="flex items-center">
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">MOTOGO</span>
-          </a>
-          <div className="flex items-center lg:order-2 ">
+      <header className="pb-6 bg-slate-600">
+        <div className="mx-auto border-b border-slate-500 mb-6">
+          <div className="flex justify-between max-w-screen-xl mx-auto py-2">
+            <div className="flex items-center gap-10 text-xs text-slate-200">
+              <a href="" className="flex items-center gap-2">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                  </svg>
+                </span>
+                <span>+01 (977) 2599 12</span>
+              </a>
+              <a href="" className="flex items-center gap-2">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
 
-            <div id="userDropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-              <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                <div className="font-medium truncate"></div>
-              </div>
-              <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-                <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                </li>
-                <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                </li>
-                <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                </li>
-              </ul>
-              <div className="py-1">
-                <form action="/user/logout" method="post" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                  <button>Sign out</button>
-                </form>
-              </div>
+                </span>
+                <span>company@domain.com</span>
+              </a>
+              <a href="" className="flex items-center gap-2">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                  </svg>
+
+                </span>
+                <span>3146 Koontz Lane, California</span>
+              </a>
             </div>
+            <div>
+              <a href="" className="text-slate-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
 
-
-            <a href="/user/login" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">ĐĂNG NHẬP</a>
-
-            <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-              <span className="sr-only">Open main menu</span>
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-              <svg className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            </button>
-          </div>
-          <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              <li>
-                <a href="/" className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">THUÊ XE MÁY</a>
-              </li>
-              <li>
-                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">BẢNG GIÁ</a>
-              </li>
-              <li>
-                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">CHÍNH SÁCH</a>
-              </li>
-              <li>
-                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</a>
-              </li>
-              <li>
-                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</a>
-              </li>
-              <li>
-                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-              </li>
-            </ul>
+              </a>
+            </div>
           </div>
         </div>
-      </nav>
+        <div className="mx-auto max-w-screen-xl flex items-center w-full justify-between">
+          <a href="" className="font-bold text-3xl text-white">Travel</a>
+          <nav className="flex gap-12">
+
+            <a href="" className="text-white uppercase relative pr-6">Home
+              <span className="w-0 h-0 absolute right-0 top-2
+        border-l-[5px] border-l-transparent
+        border-t-[8px] border-t-white
+        border-r-[5px] border-r-transparent"></span>
+            </a>
+            <a href="" className="text-white uppercase relative pr-6">About
+              <span className="w-0 h-0 absolute right-0 top-2
+        border-l-[5px] border-l-transparent
+        border-t-[8px] border-t-white
+        border-r-[5px] border-r-transparent"></span>
+            </a>
+            <a href="" className="text-white uppercase relative pr-6">Tours
+              <span className="w-0 h-0 absolute right-0 top-2
+        border-l-[5px] border-l-transparent
+        border-t-[8px] border-t-white
+        border-r-[5px] border-r-transparent"></span>
+            </a>
+            <a href="" className="text-white uppercase relative pr-6">Pages
+              <span className="w-0 h-0 absolute right-0 top-2
+        border-l-[5px] border-l-transparent
+        border-t-[8px] border-t-white
+        border-r-[5px] border-r-transparent"></span>
+            </a>
+            <a href="" className="text-white uppercase relative pr-6">Blog
+              <span className="w-0 h-0 absolute right-0 top-2
+        border-l-[5px] border-l-transparent
+        border-t-[8px] border-t-white
+        border-r-[5px] border-r-transparent"></span>
+            </a>
+            <a href="" className="text-white uppercase relative pr-6">Contact
+              <span className="w-0 h-0 absolute right-0 top-2
+        border-l-[5px] border-l-transparent
+        border-t-[8px] border-t-white
+        border-r-[5px] border-r-transparent"></span>
+            </a>
+          </nav>
+          <button className="uppercase text-white text-sm bg-orange-600 pt-2 pb-3 px-6">
+            Book now
+          </button>
+        </div>
+      </header>
     </>
   )
 }

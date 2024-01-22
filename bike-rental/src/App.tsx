@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Router } from 'react-router-dom';
 import { Button } from './components/ui/Button';
 import { Home } from './pages/Home';
 import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 
 export const App = () => {
@@ -14,6 +15,7 @@ export const App = () => {
           <Route index element={<Home />} />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
