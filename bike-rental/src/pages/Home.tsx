@@ -3,6 +3,27 @@ import "../index.css"
 import background from "../assets/images/1.jpg"
 
 export const Home = () => {
+
+  const date: Date = new Date();
+
+  let day = date.getDate();
+  let month: String = (date.getMonth() + 1).toString();
+  if (Number(month) < 10) {
+    month = '0' + month.toString();
+
+  }
+  let year = date.getFullYear();
+
+  let currentDate = `${year}-${month}-${day}`;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(e.target);
+
+
+
+  }
+
   return (
     <>
       <div className="hero py-40 bg-slate-200 relative before:block before:absolute before:bg-black before:h-full before:w-full before:top-0 before:z-10 before:opacity-70">
@@ -32,36 +53,36 @@ export const Home = () => {
             </div>
           </div>
           <div className="w-1/3">
-            <form action="" className="bg-gray-600 p-10">
+            <form onSubmit={handleSubmit} className="bg-gray-600 p-10">
               <div className="flex flex-col mb-4">
-                <label htmlFor="" className="text-white text-sm mb-2">Search Destination*</label>
-                <input type="text" className="h-12 bg-white px-4 placeholder:text-sm placeholder:text-slate-400" placeholder="no fo people" />
+                <label htmlFor="cars" className="text-white text-sm mb-2">Địa điểm nhận xe</label>
+                <select required name="cars" id="cars" className="h-12 bg-white px-4 ">
+                  <option value="" disabled hidden selected>Chọn địa điểm</option>
+                  <option value="volvo">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                  <option value="saab">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                  <option value="opel">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                  <option value="audi">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                </select>
               </div>
               <div className="flex flex-col mb-4">
-                <label htmlFor="" className="text-white text-sm mb-2">Pax number*</label>
-                <input type="text" className="h-12 bg-white px-4 placeholder:text-sm placeholder:text-slate-400" placeholder="Votre destination" />
+                <label htmlFor="cars" className="text-white text-sm mb-2">Địa điểm trả xe</label>
+                <select required name="cars" id="cars" className="h-12 bg-white px-4 ">
+                  <option value="" disabled hidden selected>Chọn địa điểm</option>
+                  <option value="volvo">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                  <option value="saab">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                  <option value="opel">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                  <option value="audi">3/2 Xuân Khánh Ninh Kiều Cần thơ</option>
+                </select>
               </div>
+
               <div className="flex flex-col mb-4">
-                <label htmlFor="" className="text-white text-sm mb-2">Chacking date*</label>
-                <div className="h-full relative">
-                  <button className="absolute flex items-center h-full top-6 right-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-                    </svg>
-                  </button>
-                </div>
-                <input type="text" className="h-12 bg-white px-4 placeholder:text-sm placeholder:text-slate-800" placeholder="jj/mm/yyy" />
+                <label htmlFor="cars" className="text-white text-sm mb-2">Ngày nhận xe</label>
+                <input type="date" required min={currentDate} />
               </div>
+
               <div className="flex flex-col mb-4">
-                <label htmlFor="" className="text-white text-sm mb-2">Checkout date*</label>
-                <div className="h-full relative">
-                  <button className="absolute flex items-center h-full top-6 right-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-                    </svg>
-                  </button>
-                </div>
-                <input type="text" className="h-12 bg-white px-4 placeholder:text-sm placeholder:text-slate-800" placeholder="jj/mm/yyy" />
+                <label htmlFor="cars" className="text-white text-sm mb-2">Ngày trả xe</label>
+                <input type="date" required min={currentDate} />
               </div>
 
               <button className="font-bold h-12 bg-yellow w-full mt-5">
