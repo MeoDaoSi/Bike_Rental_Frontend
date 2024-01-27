@@ -1,8 +1,11 @@
 // import React from 'react'
 import "../index.css"
 import background from "../assets/images/1.jpg"
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
+
+  const Navigate = useNavigate();
 
   const date: Date = new Date();
 
@@ -19,6 +22,8 @@ export const Home = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(e.target);
+
+    Navigate('/reservation');
 
 
 

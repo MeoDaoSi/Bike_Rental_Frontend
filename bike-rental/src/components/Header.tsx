@@ -7,7 +7,7 @@ interface Props {
 export const Header: FunctionComponent<Props> = () => {
   return (
     <>
-      <header className="pb-6 dark:bg-gray-600 fixed w-full z-40">
+      <header className="pb-6 bg-gray-500 fixed w-full z-40">
         <div className="mx-auto border-b border-slate-500 mb-6">
           <div className="flex justify-between max-w-screen-xl mx-auto py-2">
             <div className="flex items-center gap-10 text-xs text-slate-200">
@@ -54,22 +54,22 @@ export const Header: FunctionComponent<Props> = () => {
           <nav className="flex gap-12">
 
             <a href="" className="text-white uppercase relative pr-6">Home
-              
+
             </a>
             <a href="" className="text-white uppercase relative pr-6">About
-              
+
             </a>
             <a href="" className="text-white uppercase relative pr-6">Tours
-              
+
             </a>
             <a href="" className="text-white uppercase relative pr-6">Pages
-              
+
             </a>
             <a href="" className="text-white uppercase relative pr-6">Blog
-              
+
             </a>
             <a href="" className="text-white uppercase relative pr-6">Contact
-              
+
             </a>
           </nav>
           <button className="font-bold text-sm bg-yellow-500 pt-2 pb-3 px-6">
