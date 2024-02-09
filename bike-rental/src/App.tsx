@@ -2,9 +2,9 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Header } from './components/Header';
-// import { Footer } from './components/Footer';
+import { Footer } from './components/Footer';
 import { Admin } from './pages/Admin';
-import { Motorcycle } from './pages/Motorcycle';
+import { Motorcycle } from './pages/Reservation';
 
 
 export const App = () => {
@@ -20,7 +20,7 @@ export const App = () => {
           <Route index element={<Admin />} />
         </Route>
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   )
 }

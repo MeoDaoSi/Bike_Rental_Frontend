@@ -1,7 +1,18 @@
-import React from 'react'
+import React from 'react';
 import motorcycle from '../assets/images/motorcycle.png'
+import { useNavigate } from 'react-router-dom';
 
 export const Motorcycle = () => {
+
+    const Navigate = useNavigate();
+
+    function handleClick(e: any) {
+        console.log(e.target.value);
+
+        // Navigate('/reservation/infos');
+    }
+
+
     return (
         <>
             <div className="flex flex-row min-h-screen justify-between mx-12 py-48">
@@ -29,19 +40,16 @@ export const Motorcycle = () => {
 
 
                         <div className="my-3">
-                            <form action="/reservation/motorcycles" method="post">
-                                <input type="text" id="id" name="id" className="hidden" value="{{this._id}}" />
-                                <div className="flex flex-col justify-end">
-                                    <div className="mr-3 mt-3 font-medium text-right">ssss/Ngày</div>
-                                    <div className="mr-3 my-1 text-right">
-                                        không bao gồm thuế và bảo hiểm
-                                    </div>
-
-                                    <div className="mr-3 my-1 text-right">
-                                        <button className="bg-yellow-400 font-medium  px-5 py-2.5 text-center">THUÊ XE</button>
-                                    </div>
+                            <div className="flex flex-col justify-end">
+                                <div className="mr-3 mt-3 font-medium text-right">ssss/Ngày</div>
+                                <div className="mr-3 my-1 text-right">
+                                    không bao gồm thuế và bảo hiểm
                                 </div>
-                            </form>
+
+                                <div className="mr-3 my-1 text-right">
+                                    <button value={1233} onClick={handleClick} className="bg-yellow-400 font-medium  px-5 py-2.5 text-center">THUÊ XE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -66,19 +74,16 @@ export const Motorcycle = () => {
 
 
                         <div className="my-3">
-                            <form action="/reservation/motorcycles" method="post">
-                                <input type="text" id="id" name="id" className="hidden" value="{{this._id}}" />
-                                <div className="flex flex-col justify-end">
-                                    <div className="mr-3 mt-3 font-medium text-right">ssss/Ngày</div>
-                                    <div className="mr-3 my-1 text-right">
-                                        không bao gồm thuế và bảo hiểm
-                                    </div>
-
-                                    <div className="mr-3 my-1 text-right">
-                                        <button className="bg-yellow-400 font-medium  px-5 py-2.5 text-center">THUÊ XE</button>
-                                    </div>
+                            <div className="flex flex-col justify-end">
+                                <div className="mr-3 mt-3 font-medium text-right">ssss/Ngày</div>
+                                <div className="mr-3 my-1 text-right">
+                                    không bao gồm thuế và bảo hiểm
                                 </div>
-                            </form>
+
+                                <div className="mr-3 my-1 text-right">
+                                    <button value={1233} onClick={handleClick} className="bg-yellow-400 font-medium  px-5 py-2.5 text-center">THUÊ XE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -101,6 +106,7 @@ export const Motorcycle = () => {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }
