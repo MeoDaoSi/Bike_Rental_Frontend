@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 export const Motorcycle = () => {
 
+    const handle = (e: any) => {
+        e.preventDefault();
+
+        console.log('1221');
+    }
+
     const Navigate = useNavigate();
 
     function handleClick(e: any) {
@@ -47,7 +53,7 @@ export const Motorcycle = () => {
                                 </div>
 
                                 <div className="mr-3 my-1 text-right">
-                                    <button value={1233} onClick={handleClick} className="bg-yellow-400 font-medium  px-5 py-2.5 text-center">THUÊ XE</button>
+                                    <button value={1233} onClick={handleClick} className="btn">THUÊ XE</button>
                                 </div>
                             </div>
                         </div>

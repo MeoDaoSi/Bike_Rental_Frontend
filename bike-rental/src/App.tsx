@@ -5,6 +5,8 @@ import { Header } from './components/Header';
 // import { Footer } from './components/Footer';
 import { Admin } from './pages/Admin';
 import { Motorcycle } from './pages/Reservation';
+import { Schedule } from './pages/Schedule';
+// import '../public/style.css'
 
 
 export const App = () => {
@@ -14,7 +16,8 @@ export const App = () => {
       <Routes>
         <Route path='/'>
           <Route index element={<Home />} />
-          <Route path='/reservation' element={<Motorcycle />} />
+          <Route path='/reservation' element={<Schedule />} />
+          <Route path='/reservation/bike' element={<Motorcycle />} />
         </Route>
         <Route path='/admin'>
           <Route index element={<Admin />} />
