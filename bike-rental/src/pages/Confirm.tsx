@@ -3,8 +3,8 @@ import React from 'react'
 export const Confirm = () => {
     return (
         <>
-            <div className="flex flex-row min-h-screen justify-between mx-12 my-12">
-                <div className="bg-gray-100 border w-2/3 flex flex-col mt-24">
+            <div className="flex flex-row min-h-screen justify-between mx-4 my-4">
+                <div className="bg-gray-100 border w-2/3 flex flex-col">
                     <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">XACH NHAN THÔNG TIN</h2>
                     <div className="content m-4" >
                         <form method="POST">
@@ -40,7 +40,7 @@ export const Confirm = () => {
                         </form>
                     </div>
                 </div>
-                <div className="mt-24 ml-6 bg-gray-100 border w-96 flex flex-col">
+                <div className="bg-gray-100 border w-96 flex flex-col">
                     <div className="h-96 mx-4 my-4 border">
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold">Thông tin nhận xe</p>

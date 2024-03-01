@@ -7,7 +7,7 @@ export const Motorcycle = () => {
     const Navigate = useNavigate();
 
     function handleClick(motocycleId: object) {
-        return function () { 
+        return function () {
             console.log(motocycleId);
             Navigate('/reservation/info');
         }
@@ -17,7 +17,7 @@ export const Motorcycle = () => {
 
     return (
         <>
-            <div className="flex flex-row min-h-screen justify-between mx-12 py-48">
+            <div className="flex flex-row min-h-screen justify-center px-4 py-4">
                 <div className=" bg-gray-100 border w-2/3 flex flex-col">
                     <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">THUÊ XE</h2>
 
@@ -49,7 +49,7 @@ export const Motorcycle = () => {
                                 </div>
 
                                 <div className="mr-3 my-1 text-right">
-                                    <button onClick={handleClick({id:1})} className="btn">THUÊ XE</button>
+                                    <button onClick={handleClick({ id: 1 })} className="btn">CHỌN</button>
                                 </div>
                             </div>
                         </div>
@@ -83,14 +83,14 @@ export const Motorcycle = () => {
                                 </div>
 
                                 <div className="mr-3 my-1 text-right">
-                                    <button onClick={handleClick({id:1})} className="bg-yellow-400 font-medium  px-5 py-2.5 text-center">THUÊ XE</button>
+                                    <button onClick={handleClick({ id: 1 })} className="bg-yellow-400 font-medium  px-5 py-2.5 text-center">THUÊ XE</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div className=" ml-6 bg-gray-100 border w-96 flex flex-col">
+                {/* <div className=" ml-6 bg-gray-100 border w-96 flex flex-col">
                     <div className="h-64 mx-4 my-4 border">
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold">Thông tin nhận xe</p>
@@ -106,7 +106,7 @@ export const Motorcycle = () => {
                     <div className="h-48 mx-4 my-4 border">
                         Thông tin nhận xe
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </>
