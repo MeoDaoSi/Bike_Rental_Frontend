@@ -5,11 +5,19 @@ import { Motorcycle } from './Motorcycle'
 import { Info } from './Info'
 import { Confirm } from './Confirm'
 
+type BikeData = {
+    id: number,
+    name: string,
+    price: number,
+    image: string
+}
+
 type FormData = {
     pickup_location: string,
     return_location: string,
     pickup_time: string,
     return_time: string,
+    bike: BikeData[],
 }
 
 const INITIAL_DATA: FormData = {
@@ -17,6 +25,7 @@ const INITIAL_DATA: FormData = {
     return_location: '',
     pickup_time: '',
     return_time: '',
+    bike: [],
 }
 
 export const RentBikeForm = () => {

@@ -7,7 +7,7 @@ export const Info = () => {
 
     return (
         <>
-            <div className="flex flex-row min-h-screen justify-between px-4 py-4">
+            <div className="flex flex-row min-h-screen justify-center px-4 py-4">
                 <div className="bg-gray-100 border w-2/3 flex flex-col">
                     <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">THÔNG TIN</h2>
                     <div className="content m-4" >
@@ -43,27 +43,25 @@ export const Info = () => {
                     </div>
                 </div>
                 <div className="ml-6 bg-gray-100 border w-96 flex flex-col">
-                    <div className="h-96 mx-4 my-4 border">
+                    <div className="h-64 mx-4 my-4 border">
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold">Thông tin nhận xe</p>
-                            <p className="text-sm mt-1">ssssssssss</p>
-                            <p className="text-sm mt-1">Vị Trí: ssssssssss</p>
+                            <p className="text-sm mt-1">ssss</p>
+                            <p className="text-sm mt-1">Vị Trí: ssss</p>
                         </div>
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold">Thông tin trả xe</p>
-                            <p className="text-sm mt-1">ssssssssss</p>
-                            <p className="text-sm mt-1">Vị Trí: ssssssssss</p>
-                        </div>
-                        <div className="mx-4 mt-8 ">
-                            <p className="mt-3 text-xl font-bold">Thông tin thuê xe</p>
-                            <p className="text-sm mt-1">ssssssssss</p>
-                            <p className="text-sm mt-1">Giá: ssssssssssice_per_day/Ngày</p>
+                            <p className="text-sm mt-1">ssss</p>
+                            <p className="text-sm mt-1">Vị Trí: ssss</p>
                         </div>
                     </div>
-                    <div className="h-80 mx-4 my-4 border">
-                        <div className="mx-4 mt-8 ">
-                            <span className="mt-3 text-xl font-bold">Tổng cộng</span>
-                            <span className="text-xl mt-1 text-right">ssssssssss</span>
+                    <div className="h-48 mx-4 my-4 border">
+                        <div className="mx-4 my-2 ">
+                            <p className="mt-3 text-xl font-bold bg-orange-400">Giỏ hàng</p>
+                            <p className="mt-3 mx-2 text-xl font-bold bg-white">Giỏ hàng - 9999999</p>
+                            <p className="mt-3 mx-2 text-xl font-bold bg-white">Giỏ hàng - 9999999</p>
+                            <p className="mt-3 mx-2 text-xl font-bold bg-white">Giỏ hàng - 9999999</p>
+                            <h2 className="my-3 border-t-4 text-xl">THUÊ XE</h2>
                         </div>
                     </div>
                 </div>

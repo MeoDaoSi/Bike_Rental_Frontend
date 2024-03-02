@@ -1,15 +1,12 @@
 // import React, { ReactElement, ReactHTMLElement } from 'react';
-import motorcycle from '../assets/images/motorcycle.png'
-import { useNavigate } from 'react-router-dom';
-
+import motorcycle from '../assets/images/motorcycle.png';
 export const Motorcycle = () => {
 
-    const Navigate = useNavigate();
 
     function handleClick(motocycleId: object) {
         return function () {
             console.log(motocycleId);
-            Navigate('/reservation/info');
+            
         }
 
     }
@@ -49,7 +46,7 @@ export const Motorcycle = () => {
                                 </div>
 
                                 <div className="mr-3 my-1 text-right">
-                                    <button onClick={handleClick({ id: 1 })} className="btn">CHỌN</button>
+                                    <button type='button' onClick={handleClick({ id: 1 })} className="btn">CHỌN</button>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +87,7 @@ export const Motorcycle = () => {
                     </div>
 
                 </div>
-                {/* <div className=" ml-6 bg-gray-100 border w-96 flex flex-col">
+                <div className="ml-6 bg-gray-100 border w-96 flex flex-col">
                     <div className="h-64 mx-4 my-4 border">
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold">Thông tin nhận xe</p>
@@ -103,10 +100,16 @@ export const Motorcycle = () => {
                             <p className="text-sm mt-1">Vị Trí: ssss</p>
                         </div>
                     </div>
-                    <div className="h-48 mx-4 my-4 border">
-                        Thông tin nhận xe
+                    <div className="h-48 mx-4 my-4">
+                        <div className="mx-4 my-2 ">
+                            <p className="mt-3 text-xl font-bold bg-orange-400">Giỏ hàng</p>
+                            <p className="mt-3 mx-2 text-xl font-bold bg-white">Giỏ hàng - 9999999</p>
+                            <p className="mt-3 mx-2 text-xl font-bold bg-white">Giỏ hàng - 9999999</p>
+                            <p className="mt-3 mx-2 text-xl font-bold bg-white">Giỏ hàng - 9999999</p>
+                            <h2 className="my-3 border-t-4 text-xl">Tổng giá thuê: 999999</h2>
+                        </div>
                     </div>
-                </div> */}
+                </div>
             </div>
 
         </>

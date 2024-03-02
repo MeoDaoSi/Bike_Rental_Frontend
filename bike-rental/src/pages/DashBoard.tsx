@@ -22,6 +22,13 @@ export const Admin = () => {
                             <span className="allLinks_name">Add Bikes</span>
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink className="dashlinks" to="/admin/location">
+                            <i className="fa-solid fa-store"></i>
+                            <span className="allLinks_name">Cửa Hàng</span>
+                        </NavLink>
+                    </li>
+                    
 
                     <li>
                         <NavLink className="dashlinks" to="/getrentbikesforadmin">
@@ -51,7 +58,7 @@ export const Admin = () => {
 
 
 
-            <section className="home-section">
+            <section className="mt-28 home-section">
                 <nav>
                     <div className="sidebar-button">
                         <span className="dashboard">Dashboard</span>
