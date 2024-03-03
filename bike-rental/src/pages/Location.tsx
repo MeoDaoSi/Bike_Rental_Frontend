@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import {NavLink} from "react-router-dom";
 
 export const Location = () => {
@@ -49,19 +49,33 @@ export const Location = () => {
 
             <section className="home-section">
                 <nav>
-                <div className="sidebar-button">
+                    <div className="sidebar-button">
+                        
+                        <span className="dashboard">Dashboard</span>
+                    </div>
                     
-                    <span className="dashboard">Dashboard</span>
-                </div>
-                
-                <div className="profile-details">
-                    <span className="admin_name">Admin</span>
-                </div>
+                    <div className="profile-details">
+                        <span className="admin_name">Admin</span>
+                    </div>
                 </nav>
                 
-                <div className = "salecartableDiv">
+                <div className="salecartableDiv" >
 
                     <h1 className="heading"><span>Danh Sách Cửa Hàng</span></h1>
+
+                    <div className='flex'>
+                        
+                        <form className="max-w-md w-96 mr-2 mb-2"> 
+                            <div className="relative mt-4">
+                                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <input type="search" id="default-search" className="w-full p-4 ps-10 text-sm text-gray-900 border rounded" placeholder="Search" required />
+                                <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-orange-700 hover:bg-orange-800 rounded text-sm px-4 py-2">Search</button>
+                            </div>
+                        </form>
+                        <NavLink className="btn mb-2" to="add">Thêm</NavLink>
+                    </div>
 
                     <table className = "salecartable">
                         <thead>

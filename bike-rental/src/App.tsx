@@ -11,6 +11,7 @@ import { Info } from './pages/Info';
 import { Confirm } from './pages/Confirm';
 import { RentBikeForm } from './pages/RentBikeForm';
 import { Location } from './pages/Location';
+import { Location_Form_Create } from './pages/Location_Form_Create';
 
 // import '../public/style.css'
 import './registerStyle.css'
@@ -32,6 +33,7 @@ export const App = () => {
         <Route path='/admin'>
           <Route index element={<Admin />} />
           <Route path='location' element={<Location />} />
+          <Route path='location/add' element={<Location_Form_Create />} />
         </Route>
       </Routes>
     </BrowserRouter>

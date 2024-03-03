@@ -36,7 +36,14 @@ export const Schedule = ({ pickup_location, return_location, pickup_time, return
                         <div className="user-details">
                                 <div className="input-box">
                                     <span className="details">Ngày nhận xe</span>
-                                    <input value={pickup_time} type="date" name="pickup_time" id="pickup_time" required onChange={ e => updateFields({ pickup_time: e.target.value})}/>
+                                    <input
+                                        value={pickup_time}
+                                        type="date"
+                                        name="pickup_time"
+                                        id="pickup_time"
+                                        required
+                                        onChange={e => updateFields({ pickup_time: e.target.value })}
+                                    />
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Ngày trả xe</span>
