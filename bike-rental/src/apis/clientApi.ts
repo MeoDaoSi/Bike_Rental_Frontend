@@ -1,62 +1,26 @@
 import { instance as axiosClient } from './index';
 
 export const clientApi = {
-    get: async (url: string) => {
-        try {
-            const response = await axiosClient.get(url);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }
+    getAll: async (params: object | string, url: string): Promise<object>=> {
+        return axiosClient.get(url, { params });
     },
-    post: async (url: string, data: object) => {
-        try {
-            const response = await axiosClient.post(url, data);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }
+    getById: async (id: string, url: string): Promise<string> => { 
+        const base_url = `${url}${id}`;
+        return axiosClient.get(base_url);
     },
-    put: async (url: string, data: object) => {
-        try {
-            const response = await axiosClient.put(url, data);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }
+    post(data: object, url: string): Promise<object> {
+        const base_url = `${url}`
+        return axiosClient.post(base_url, data)
     },
-    delete: async (url: string) => {
-        try {
-            const response = await axiosClient.delete(url);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }
-    }
+
+    update(data: Partial<any>, url: string): Promise<object> {
+        if (!data?.userId) throw new Error('userId is required');
+        const base_url = `${url}${data?.userId}`
+        return axiosClient.patch(base_url, data?.bodyReq)
+    },
+
+    delete(id: string, url: string): Promise<object> {
+        const base_url = `${url}${id}`
+        return axiosClient.delete(base_url)
+    },
 }
-
-// const axiosService = {
-//   getAll(params: object | string, url: string): Promise<object> {
-//     return axiosClient.get(url, { params })
-//   },
-
-//   getById(id: string, url: string): Promise<object> {
-//     const base_url = `${url}${id}`
-//     return axiosClient.get(base_url)
-//   },
-
-//   post(data: object, url: string): Promise<object> {
-//     const base_url = `${url}`
-//     return axiosClient.post(base_url, data)
-//   },
-
-//   update(data: Partial<any>, url: string): Promise<object> {
-//     const base_url = `${url}${data.userId}`
-//     return axiosClient.patch(base_url, data.bodyReq)
-//   },
-
-//   delete(id: string, url: string): Promise<object> {
-//     const base_url = `${url}${id}`
-//     return axiosClient.delete(base_url)
-//   },
-// }

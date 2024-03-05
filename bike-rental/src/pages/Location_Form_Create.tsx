@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from "react-router-dom";
+import { clientApi } from '../apis/clientApi';
+import { useNavigate } from 'react-router-dom';
 
 type LocationData = {
     address: string,
@@ -16,15 +18,23 @@ const INITIAL_DATA: LocationData = {
 export const Location_Form_Create = () => {
 
     const [data, setData] = useState(INITIAL_DATA)
+    const Navigate = useNavigate();
 
     const updateFields = (newFields: Partial<LocationData>) => { 
         setData(prev => ({ ...prev, ...newFields }))
     }
 
-    const handle = (e: React.FormEvent) => {
+    const handle = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(data);
-        
+        try {
+            const res = await clientApi.post(data, '/location');
+            console.log(res);
+            Navigate('/admin/location');
+            
+            
+        } catch (error) {
+            alert('Error');
+        }
     }
 
     return (

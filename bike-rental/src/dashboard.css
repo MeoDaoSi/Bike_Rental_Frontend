@@ -268,13 +268,14 @@ nav .profile-details .admin_name {
 }
 
 .addbikeform label {
-    float: left;
+    /* float: left; */
     color: #1a1a1a;
     font-size: 15px;
     border: 1px;
     padding: 5;
     margin: 8px 0px;
-    width: 80px;
+    width: 100px;
+    display: inline-block;
 }
 
 

@@ -1,30 +1,42 @@
-// import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom";
 import { clientApi } from '../apis/clientApi';
-import { useState, useEffect } from 'react';
-import axios from "axios";
 
-export const Location = () => {
+import { useParams } from 'react-router-dom';
 
+export const ListBike = () => {
+
+    const params = useParams();
     const [data, setData] = useState([
         {
-            address: '',
             _id: '',
+            location_id: '',
+            brand: '',
+            model: '',
+            year: '',
+            color: '',
+            license_plate: '',
+            status: '',
+            type: '',
+            QR_code: '',
         }
     ]);
-
+    
     useEffect(() => {
-        const fetchData = async () => {
+        const fetch = async () => { 
             try {
-                const res = await axios.get('http://localhost:3000/location');
+                const res = await axios.get(`http://localhost:3000/location/${params.location_id}/bike`);
                 console.log(res);
                 setData(res.data);
+                
             } catch (error) {
-                console.log('Error');
+                
             }
         }
-        fetchData();
-    }, []);
+        fetch();
+    }, [])
+    
 
     return (
         <>
@@ -119,7 +131,7 @@ export const Location = () => {
                                     return (
                                         <tr key={index}>
                                             <td >{index + 1}</td>
-                                            <td >{item.address}</td>
+                                            <td ></td>
                                             <td >ssss</td>
                                             <td >Taka</td>
                                             <td ><NavLink to={`${item._id}/bike`}><i className="fa-solid fa-info"></i></NavLink></td>
