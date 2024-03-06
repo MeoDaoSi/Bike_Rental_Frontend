@@ -59,16 +59,6 @@ export const Admin = () => {
 
 
             <section className="mt-28 home-section">
-                <nav>
-                    <div className="sidebar-button">
-                        <span className="dashboard">Dashboard</span>
-                    </div>
-
-                    <div className="profile-details">
-                        <span className="admin_name">Admin</span>
-                    </div>
-
-                </nav>
 
                 <div className="home-content" style={{ textAlign: "center" }}>
                     <h1>WELCOME TO DASHBOARD</h1><br />

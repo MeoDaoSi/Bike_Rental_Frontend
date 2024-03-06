@@ -1,6 +1,6 @@
 // import React from 'react'
 import { NavLink } from "react-router-dom";
-import { clientApi } from '../apis/clientApi';
+// import { clientApi } from '../apis/clientApi';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 
@@ -72,16 +72,6 @@ export const Location = () => {
             </div>
 
             <section className="home-section">
-                <nav>
-                    <div className="sidebar-button">
-                        
-                        <span className="dashboard">Dashboard</span>
-                    </div>
-                    
-                    <div className="profile-details">
-                        <span className="admin_name">Admin</span>
-                    </div>
-                </nav>
                 
                 <div className="salecartableDiv" >
 

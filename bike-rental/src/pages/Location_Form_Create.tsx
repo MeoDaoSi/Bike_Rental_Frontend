@@ -85,15 +85,6 @@ export const Location_Form_Create = () => {
 
 
             <section className="home-section">
-                <nav>
-                    <div className="sidebar-button">
-                        <span className="dashboard">Dashboard</span>
-                    </div>
-                
-                    <div className="profile-details">
-                        <span className="admin_name">Admin</span>
-                    </div>
-                </nav>
 
                 <div className="home-content">
                     <div className="sales-boxes">
