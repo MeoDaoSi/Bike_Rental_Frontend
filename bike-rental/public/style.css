@@ -22,12 +22,11 @@
     border: none;
     text-decoration: none;
     text-transform: capitalize;
-    transition: .2s linear;
+    /* transition: .2s linear; */
 
 }
 
 html {
-    /* font-size: 62.5%; */
     overflow-x: hidden;
     scroll-padding-top: 7rem;
     scroll-behavior: smooth;

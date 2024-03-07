@@ -3,8 +3,8 @@ import React from 'react'
 export const Test = () => {
     return (
         <>
-            {/* <!-- Start block --> */}
-            <section className="mt-28">
+            <section className="mt-28 home-section">
+                <h1 className="heading"><span>Danh Sách Cửa Hàng</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     {/* <!-- Start coding here --> */}
                     <div className="bg-white rounded">
@@ -21,15 +21,25 @@ export const Test = () => {
                                 </form>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button type="button" id="createProductModalButton" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
+                                <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
                                     <i className="fa-solid fa-plus mr-1"></i>
                                     Thêm
                                 </button>
+                                <div className="flex items-center space-x-3 w-full md:w-auto">
+                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2" type="button">
+                                        <i className="fa-solid fa-filter mr-1"></i>
+                                        Filter
+                                    </button>
+                                    <div id="filterDropdown" className="z-10 hidden w-56 rounded bg-gray-500">
+                                        <h1>hello</h1>
+                                    </div>
+                                </div>
                             </div>
+                            
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-sm text-left">
-                                <thead className="text-xs uppercase bg-orange-400">
+                                <thead className="text-xs uppercase bg-orange-500">
                                     <tr>
                                         <th scope="col" className="px-4 py-4">Product name</th>
                                         <th scope="col" className="px-4 py-3">Category</th>
@@ -50,9 +60,66 @@ export const Test = () => {
                                         <td className="px-4 py-3 max-w-[12rem] truncate">What is a product description? A product description describes a product.</td>
                                         <td className="px-4 py-3">$499</td>
                                         <td className="px-4 py-3 flex items-center justify-end">
-                                            <button>
-                                                <i className="fa-solid fa-bars"></i>
+                                            <button id="apple-imac-20-dropdown-button" data-dropdown-toggle="apple-imac-20-dropdown">
+                                                <i className="fa-solid fa-bars text-xl"></i>
                                             </button>
+                                            <div id="apple-imac-20-dropdown" className="hidden z-10 w-44 bg-white rounded border">
+                                                <ul className="py-1 text-sm" aria-labelledby="apple-imac-20-dropdown-button">
+                                                    <li>
+                                                        <button type='button' data-modal-target="updateProductModal" data-modal-toggle="updateProductModal" className='m-2'>
+                                                            <i className="fa-solid fa-pen-to-square mr-1"></i>
+                                                            Edit
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button type="button" data-modal-target="readProductModal" data-modal-toggle="readProductModal" className="m-2">
+                                                            <i className="fa-solid fa-eye mr-1"></i>
+                                                            Preview
+                                                        </button>
+                                                    </li>
+                                                    <li className='text-red-700'>
+                                                        <button type="button" data-modal-target="deleteModal" data-modal-toggle="deleteModal" className="m-2">
+                                                            <i className="fa-solid fa-trash mr-1"></i>
+                                                            Delete
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr className="border-b dark:border-gray-700">
+                                        <td className="px-4 py-3">TV/Monitor</td>
+                                        <td className="px-4 py-3">BenQ</td>
+                                        <td className="px-4 py-3">BenQ</td>
+                                        <td className="px-4 py-3 max-w-[12rem] truncate">What is a product description? A product description describes a product.</td>
+                                        <td className="px-4 py-3">$499</td>
+                                        <td className="px-4 py-3 flex items-center justify-end">
+                                            <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown">
+                                                <i className="fa-solid fa-bars text-xl"></i>
+                                            </button>
+                                            <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded border">
+                                                <ul className="py-1 text-sm" aria-labelledby="apple-imac-27-dropdown-button">
+                                                    <li>
+                                                        <button type='button' data-modal-target="updateProductModal" data-modal-toggle="updateProductModal" className='m-2'>
+                                                            <i className="fa-solid fa-pen-to-square mr-1"></i>
+                                                            Edit
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button type="button" data-modal-target="readProductModal" data-modal-toggle="readProductModal" className="m-2">
+                                                            <i className="fa-solid fa-eye mr-1"></i>
+                                                            Preview
+                                                        </button>
+                                                    </li>
+                                                    <li className='text-red-700'>
+                                                        <button type="button" data-modal-target="deleteModal" data-modal-toggle="deleteModal" className="m-2">
+                                                            <i className="fa-solid fa-trash mr-1"></i>
+                                                            Delete
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </td>
                                         
                                     </tr>
@@ -104,35 +171,37 @@ export const Test = () => {
             <div id="createProductModal" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div className="relative p-4 w-full max-w-2xl max-h-full">
                     {/* <!-- Modal content --> */}
-                    <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                    <div className="relative p-4 bg-white rounded-lg">
                         {/* <!-- Modal header --> */}
-                        <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Add Product</h3>
-                            <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="createProductModal" data-modal-toggle="createProductModal">
-                                Icon
-                                <span className="sr-only">Close modal</span>
+                        <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b">
+                            <h3 className="text-lg font-semibold">Thêm sản phẩm</h3>
+                            <button type="button" className="text-red-700" data-modal-target="createProductModal" data-modal-toggle="createProductModal">
+                                <i className="fa-solid fa-x text-xl"></i>
                             </button>
                         </div>
                         {/* <!-- Modal body --> */}
                         <form action="#">
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                                 <div>
-                                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                    <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required/>
+                                    <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
+                                    <input type="text" name="name" id="name" className="border rounded-lg block w-full p-2.5" placeholder="Type product name" required/>
                                 </div>
                                 <div>
-                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                                    <input type="text" name="brand" id="brand" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Product brand" required/>
+                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
                                 </div>
                                 <div>
-                                    <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                    <input type="number" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required/>
+                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
                                 </div>
-                                <div>Select option</div>
+                                <div>
+                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
+                                </div>
                             </div>
-                            <button type="submit" className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                Icon
-                                Add new product
+                            <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">
+                                <i className="fa-solid fa-plus mr-1"></i>
+                                Thêm Mới
                             </button>
                         </form>
                     </div>
@@ -142,41 +211,38 @@ export const Test = () => {
             <div id="updateProductModal" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div className="relative p-4 w-full max-w-2xl max-h-full">
                     {/* <!-- Modal content --> */}
-                    <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                    <div className="relative p-4 bg-white rounded-lg">
                         {/* <!-- Modal header --> */}
-                        <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Update Product</h3>
-                            <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="updateProductModal">
-                                Icon
-                                <span className="sr-only">Close modal</span>
+                        <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b">
+                            <h3 className="text-lg font-semibold">Thêm sản phẩm</h3>
+                            <button type="button" className="text-red-700" data-modal-target="createProductModal" data-modal-toggle="createProductModal">
+                                <i className="fa-solid fa-x text-xl"></i>
                             </button>
                         </div>
                         {/* <!-- Modal body --> */}
                         <form action="#">
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                                 <div>
-                                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                    <input type="text" name="name" id="name" value="iPad Air Gen 5th Wi-Fi" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Ex. Apple iMac 27&ldquo;"/>
+                                    <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
+                                    <input type="text" name="name" id="name" className="border rounded-lg block w-full p-2.5" placeholder="Type product name" required/>
                                 </div>
                                 <div>
-                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                                    <input type="text" name="brand" id="brand" value="Google" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Ex. Apple"/>
+                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
                                 </div>
                                 <div>
-                                    <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                    <input type="number" value="399" name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$299"/>
+                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
                                 </div>
                                 <div>
-                                    Select option                
+                                    <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
                                 </div>
                             </div>
-                            <div className="flex items-center space-x-4">
-                                <button type="submit" className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update product</button>
-                                <button type="button" className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                    Icon
-                                    Delete
-                                </button>
-                            </div>
+                            <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">
+                                <i className="fa-solid fa-plus mr-1"></i>
+                                Thêm Mới
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -220,16 +286,15 @@ export const Test = () => {
             <div id="deleteModal" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div className="relative p-4 w-full max-w-md max-h-full">
                     {/* <!-- Modal content --> */}
-                    <div className="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-                        <button type="button" className="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="deleteModal">
-                            Icon
-                            <span className="sr-only">Close modal</span>
+                    <div className="relative p-4 text-center bg-white rounded-lg">
+                        <button type="button" className="text-red-700 absolute top-2.5 right-2.5 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="deleteModal">
+                            <i className="fa-solid fa-x text-xl"></i>
                         </button>
-                        Icon
-                        <p className="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this item?</p>
+                        <i className="fa-solid fa-trash text-2xl m-1"></i>
+                        <p className="mb-4">Bạn Muốn Xóa Sản Phẩm Này?</p>
                         <div className="flex justify-center items-center space-x-4">
-                            <button data-modal-toggle="deleteModal" type="button" className="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
-                            <button type="submit" className="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
+                            <button data-modal-toggle="deleteModal" type="button" className="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Không</button>
+                            <button type="submit" className="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Đồng Ý</button>
                         </div>
                     </div>
                 </div>

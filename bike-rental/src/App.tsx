@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-import { Header } from './components/Header';
+// import { Header } from './components/Header';
 // import { Footer } from './components/Footer';
 
 import { Admin } from './pages/DashBoard';
@@ -24,7 +24,7 @@ import { ListBike } from './pages/ListBike';
 export const App = () => {
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route path='/'>
           <Route index element={<Home />} />
