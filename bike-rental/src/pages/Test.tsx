@@ -215,7 +215,7 @@ export const Test = () => {
                         {/* <!-- Modal header --> */}
                         <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b">
                             <h3 className="text-lg font-semibold">Thêm sản phẩm</h3>
-                            <button type="button" className="text-red-700" data-modal-target="createProductModal" data-modal-toggle="createProductModal">
+                            <button type="button" className="text-red-700" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal">
                                 <i className="fa-solid fa-x text-xl"></i>
                             </button>
                         </div>

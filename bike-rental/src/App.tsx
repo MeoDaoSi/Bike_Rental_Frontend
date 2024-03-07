@@ -13,6 +13,7 @@ import { RentBikeForm } from './pages/RentBikeForm';
 import { Location } from './pages/Location';
 import { Location_Form_Create } from './pages/Location_Form_Create';
 import { Bike_Form_Create } from './pages/Bike_Form_Create';
+import { Location_Detail } from './pages/Location_Detail';
 import { Test } from './pages/Test';
 
 // import '../public/style.css'
@@ -37,6 +38,7 @@ export const App = () => {
         <Route path='/admin'>
           <Route index element={<Admin />} />
           <Route path='location' element={<Location />} />
+          <Route path='location/:location_id' element={<Location_Detail />} />
           <Route path='location/:location_id/bike' element={<ListBike />} />
           <Route path='location/:location_id/bike/add' element={<Bike_Form_Create />} />
           <Route path='location/add' element={<Location_Form_Create />} />
