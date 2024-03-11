@@ -28,7 +28,7 @@ export const Admin = () => {
                             <span className="allLinks_name">Cửa Hàng</span>
                         </NavLink>
                     </li>
-                    
+
 
                     <li>
                         <NavLink className="dashlinks" to="/getrentbikesforadmin">

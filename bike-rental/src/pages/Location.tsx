@@ -26,7 +26,7 @@ export const Location = () => {
         INITIAL_DATA
     ]);
 
-    const updateFields = (newFields: Partial<LocationData>) => { 
+    const updateFields = (newFields: Partial<LocationData>) => {
         setLocation(prev => ({ ...prev, ...newFields }))
     }
 
@@ -47,7 +47,7 @@ export const Location = () => {
                 const res = await axios.get('http://localhost:3000/location');
                 // console.log(res);
                 setLocations(res.data);
-                
+
             } catch (error) {
                 console.log('Error');
             }
@@ -67,33 +67,33 @@ export const Location = () => {
                 <ul className="nav-links">
                     <li>
                         <NavLink className="dashlinks" to="/dashboard">
-                        <i className='bx bx-grid-alt' ></i>
-                        <span className="allLinks_name">Dashboard</span>
+                            <i className='bx bx-grid-alt' ></i>
+                            <span className="allLinks_name">Dashboard</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink className="dashlinks" to="/addbikes">
-                        <i className="fa-sharp fa-solid fa-square-plus"></i>
-                        <span className="allLinks_name">Add Bikes</span>
+                            <i className="fa-sharp fa-solid fa-square-plus"></i>
+                            <span className="allLinks_name">Add Bikes</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink className="dashlinks" to="/getrentbikesforadmin">
-                        <i className="fa-sharp fa-solid fa-motorcycle"></i>
-                        <span className="allLinks_name">Available Rent Bikes</span>
+                            <i className="fa-sharp fa-solid fa-motorcycle"></i>
+                            <span className="allLinks_name">Available Rent Bikes</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink className="dashlinks" to="/rentbikesreports">
-                        <i className="fa-solid fa-sack-dollar"></i>
-                        <span className="allLinks_name">Rent Bikes Income</span>
+                            <i className="fa-solid fa-sack-dollar"></i>
+                            <span className="allLinks_name">Rent Bikes Income</span>
                         </NavLink>
                     </li>
                     <li>
-                    <NavLink className="dashlinks" to="/availableusers">
-                    <i className="fa-solid fa-users"></i>
-                        <span className="allLinks_name">Available Users</span>
-                    </NavLink>
+                        <NavLink className="dashlinks" to="/availableusers">
+                            <i className="fa-solid fa-users"></i>
+                            <span className="allLinks_name">Available Users</span>
+                        </NavLink>
                     </li>
                 </ul>
 
@@ -102,7 +102,7 @@ export const Location = () => {
                 </div>
             </div>
             {/* -----------------------Side Bar-------------------------- */}
-        
+
             <section className="mt-28 home-section">
                 <h1 className="heading"><span>Danh Sách Cửa Hàng</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -121,7 +121,7 @@ export const Location = () => {
                                 </form>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
+                                <button type="button" id="createProductModalButton" data-modal-toggle="createProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
                                     <i className="fa-solid fa-plus mr-1"></i>
                                     Thêm
                                 </button>
@@ -135,7 +135,7 @@ export const Location = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-sm text-left">
@@ -149,20 +149,20 @@ export const Location = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                     {
-                                        locations.map((location, index) => 
-                                            (
-                                                <tr className="border-b dark:border-gray-700" key={index + 1}>
-                                                    <td className="px-4 py-3">{index + 1}</td>
-                                                    <td className="px-4 py-3">{location.address}</td>
-                                                    <td className="px-4 py-3 flex items-center justify-end">
-                                                        <NavLink className='border rounded p-2' to={`${location._id}`}>Chi tiết</NavLink>
-                                            
-                                                    </td>
-                                            
-                                                </tr>
-                                            )
+                                        locations.map((location, index) =>
+                                        (
+                                            <tr className="border-b dark:border-gray-700" key={index + 1}>
+                                                <td className="px-4 py-3">{index + 1}</td>
+                                                <td className="px-4 py-3">{location.address}</td>
+                                                <td className="px-4 py-3 flex items-center justify-end">
+                                                    <NavLink className='border rounded p-2' to={`${location._id}`}>Chi tiết</NavLink>
+
+                                                </td>
+
+                                            </tr>
+                                        )
                                         )
                                     }
                                 </tbody>
@@ -233,7 +233,7 @@ export const Location = () => {
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập địa chỉ"
                                         required
-                                        onChange={(e) => { updateFields({address: e.target.value}) }}
+                                        onChange={(e) => { updateFields({ address: e.target.value }) }}
                                     />
                                 </div>
                             </div>

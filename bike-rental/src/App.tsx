@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-// import { Header } from './components/Header';
+import { Header } from './components/Header';
 // import { Footer } from './components/Footer';
 
 import { Admin } from './pages/DashBoard';
@@ -11,7 +11,6 @@ import { Info } from './pages/Info';
 import { Confirm } from './pages/Confirm';
 import { RentBikeForm } from './pages/RentBikeForm';
 import { Location } from './pages/Location';
-import { Location_Form_Create } from './pages/Location_Form_Create';
 import { Bike_Form_Create } from './pages/Bike_Form_Create';
 import { Location_Detail } from './pages/Location_Detail';
 import { Test } from './pages/Test';
@@ -25,7 +24,7 @@ import { ListBike } from './pages/ListBike';
 export const App = () => {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path='/'>
           <Route index element={<Home />} />
@@ -41,7 +40,6 @@ export const App = () => {
           <Route path='location/:location_id' element={<Location_Detail />} />
           <Route path='location/:location_id/bike' element={<ListBike />} />
           <Route path='location/:location_id/bike/add' element={<Bike_Form_Create />} />
-          <Route path='location/add' element={<Location_Form_Create />} />
         </Route>
       </Routes>
     </BrowserRouter>
