@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom";
-import { clientApi } from '../apis/clientApi';
-
+import { axiosClient } from '../apis/axiosClient';
+import { options } from '../helpers/optionModel'
 import { useParams } from 'react-router-dom';
+import { Modal } from 'flowbite';
 
 type BikeData = {
     _id: string,
@@ -55,9 +56,9 @@ export const ListBike = () => {
     const handleAddSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/bike', {
+            const res = await axiosClient.post('/bike', {
                 ...bike,
-                location: params.location_id
+                branch: params.branch_id
             });
             console.log(res);
             alert('Thêm Thành Công!')
@@ -66,23 +67,29 @@ export const ListBike = () => {
         }
     }
 
+    const addModelButton = () => {
+        const $modal = document.getElementById('createProductModal');
+
+
+        const modal = new Modal($modal, options);
+
+        modal.show();
+
+    }
+
     useEffect(() => {
         const fetch = async () => {
             try {
-                const res = await axios.get(`http://localhost:3000/bike`);
+                const res = await axiosClient.get(`/bike`);
                 console.log(res);
                 setBikes(res.data);
 
             } catch (error) {
-
+                alert('Error');
             }
         }
         fetch();
     }, [])
-
-    console.log(q);
-
-
 
     return (
         <>
@@ -99,7 +106,7 @@ export const ListBike = () => {
                         <a href="/dashboard" className="dashlinks">
                             <div>
                                 <i className="fa-solid fa-table-columns text-white"></i>
-                            <span className="allLinks_name">Dashboard</span>
+                                <span className="allLinks_name">Dashboard</span>
                             </div>
                         </a>
                     </li>
@@ -149,45 +156,17 @@ export const ListBike = () => {
                                 </form>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button type="button" id="createProductModalButton" data-modal-target="createProductModal" data-modal-toggle="createProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
+                                <button onClick={addModelButton} type="button" id="createProductModalButton" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-green-500">
                                     <i className="fa-solid fa-plus mr-1"></i>
                                     Thêm
                                 </button>
                                 <div className="flex items-center space-x-3 w-full md:w-auto">
-                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2" type="button">
-                                        <i className="fa-solid fa-filter mr-1"></i>
-                                        Filter
-                                    </button>
-                                    <div id="filterDropdown" className="z-10 hidden p-2 w-48 rounded bg-white border">
-                                        <h5 className="m-2 text-sm font-medium border-b">Danh Mục Xe</h5>
-                                        <ul className=''>
-                                            <>
-                                                <li className='flex items-center'>
-                                                    <input
-                                                        id="motorcycle"
-                                                        type="checkbox"
-                                                        value="MOTORCYCLE"
-                                                        className="w-4 h-4 bg-gray-100 border-gray-300 rounded "
-                                                        onChange={(e) => { updateField(e.target.value) }}
-                                                    />
-                                                    <label htmlFor="motorcycle" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
-                                                </li>
-                                                <li className='flex items-center'>
-                                                    <input
-                                                        id="bikecycle"
-                                                        type="checkbox"
-                                                        value="BIKECYCLE"
-                                                        className="w-4 h-4 bg-gray-100 border-gray-300 rounded "
-                                                        onChange={(e) => { updateField(e.target.value) }}
-                                                    />
-                                                    <label htmlFor="bikecycle" className="ml-2 text-sm font-medium">Xe Đạp (56)</label>
-                                                </li>
-                                            </>
+                                    <select name="" id="">
+                                        <option value="all">Tất cả</option>
+                                        <option value="available">Còn Trống</option>
+                                        <option value="rented">Đã Thuê</option>
+                                    </select>
 
-                                        </ul>
-
-
-                                    </div>
                                 </div>
                             </div>
 

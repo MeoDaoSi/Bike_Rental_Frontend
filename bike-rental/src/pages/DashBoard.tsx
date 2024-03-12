@@ -16,12 +16,12 @@ export const Admin = () => {
                         <a href="/dashboard" className="dashlinks">
                             <div>
                                 <i className="fa-solid fa-table-columns text-white"></i>
-                            <span className="allLinks_name">Dashboard</span>
+                                <span className="allLinks_name">Dashboard</span>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/location" className="dashlinks">
+                        <a href="/admin/branch" className="dashlinks">
                             <div>
                                 <i className="fa-solid fa-store text-white"></i>
                                 <span className="allLinks_name">Chi Nhánh</span>
@@ -46,7 +46,7 @@ export const Admin = () => {
                     </li>
                 </ul>
             </div>
-            
+
 
 
             <section className="home-section">
@@ -60,9 +60,9 @@ export const Admin = () => {
                             alt="Rounded avatar">
                         </img>
                     </button>
-                    
+
                 </nav>
-                
+
 
                 <div className="home-content mt-24" style={{ textAlign: "center" }}>
                     <h1>WELCOME TO DASHBOARD</h1><br />

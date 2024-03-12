@@ -2,33 +2,32 @@
 import { NavLink, useParams } from "react-router-dom";
 // import { clientApi } from '../apis/clientApi';
 import { useState, useEffect, FormEvent } from 'react';
-import axios from "axios";
-import { clientApi } from '../apis/clientApi';
+import { axiosClient } from '../apis/axiosClient';
 
-type LocationData = {
+type BranchData = {
     _id: string,
     address: string,
 }
 
-const INITIAL_DATA: LocationData = {
+const INITIAL_DATA: BranchData = {
     _id: '',
     address: '',
 }
 
-export const Location_Detail = () => {
+export const Branch_Detail = () => {
 
-    const [location, setLocation] = useState(INITIAL_DATA);
+    const [branch, setBranch] = useState(INITIAL_DATA);
     const Params = useParams();
 
-    const updateFields = (newFields: Partial<LocationData>) => { 
-        setLocation(prev => ({ ...prev, ...newFields }))
+    const updateFields = (newFields: Partial<BranchData>) => {
+        setBranch(prev => ({ ...prev, ...newFields }))
     }
 
-    const updateLocation = async (e : FormEvent) => {
+    const updateBranch = async (e: FormEvent) => {
         e.preventDefault();
-        const url = `http://localhost:3000/location/${Params.location_id}`;
+        const url = `/branch/${Params.branch_id}`;
         try {
-            await axios.put(url, location);
+            await axiosClient.put(url, branch);
             alert('Chỉnh Sửa Thành Công!')
         } catch (error) {
             alert('Error')
@@ -36,15 +35,19 @@ export const Location_Detail = () => {
     }
 
     useEffect(() => {
-        const getLocation = async () => {
-            const url = `http://localhost:3000/location/${Params.location_id}`;
-            
-            const res = await axios.get(url);
-            setLocation(res.data);
+        const getBranch = async () => {
+            const url = `/branch/${Params.branch_id}`;
+            console.log(url);
 
-            
+
+            const res = await axiosClient.get(url);
+            console.log(res);
+
+            setBranch(res.data);
+
+
         }
-        getLocation()
+        getBranch()
     }, [])
 
     return (
@@ -62,12 +65,12 @@ export const Location_Detail = () => {
                         <a href="/dashboard" className="dashlinks">
                             <div>
                                 <i className="fa-solid fa-table-columns text-white"></i>
-                            <span className="allLinks_name">Dashboard</span>
+                                <span className="allLinks_name">Dashboard</span>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/location" className="dashlinks">
+                        <a href="/admin/branch" className="dashlinks">
                             <div>
                                 <i className="fa-solid fa-store text-white"></i>
                                 <span className="allLinks_name">Chi Nhánh</span>
@@ -93,7 +96,7 @@ export const Location_Detail = () => {
                 </ul>
             </div>
             {/* -----------------------Side Bar-------------------------- */}
-        
+
             <section className="home-section">
                 <nav className="">
                     <button className='mr-4'>
@@ -105,7 +108,7 @@ export const Location_Detail = () => {
                             alt="Rounded avatar">
                         </img>
                     </button>
-                    
+
                 </nav>
                 <h1 className="heading mt-16"><span>Chi Tiết Cửa Hàng</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -123,7 +126,7 @@ export const Location_Detail = () => {
                                     </div>
                                 </form>
                             </div>
-                            
+
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                                 <button type="button" id="updateProductModalButton" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-gray-500">
                                     <i className="fa-solid fa-pen-to-square mr-1"></i>
@@ -139,7 +142,7 @@ export const Location_Detail = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-sm text-left">
@@ -154,16 +157,16 @@ export const Location_Detail = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                     <tr className="border-b dark:border-gray-700">
-                                        <td className="px-4 py-3">{location.address}</td>
+                                        <td className="px-4 py-3">{branch.address}</td>
                                         <td className="px-4 py-3">
                                             <NavLink className='border rounded p-2' to='user'><i className="fa-solid fa-user"></i></NavLink>
                                         </td>
                                         <td className="px-4 py-3">
                                             <NavLink className='border rounded p-2' to='bike'><i className="fa-solid fa-bicycle"></i></NavLink>
                                         </td>
-                                
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -185,7 +188,7 @@ export const Location_Detail = () => {
                             </button>
                         </div>
                         {/* <!-- Modal body --> */}
-                        <form onSubmit={updateLocation}>
+                        <form onSubmit={updateBranch}>
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                                 <div>
                                     <label htmlFor="address" className="block mb-2 text-sm font-medium">Địa Chỉ</label>
@@ -196,8 +199,8 @@ export const Location_Detail = () => {
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập địa chỉ"
                                         required
-                                        value={location.address}
-                                        onChange={(e) => { updateFields({address: e.target.value}) }}
+                                        value={branch.address}
+                                        onChange={(e) => { updateFields({ address: e.target.value }) }}
                                     />
                                 </div>
                             </div>

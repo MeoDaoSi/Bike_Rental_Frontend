@@ -1,6 +1,10 @@
 import React from 'react'
+import { Modal } from 'flowbite';
+import { options } from '../helpers/optionModel'
 
 export const Test = () => {
+
+
     return (
         <>
             <section className="mt-28 home-section">
@@ -26,16 +30,27 @@ export const Test = () => {
                                     Thêm
                                 </button>
                                 <div className="flex items-center space-x-3 w-full md:w-auto">
-                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2" type="button">
-                                        <i className="fa-solid fa-filter mr-1"></i>
+                                    <button id="filterDropdownButton" className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" type="button">
+
                                         Filter
+                                        icon
                                     </button>
-                                    <div id="filterDropdown" className="z-10 hidden w-56 rounded bg-gray-500">
-                                        <h1>hello</h1>
+                                    <div id="filterDropdown" className="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">Category</h6>
+                                        <ul className="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                                            <li className="flex items-center">
+                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Apple (56)</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input id="fitbit" type="checkbox" value="" className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                                <label htmlFor="fitbit" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">Fitbit (56)</label>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-sm text-left">
@@ -52,7 +67,7 @@ export const Test = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                     <tr className="border-b dark:border-gray-700">
                                         <td className="px-4 py-3">TV/Monitor</td>
                                         <td className="px-4 py-3">BenQ</td>
@@ -86,7 +101,7 @@ export const Test = () => {
                                                 </ul>
                                             </div>
                                         </td>
-                                        
+
                                     </tr>
                                     <tr className="border-b dark:border-gray-700">
                                         <td className="px-4 py-3">TV/Monitor</td>
@@ -121,7 +136,7 @@ export const Test = () => {
                                                 </ul>
                                             </div>
                                         </td>
-                                        
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -184,19 +199,19 @@ export const Test = () => {
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                                 <div>
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
-                                    <input type="text" name="name" id="name" className="border rounded-lg block w-full p-2.5" placeholder="Type product name" required/>
+                                    <input type="text" name="name" id="name" className="border rounded-lg block w-full p-2.5" placeholder="Type product name" required />
                                 </div>
                                 <div>
                                     <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
-                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required />
                                 </div>
                                 <div>
                                     <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
-                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required />
                                 </div>
                                 <div>
                                     <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
-                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required />
                                 </div>
                             </div>
                             <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">
@@ -224,19 +239,19 @@ export const Test = () => {
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                                 <div>
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
-                                    <input type="text" name="name" id="name" className="border rounded-lg block w-full p-2.5" placeholder="Type product name" required/>
+                                    <input type="text" name="name" id="name" className="border rounded-lg block w-full p-2.5" placeholder="Type product name" required />
                                 </div>
                                 <div>
                                     <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
-                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required />
                                 </div>
                                 <div>
                                     <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
-                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required />
                                 </div>
                                 <div>
                                     <label htmlFor="brand" className="block mb-2 text-sm font-medium">Brand</label>
-                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required/>
+                                    <input type="text" name="brand" id="brand" className="border rounded-lg block w-full p-2.5" placeholder="Product brand" required />
                                 </div>
                             </div>
                             <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">

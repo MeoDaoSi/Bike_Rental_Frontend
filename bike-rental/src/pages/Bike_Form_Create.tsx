@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from "react-router-dom";
-import { clientApi } from '../apis/clientApi';
+import { clientApi } from '../apis/axiosClient';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -40,7 +40,7 @@ export const Bike_Form_Create = () => {
     const Navigate = useNavigate();
     const params = useParams();
 
-    const updateFields = (newFields: Partial<BikeData>) => { 
+    const updateFields = (newFields: Partial<BikeData>) => {
         setData(prev => ({ ...prev, ...newFields }))
     }
 
@@ -48,12 +48,12 @@ export const Bike_Form_Create = () => {
         e.preventDefault();
         try {
             console.log(data);
-            
+
             // const res = await axios.post(`http://localhost:3000/location/${params.location_id}/bike/add`, data);
             // console.log(res);
             // Navigate(`/admin/location/${params.location_id}/bike`);
-            
-            
+
+
         } catch (error) {
             alert('Error');
         }
@@ -115,7 +115,7 @@ export const Bike_Form_Create = () => {
                             <form onSubmit={handle} method="POST" className="addbikeform" name="rentform" id="myrentform">
                                 <label htmlFor="brand">Hãng xe: </label>
                                 <input
-                                    onChange={(e) => { updateFields({brand: e.target.value}) }}
+                                    onChange={(e) => { updateFields({ brand: e.target.value }) }}
                                     type="text"
                                     name="brand"
                                     id="brand"
@@ -124,7 +124,7 @@ export const Bike_Form_Create = () => {
                                 <br />
                                 <label htmlFor="model">Mẫu xe: </label>
                                 <input
-                                    onChange={(e) => { updateFields({model: e.target.value}) }}
+                                    onChange={(e) => { updateFields({ model: e.target.value }) }}
                                     type="text"
                                     name="model"
                                     id="model"
@@ -133,7 +133,7 @@ export const Bike_Form_Create = () => {
                                 <br />
                                 <label htmlFor="year">Năm Sản Xuất: </label>
                                 <input
-                                    onChange={(e) => { updateFields({year: e.target.value}) }}
+                                    onChange={(e) => { updateFields({ year: e.target.value }) }}
                                     type="text"
                                     name="year"
                                     id="year"
@@ -145,7 +145,7 @@ export const Bike_Form_Create = () => {
                                     className='border'
                                     name="color"
                                     id="color"
-                                    onChange={(e) => { updateFields({color: e.target.value}) }}
+                                    onChange={(e) => { updateFields({ color: e.target.value }) }}
                                 >
                                     <option value="red">Đỏ</option>
                                     <option value="white">Trắng</option>
@@ -157,14 +157,14 @@ export const Bike_Form_Create = () => {
                                     className='border'
                                     name="type"
                                     id="type"
-                                    onChange={(e) => { updateFields({type: e.target.value}) }}
+                                    onChange={(e) => { updateFields({ type: e.target.value }) }}
                                 >
                                     <option value="motorcycle">Xe máy</option>
                                     <option value="bikecycle">Xe đạp</option>
                                 </select>
                                 <button className='btn block'>Xác Nhận</button>
                             </form>
-                        
+
                         </div>
                     </div>
                 </div>

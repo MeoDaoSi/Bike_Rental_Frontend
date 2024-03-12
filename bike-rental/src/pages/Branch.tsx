@@ -1,64 +1,35 @@
 // import React from 'react'
-import { NavLink } from "react-router-dom";
-// import { clientApi } from '../apis/clientApi';
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import { clientApi } from '../apis/clientApi';
-import { Modal, ModalOptions } from 'flowbite';
+import { axiosClient } from '../apis/axiosClient';
+import { Modal } from 'flowbite';
+import { options } from '../helpers/optionModel'
 
-type LocationData = {
+type BranchData = {
     _id: string,
     address: string,
 }
 
-// type LocationFormProps = LocationData & {
-//     updateFields: (fields: Partial<LocationData>) => void
-// }
-
-const INITIAL_DATA: LocationData = {
+const INITIAL_DATA: BranchData = {
     _id: '',
     address: '',
 }
 
-type optionModel = {
-    placement: string,
-    backdrop: string,
-    backdropClasses: string,
-    closable: boolean,
-    onHide: () => void,
-    onShow: () => void,
-    onToggle: () => void,
-}
+export const Branch = () => {
 
-export const Location = () => {
-
-    const [location, setLocation] = useState(INITIAL_DATA);
-    const [locations, setLocations] = useState([
+    const [branch, setBranch] = useState(INITIAL_DATA);
+    const [branches, setBranches] = useState([
         INITIAL_DATA
     ]);
 
-    const updateFields = (newFields: Partial<LocationData>) => {
-        setLocation(prev => ({ ...prev, ...newFields }))
+    const updateFields = (newFields: Partial<BranchData>) => {
+        setBranch(prev => ({ ...prev, ...newFields }))
     }
 
-    const test = () => {
+    const addModelButton = () => {
         const $modal = document.getElementById('createProductModal');
 
-        const options : ModalOptions = {
-            placement: 'bottom-right',
-            backdrop: 'dynamic',
-            backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
-            closable: true,
-            onHide: () => {
-                console.log('modal is hidden');
-            },
-            onShow: () => {
-                console.log('modal is shown');
-            },
-            onToggle: () => {
-                console.log('modal has been toggled');
-            }
-        };
+
         const modal = new Modal($modal, options);
 
         modal.show();
@@ -68,7 +39,7 @@ export const Location = () => {
     const handleAddSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/location', location);
+            const res = await axiosClient.post('/branch', branch);
             console.log(res);
             alert('Thêm Thành Công!')
         } catch (error) {
@@ -79,9 +50,9 @@ export const Location = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:3000/location');
+                const res = await axiosClient.get('/branch');
                 // console.log(res);
-                setLocations(res.data);
+                setBranches(res.data);
 
             } catch (error) {
                 console.log('Error');
@@ -103,10 +74,10 @@ export const Location = () => {
                 </a>
                 <ul className="nav-links">
                     <li>
-                        <a href="/dashboard" className="dashlinks">
+                        <a href="admin/dashboard" className="dashlinks">
                             <div>
                                 <i className="fa-solid fa-table-columns text-white"></i>
-                            <span className="allLinks_name">Dashboard</span>
+                                <span className="allLinks_name">Dashboard</span>
                             </div>
                         </a>
                     </li>
@@ -149,7 +120,7 @@ export const Location = () => {
                             alt="Rounded avatar">
                         </img>
                     </button>
-                    
+
                 </nav>
                 <h1 className="heading mt-16"><span>Danh Sách Cửa Hàng</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -168,7 +139,7 @@ export const Location = () => {
                                 </form>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button onClick={test} type="button" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
+                                <button onClick={addModelButton} type="button" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-green-500">
                                     <i className="fa-solid fa-plus mr-1"></i>
                                     Thêm
                                 </button>
@@ -198,13 +169,13 @@ export const Location = () => {
                                 <tbody>
 
                                     {
-                                        locations.map((location, index) =>
+                                        branches.map((branch, index) =>
                                         (
                                             <tr className="border-b dark:border-gray-700" key={index + 1}>
                                                 <td className="px-4 py-3">{index + 1}</td>
-                                                <td className="px-4 py-3">{location.address}</td>
+                                                <td className="px-4 py-3">{branch.address}</td>
                                                 <td className="px-4 py-3 flex items-center justify-end">
-                                                    <NavLink className='border rounded p-2' to={`${location._id}`}>Chi tiết</NavLink>
+                                                    <a className='border rounded p-2' href={`/admin/branch/${branch._id}`}>Chi tiết</a>
 
                                                 </td>
 
