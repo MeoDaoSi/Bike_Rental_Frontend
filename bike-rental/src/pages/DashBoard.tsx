@@ -1,66 +1,70 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 
 export const Admin = () => {
     return (
         <>
             <div className="sidebar">
-                <div className="logo-details">
-                    <i className=''></i>
-                    <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
-                </div>
+                <a href="/admin">
+                    <div className="logo-details border-b">
+                        <i className=''></i>
+                        <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
+                    </div>
+                </a>
                 <ul className="nav-links">
                     <li>
-                        <NavLink className="dashlinks" to="/dashboard">
-                            <i className="fa-solid fa-table-columns"></i>
+                        <a href="/dashboard" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-table-columns text-white"></i>
                             <span className="allLinks_name">Dashboard</span>
-                        </NavLink>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/addbikes">
-                            <i className="fa-sharp fa-solid fa-square-plus"></i>
-                            <span className="allLinks_name">Add Bikes</span>
-                        </NavLink>
+                        <a href="/admin/location" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-store text-white"></i>
+                                <span className="allLinks_name">Chi Nhánh</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/admin/location">
-                            <i className="fa-solid fa-store"></i>
-                            <span className="allLinks_name">Cửa Hàng</span>
-                        </NavLink>
-                    </li>
-
-
-                    <li>
-                        <NavLink className="dashlinks" to="/getrentbikesforadmin">
-                            <i className="fa-sharp fa-solid fa-motorcycle"></i>
-                            <span className="allLinks_name">Available Rent Bikes</span>
-                        </NavLink>
-                    </li>
-
-                    <li>
-                        <NavLink className="dashlinks" to="/rentbikesreports">
-                            <i className="fa-solid fa-sack-dollar"></i>
-                            <span className="allLinks_name">Rent Bikes Income</span>
-                        </NavLink>
+                        <a href="/admin/user" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-users text-white"></i>
+                                <span className="allLinks_name">Người Dùng</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/availableusers">
-                            <i className="fa-solid fa-users"></i>
-                            <span className="allLinks_name">Available Users</span>
-                        </NavLink>
+                        <a href="/admin/contract" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-file-contract text-white"></i>
+                                <span className="allLinks_name">Hợp Đồng</span>
+                            </div>
+                        </a>
                     </li>
                 </ul>
-
-                <div className="logoutbtnDashDiv">
-                    {/* <Loginbutton /> */}
-                </div>
             </div>
+            
 
 
+            <section className="home-section">
+                <nav>
+                    <button className='mr-4'>
+                        <i className="fa-solid fa-bell text-xl text-white"></i>
+                    </button>
+                    <button>
+                        <img className="w-10 h-10 rounded-full"
+                            src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
+                            alt="Rounded avatar">
+                        </img>
+                    </button>
+                    
+                </nav>
+                
 
-            <section className="mt-28 home-section">
-
-                <div className="home-content" style={{ textAlign: "center" }}>
+                <div className="home-content mt-24" style={{ textAlign: "center" }}>
                     <h1>WELCOME TO DASHBOARD</h1><br />
                     <h3>Go To Add Bikes Tab In Side Menu To Add Bikes In Database</h3><br />
                     <h3>Go To Rent Bikes Tab In Side Menu To Generate Income Reports of Rented Bikes In Database</h3><br />

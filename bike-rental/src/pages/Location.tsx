@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { clientApi } from '../apis/clientApi';
+import { Modal, ModalOptions } from 'flowbite';
 
 type LocationData = {
     _id: string,
@@ -19,6 +20,16 @@ const INITIAL_DATA: LocationData = {
     address: '',
 }
 
+type optionModel = {
+    placement: string,
+    backdrop: string,
+    backdropClasses: string,
+    closable: boolean,
+    onHide: () => void,
+    onShow: () => void,
+    onToggle: () => void,
+}
+
 export const Location = () => {
 
     const [location, setLocation] = useState(INITIAL_DATA);
@@ -28,6 +39,30 @@ export const Location = () => {
 
     const updateFields = (newFields: Partial<LocationData>) => {
         setLocation(prev => ({ ...prev, ...newFields }))
+    }
+
+    const test = () => {
+        const $modal = document.getElementById('createProductModal');
+
+        const options : ModalOptions = {
+            placement: 'bottom-right',
+            backdrop: 'dynamic',
+            backdropClasses: 'bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40',
+            closable: true,
+            onHide: () => {
+                console.log('modal is hidden');
+            },
+            onShow: () => {
+                console.log('modal is shown');
+            },
+            onToggle: () => {
+                console.log('modal has been toggled');
+            }
+        };
+        const modal = new Modal($modal, options);
+
+        modal.show();
+
     }
 
     const handleAddSubmit = async (e: React.FormEvent) => {
@@ -60,51 +95,63 @@ export const Location = () => {
         <>
             {/* -----------------------Side Bar-------------------------- */}
             <div className="sidebar">
-                <div className="logo-details">
-                    <i className=''></i>
-                    <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
-                </div>
+                <a href="/admin">
+                    <div className="logo-details border-b">
+                        <i className=''></i>
+                        <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
+                    </div>
+                </a>
                 <ul className="nav-links">
                     <li>
-                        <NavLink className="dashlinks" to="/dashboard">
-                            <i className='bx bx-grid-alt' ></i>
+                        <a href="/dashboard" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-table-columns text-white"></i>
                             <span className="allLinks_name">Dashboard</span>
-                        </NavLink>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/addbikes">
-                            <i className="fa-sharp fa-solid fa-square-plus"></i>
-                            <span className="allLinks_name">Add Bikes</span>
-                        </NavLink>
+                        <a href="/admin/location" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-store text-white"></i>
+                                <span className="allLinks_name">Chi Nhánh</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/getrentbikesforadmin">
-                            <i className="fa-sharp fa-solid fa-motorcycle"></i>
-                            <span className="allLinks_name">Available Rent Bikes</span>
-                        </NavLink>
+                        <a href="/admin/user" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-users text-white"></i>
+                                <span className="allLinks_name">Người Dùng</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/rentbikesreports">
-                            <i className="fa-solid fa-sack-dollar"></i>
-                            <span className="allLinks_name">Rent Bikes Income</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink className="dashlinks" to="/availableusers">
-                            <i className="fa-solid fa-users"></i>
-                            <span className="allLinks_name">Available Users</span>
-                        </NavLink>
+                        <a href="/admin/contract" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-file-contract text-white"></i>
+                                <span className="allLinks_name">Hợp Đồng</span>
+                            </div>
+                        </a>
                     </li>
                 </ul>
-
-                <div className="logoutbtnDashDiv">
-                    {/* <Loginbutton/> */}
-                </div>
             </div>
             {/* -----------------------Side Bar-------------------------- */}
 
-            <section className="mt-28 home-section">
-                <h1 className="heading"><span>Danh Sách Cửa Hàng</span></h1>
+            <section className="home-section">
+                <nav className="">
+                    <button className='mr-4'>
+                        <i className="fa-solid fa-bell text-xl text-white"></i>
+                    </button>
+                    <button>
+                        <img className="w-10 h-10 rounded-full"
+                            src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
+                            alt="Rounded avatar">
+                        </img>
+                    </button>
+                    
+                </nav>
+                <h1 className="heading mt-16"><span>Danh Sách Cửa Hàng</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     {/* <!-- Start coding here --> */}
                     <div className="bg-white rounded">
@@ -121,7 +168,7 @@ export const Location = () => {
                                 </form>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button type="button" id="createProductModalButton" data-modal-toggle="createProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
+                                <button onClick={test} type="button" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2">
                                     <i className="fa-solid fa-plus mr-1"></i>
                                     Thêm
                                 </button>

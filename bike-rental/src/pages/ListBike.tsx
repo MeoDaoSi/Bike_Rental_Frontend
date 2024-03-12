@@ -88,50 +88,50 @@ export const ListBike = () => {
         <>
             {/* -----------------------Side Bar-------------------------- */}
             <div className="sidebar">
-                <div className="logo-details">
-                    <i className=''></i>
-                    <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
-                </div>
+                <a href="/admin">
+                    <div className="logo-details border-b">
+                        <i className=''></i>
+                        <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
+                    </div>
+                </a>
                 <ul className="nav-links">
                     <li>
-                        <NavLink className="dashlinks" to="/dashboard">
-                            <i className='bx bx-grid-alt' ></i>
+                        <a href="/dashboard" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-table-columns text-white"></i>
                             <span className="allLinks_name">Dashboard</span>
-                        </NavLink>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/addbikes">
-                            <i className="fa-sharp fa-solid fa-square-plus"></i>
-                            <span className="allLinks_name">Add Bikes</span>
-                        </NavLink>
+                        <a href="/admin/location" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-store text-white"></i>
+                                <span className="allLinks_name">Chi Nhánh</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/getrentbikesforadmin">
-                            <i className="fa-sharp fa-solid fa-motorcycle"></i>
-                            <span className="allLinks_name">Available Rent Bikes</span>
-                        </NavLink>
+                        <a href="/admin/user" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-users text-white"></i>
+                                <span className="allLinks_name">Người Dùng</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
-                        <NavLink className="dashlinks" to="/rentbikesreports">
-                            <i className="fa-solid fa-sack-dollar"></i>
-                            <span className="allLinks_name">Rent Bikes Income</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink className="dashlinks" to="/availableusers">
-                            <i className="fa-solid fa-users"></i>
-                            <span className="allLinks_name">Available Users</span>
-                        </NavLink>
+                        <a href="/admin/contract" className="dashlinks">
+                            <div>
+                                <i className="fa-solid fa-file-contract text-white"></i>
+                                <span className="allLinks_name">Hợp Đồng</span>
+                            </div>
+                        </a>
                     </li>
                 </ul>
-
-                <div className="logoutbtnDashDiv">
-                    {/* <Loginbutton/> */}
-                </div>
             </div>
             {/* -----------------------Side Bar-------------------------- */}
 
-            <section className="mt-28 home-section">
+            <section className="home-section">
                 <h1 className="heading"><span>Danh Sách Xe</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     {/* <!-- Start coding here --> */}

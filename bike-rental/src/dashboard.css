@@ -128,7 +128,7 @@
 }
 
 .dashlinks i {
-    color: #000000;
+    /* color: #000000; */
 }
 
 
@@ -158,14 +158,14 @@
     /* transition: all 0.5s ease; */
 }
 
-/* .sidebar.active~.home-section {
+.sidebar.active~.home-section {
     width: calc(100% - 60px);
     left: 60px;
 }
 
 .home-section nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     height: 80px;
     background: #2e2e2e;
     display: flex;
@@ -177,6 +177,7 @@
     padding: 0 20px;
     transition: all 0.5s ease;
     color: #ff6a00;
+    top: 0;
 }
 
 .sidebar.active~.home-section nav {
@@ -191,7 +192,7 @@
     font-size: 24px;
     font-weight: 500;
     cursor: pointer;
-} */
+}
 
 nav .sidebar-button i {
     font-size: 35px;
@@ -269,7 +270,7 @@ nav .profile-details .admin_name {
 
 .addbikeform label {
     /* float: left; */
-    color: #1a1a1a;
+    color: #1a1a1ab7;
     font-size: 15px;
     border: 1px;
     padding: 5;
