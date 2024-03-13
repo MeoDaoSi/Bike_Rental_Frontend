@@ -161,12 +161,41 @@ export const ListBike = () => {
                                     Thêm
                                 </button>
                                 <div className="flex items-center space-x-3 w-full md:w-auto">
-                                    <select name="" id="">
-                                        <option value="all">Tất cả</option>
-                                        <option value="available">Còn Trống</option>
-                                        <option value="rented">Đã Thuê</option>
-                                    </select>
-
+                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-200 " type="button">
+                                        <i className="fa-solid fa-filter mr-2"></i>
+                                        Filter
+                                        <i className="fa-solid fa-chevron-down ml-2"></i>
+                                    </button>
+                                    <div id="filterDropdown" className="z-10 hidden w-56 p-3 bg-white rounded-lg">
+                                        <div className='flex justify-between'>
+                                            <h6 className="mb-3 text-sm font-medium">Category</h6>
+                                            <button className=''>
+                                                <h6 className="mb-3 text-sm font-medium">Clear</h6>
+                                            </button>
+                                        </div>
+                                        <ul className="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                                            <li className="flex items-center">
+                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded" />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Đạp (56)</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
 
