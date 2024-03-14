@@ -1,5 +1,5 @@
 // import React from 'react'
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import { clientApi } from '../apis/clientApi';
 import { useState, useEffect, FormEvent } from 'react';
 import { axiosClient } from '../apis/axiosClient';
@@ -132,15 +132,6 @@ export const Branch_Detail = () => {
                                     <i className="fa-solid fa-pen-to-square mr-1"></i>
                                     Chỉnh sửa
                                 </button>
-                                <div className="flex items-center space-x-3 w-full md:w-auto">
-                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2" type="button">
-                                        <i className="fa-solid fa-filter mr-1"></i>
-                                        Filter
-                                    </button>
-                                    <div id="filterDropdown" className="z-10 hidden w-56 rounded bg-gray-500">
-                                        <h1>hello</h1>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
@@ -161,10 +152,10 @@ export const Branch_Detail = () => {
                                     <tr className="border-b dark:border-gray-700">
                                         <td className="px-4 py-3">{branch.address}</td>
                                         <td className="px-4 py-3">
-                                            <NavLink className='border rounded p-2' to='user'><i className="fa-solid fa-user"></i></NavLink>
+                                            <a className='border rounded p-2' href={`/admin/branch/${branch._id}/user`}><i className="fa-solid fa-user"></i></a>
                                         </td>
                                         <td className="px-4 py-3">
-                                            <NavLink className='border rounded p-2' to='bike'><i className="fa-solid fa-bicycle"></i></NavLink>
+                                            <a className='border rounded p-2' href={`/admin/branch/${branch._id}/bike`}><i className="fa-solid fa-bicycle"></i></a>
                                         </td>
 
                                     </tr>

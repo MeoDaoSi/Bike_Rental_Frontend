@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom";
 import { axiosClient } from '../apis/axiosClient';
@@ -36,11 +35,17 @@ const INITIAL_DATA: BikeData = {
     // QR_code: '',
 }
 
+type FilterData = {
+    status?: string
+}
+
+const initFilter: FilterData[] = []
+
 export const ListBike = () => {
 
     const params = useParams();
     const [bike, setBike] = useState(INITIAL_DATA);
-    const [q, setQ] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState(initFilter);
     const [bikes, setBikes] = useState([
         INITIAL_DATA
     ]);
@@ -49,8 +54,11 @@ export const ListBike = () => {
         setBike(prev => ({ ...prev, ...newFields }))
     }
 
-    const updateField = (newField: string) => {
-        setQ(newField);
+    const updateField = (newField: FilterData) => {
+        setSelectedCategories([...selectedCategories, newField]);
+    }
+    const removeField = (field: FilterData) => {
+        setSelectedCategories(selectedCategories.filter((category) => category.status !== field.status))
     }
 
     const handleAddSubmit = async (e: React.FormEvent) => {
@@ -79,8 +87,17 @@ export const ListBike = () => {
 
     useEffect(() => {
         const fetch = async () => {
+            const branch_id = params.branch_id;
+            const searchParams = new URLSearchParams();
+            selectedCategories.forEach(category => {
+                if (category.status)
+                    searchParams.append('status', category.status);
+            });
+
             try {
-                const res = await axiosClient.get(`/bike`);
+                const res = await axiosClient.get(`branch/bike/${branch_id}?${searchParams}`);
+
+
                 console.log(res);
                 setBikes(res.data);
 
@@ -89,7 +106,7 @@ export const ListBike = () => {
             }
         }
         fetch();
-    }, [])
+    }, [selectedCategories])
 
     return (
         <>
@@ -175,25 +192,55 @@ export const ListBike = () => {
                                         </div>
                                         <ul className="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
                                             <li className="flex items-center">
-                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
+                                                <input
+                                                    id="brand_1"
+                                                    type="checkbox"
+                                                    value="AVAILABLE"
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={(e) => {
+                                                        if (e.target.checked)
+                                                            return updateField({ status: e.target.value })
+                                                        else
+                                                            return removeField({ status: e.target.value })
+                                                    }}
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Có Sẵn (56)</label>
                                             </li>
                                             <li className="flex items-center">
-                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
+                                                <input
+                                                    id="brand_2"
+                                                    type="checkbox"
+                                                    value="UNAVAILABLE"
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={(e) => {
+                                                        if (e.target.checked)
+                                                            return updateField({ status: e.target.value })
+                                                        else
+                                                            return removeField({ status: e.target.value })
+                                                    }}
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Đã Thuê (56)</label>
+                                            </li>
+                                            {/* <li className="flex items-center">
+                                                <input
+                                                    id="status_1"
+                                                    type="checkbox"
+                                                    value=""
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={ }
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Đang Thuê (56)</label>
                                             </li>
                                             <li className="flex items-center">
-                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded" />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Đạp (56)</label>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <input id="apple" type="checkbox" value="" className="w-4 h-4 rounded 0" />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Xe Máy (56)</label>
-                                            </li>
+                                                <input
+                                                    id="status_1"
+                                                    type="checkbox"
+                                                    value=""
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={ }
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Còn Trống (56)</label>
+                                            </li> */}
                                         </ul>
                                     </div>
                                 </div>

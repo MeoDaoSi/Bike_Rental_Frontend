@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import { axiosClient } from '../apis/axiosClient';
-import { Modal } from 'flowbite';
 import { options } from '../helpers/optionModel'
 
 type BranchData = {
@@ -24,16 +23,6 @@ export const Branch = () => {
 
     const updateFields = (newFields: Partial<BranchData>) => {
         setBranch(prev => ({ ...prev, ...newFields }))
-    }
-
-    const addModelButton = () => {
-        const $modal = document.getElementById('createProductModal');
-
-
-        const modal = new Modal($modal, options);
-
-        modal.show();
-
     }
 
     const handleAddSubmit = async (e: React.FormEvent) => {
@@ -139,7 +128,7 @@ export const Branch = () => {
                                 </form>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button onClick={addModelButton} type="button" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-green-500">
+                                <button id='createProductModal-button' data-modal-toggle='createProductModal' type="button" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-green-500">
                                     <i className="fa-solid fa-plus mr-1"></i>
                                     Thêm
                                 </button>
