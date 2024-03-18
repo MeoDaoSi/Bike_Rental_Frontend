@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+// import React from 'react'
+import { useParams } from "react-router-dom";
+// import { clientApi } from '../apis/clientApi';
+import { useState, useEffect, FormEvent } from 'react';
 import { axiosClient } from '../apis/axiosClient';
-import { options } from '../helpers/optionModel'
-import { useParams } from 'react-router-dom';
-import { Modal } from 'flowbite';
 
-export default interface BikeData {
+type BikeData = {
     _id: string,
     brand: string,
     model: string,
@@ -17,10 +17,6 @@ export default interface BikeData {
     type: string,
     // QR_code: string,
 }
-
-// type LocationFormProps = LocationData & {
-//     updateFields: (fields: Partial<LocationData>) => void
-// }
 
 const INITIAL_DATA: BikeData = {
     _id: '',
@@ -36,77 +32,38 @@ const INITIAL_DATA: BikeData = {
     // QR_code: '',
 }
 
-type FilterData = {
-    status?: string
-}
+export const Bike_Detail = () => {
 
-const initFilter: FilterData[] = []
-
-export const ListBike = () => {
-
-    const params = useParams();
     const [bike, setBike] = useState(INITIAL_DATA);
-    const [selectedCategories, setSelectedCategories] = useState(initFilter);
-    const [bikes, setBikes] = useState([
-        INITIAL_DATA
-    ]);
+    const Params = useParams();
 
     const updateFields = (newFields: Partial<BikeData>) => {
         setBike(prev => ({ ...prev, ...newFields }))
     }
 
-    const updateField = (newField: FilterData) => {
-        setSelectedCategories([...selectedCategories, newField]);
-    }
-    const removeField = (field: FilterData) => {
-        setSelectedCategories(selectedCategories.filter((category) => category.status !== field.status))
-    }
-
-    const handleAddSubmit = async (e: React.FormEvent) => {
+    const updateBike = async (e: FormEvent) => {
         e.preventDefault();
+        const url = `/branch/bike/${Params.branch_id}/${Params.bike_id}`;
         try {
-            const res = await axiosClient.post(`/branch/bike/${params.branch_id}`, {
-                ...bike,
-            });
-            console.log(res);
-            alert('Thêm Thành Công!')
+            await axiosClient.put(url, bike);
+            alert('Chỉnh Sửa Thành Công!')
         } catch (error) {
-            alert('Error');
+            alert('Error')
         }
-    }
-
-    const addModelButton = () => {
-        const $modal = document.getElementById('createProductModal');
-
-
-        const modal = new Modal($modal, options);
-
-        modal.show();
-
     }
 
     useEffect(() => {
-        const fetch = async () => {
-            const branch_id = params.branch_id;
-            const searchParams = new URLSearchParams();
-            selectedCategories.forEach(category => {
-                if (category.status)
-                    searchParams.append('status', category.status);
-            });
+        const getBike = async () => {
+            const url = `/branch/bike/${Params.branch_id}/${Params.bike_id}`;
+            const res = await axiosClient.get(url);
+            console.log(res);
 
-            try {
-                const res = await axiosClient.get(`branch/bike/${branch_id}?${searchParams}`);
+            setBike(res.data);
 
 
-                console.log(res);
-                setBikes(res.data);
-
-            } catch (error) {
-                alert('Error');
-            }
         }
-        fetch();
-    }, [selectedCategories])
+        getBike()
+    }, [])
 
     return (
         <>
@@ -128,7 +85,7 @@ export const ListBike = () => {
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/location" className="dashlinks">
+                        <a href="/admin/branch" className="dashlinks">
                             <div>
                                 <i className="fa-solid fa-store text-white"></i>
                                 <span className="allLinks_name">Chi Nhánh</span>
@@ -156,7 +113,19 @@ export const ListBike = () => {
             {/* -----------------------Side Bar-------------------------- */}
 
             <section className="home-section">
-                <h1 className="heading"><span>Danh Sách Xe</span></h1>
+                <nav className="">
+                    <button className='mr-4'>
+                        <i className="fa-solid fa-bell text-xl text-white"></i>
+                    </button>
+                    <button>
+                        <img className="w-10 h-10 rounded-full"
+                            src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
+                            alt="Rounded avatar">
+                        </img>
+                    </button>
+
+                </nav>
+                <h1 className="heading mt-16"><span>Chi Tiết Cửa Hàng</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     {/* <!-- Start coding here --> */}
                     <div className="bg-white rounded">
@@ -172,58 +141,12 @@ export const ListBike = () => {
                                     </div>
                                 </form>
                             </div>
+
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                <button onClick={addModelButton} type="button" id="createProductModalButton" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-green-500">
-                                    <i className="fa-solid fa-plus mr-1"></i>
-                                    Thêm
+                                <button type="button" id="updateProductModalButton" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-gray-500">
+                                    <i className="fa-solid fa-pen-to-square mr-1"></i>
+                                    Chỉnh sửa
                                 </button>
-                                <div className="flex items-center space-x-3 w-full md:w-auto">
-                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-200 " type="button">
-                                        <i className="fa-solid fa-filter mr-2"></i>
-                                        Filter
-                                        <i className="fa-solid fa-chevron-down ml-2"></i>
-                                    </button>
-                                    <div id="filterDropdown" className="z-10 hidden w-56 p-3 bg-white rounded-lg">
-                                        <div className='flex justify-between'>
-                                            <h6 className="mb-3 text-sm font-medium">Category</h6>
-                                            <button className=''>
-                                                <h6 className="mb-3 text-sm font-medium">Clear</h6>
-                                            </button>
-                                        </div>
-                                        <ul className="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-                                            <li className="flex items-center">
-                                                <input
-                                                    id="brand_1"
-                                                    type="checkbox"
-                                                    value="AVAILABLE"
-                                                    className="w-4 h-4 rounded 0"
-                                                    onChange={(e) => {
-                                                        if (e.target.checked)
-                                                            return updateField({ status: e.target.value })
-                                                        else
-                                                            return removeField({ status: e.target.value })
-                                                    }}
-                                                />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Có Sẵn (56)</label>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <input
-                                                    id="brand_2"
-                                                    type="checkbox"
-                                                    value="UNAVAILABLE"
-                                                    className="w-4 h-4 rounded 0"
-                                                    onChange={(e) => {
-                                                        if (e.target.checked)
-                                                            return updateField({ status: e.target.value })
-                                                        else
-                                                            return removeField({ status: e.target.value })
-                                                    }}
-                                                />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Đã Thuê (56)</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
@@ -231,10 +154,11 @@ export const ListBike = () => {
                             <table className="w-full text-sm text-left">
                                 <thead className="text-xs uppercase bg-orange-500">
                                     <tr>
-                                        <th scope="col" className="px-4 py-4">STT</th>
+                                        <th scope="col" className="px-4 py-3">Hãng Xe</th>
                                         <th scope="col" className="px-4 py-3">Mẫu Mã</th>
+                                        <th scope="col" className="px-4 py-3">Năm Sản Xuất</th>
                                         <th scope="col" className="px-4 py-3">Màu Sắc</th>
-                                        <th scope="col" className="px-4 py-3">Giá Thuê</th>
+                                        <th scope="col" className="px-4 py-3">Biển Số Xe</th>
                                         <th scope="col" className="px-4 py-3">Trạng Thái</th>
                                         <th scope="col" className="px-4 py-3">Loại Xe</th>
                                         <th scope="col" className="px-4 py-3">
@@ -243,93 +167,46 @@ export const ListBike = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr className="border-b dark:border-gray-700" >
+                                        <td className="px-4 py-3">{bike.brand}</td>
+                                        <td className="px-4 py-3">{bike.model}</td>
+                                        <td className="px-4 py-3">{bike.year}</td>
+                                        <td className="px-4 py-3">{bike.color}</td>
+                                        <td className="px-4 py-3">{bike.license_plate}</td>
+                                        <td className="px-4 py-3 text-2xl">
+                                            {
+                                                bike.status == 'true' ? <i className="bg-green-500 fa-regular fa-circle"></i> : <i className="bg-red-500 fa-regular fa-circle"></i>
+                                            }
+                                        </td>
+                                        <td className="px-4 py-3 text-2xl">
+                                            {
+                                                bike.type == 'MOTORCYCLE' ? <i className="fa-solid fa-motorcycle"></i> : <i className=" fa-solid fa-bicycle"></i>
+                                            }
 
-                                    {
-                                        bikes.map((bike, index) =>
-                                        (
-                                            <tr className="border-b dark:border-gray-700" key={index + 1}>
-                                                <td className="px-4 py-3">{index + 1}</td>
-                                                <td className="px-4 py-3">{bike.model}</td>
-                                                <td className="px-4 py-3">{bike.color}</td>
-                                                <td className="px-4 py-3">{bike.price}</td>
-                                                <td className="px-4 py-3 text-2xl">
-                                                    {
-                                                        bike.status == 'true' ? <i className="bg-green-500 fa-regular fa-circle"></i> : <i className="bg-red-500 fa-regular fa-circle"></i>
-                                                    }
-                                                </td>
-                                                <td className="px-4 py-3 text-2xl">
-                                                    {
-                                                        bike.type == 'MOTORCYCLE' ? <i className="fa-solid fa-motorcycle"></i> : <i className=" fa-solid fa-bicycle"></i>
-                                                    }
+                                        </td>
 
-                                                </td>
-                                                <td className="px-4 py-3 flex items-center justify-end">
-                                                    <a className='border rounded p-2' href={`/admin/branch/${params.branch_id}/bike/${bike._id}`}>Chi tiết</a>
-
-                                                </td>
-
-                                            </tr>
-                                        )
-                                        )
-                                    }
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
-                        {/* <nav className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-                            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                Showing
-                                <span className="font-semibold text-gray-900 dark:text-white">1-10</span>
-                                of
-                                <span className="font-semibold text-gray-900 dark:text-white">1000</span>
-                            </span>
-                            <ul className="inline-flex items-stretch -space-x-px">
-                                <li>
-                                    <a href="#" className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <span className="sr-only">Previous</span>
-                                        Icon
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                                </li>
-                                <li>
-                                    <a href="#" aria-current="page" className="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <span className="sr-only">Next</span>
-                                        Icon
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav> */}
                     </div>
                 </div>
             </section>
             {/* <!-- End block --> */}
-            {/* <!-- Create modal --> */}
-            <div id="createProductModal" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            {/* <!-- Update modal --> */}
+            <div id="updateProductModal" aria-hidden="true" className="z-40 hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div className="relative p-4 w-full max-w-2xl max-h-full">
                     {/* <!-- Modal content --> */}
                     <div className="relative p-4 bg-white rounded-lg">
                         {/* <!-- Modal header --> */}
-                        <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b">
-                            <h3 className="text-lg font-semibold">Thêm Xe</h3>
-                            <button type="button" className="text-red-700" data-modal-target="createProductModal" data-modal-toggle="createProductModal">
+                        <div className="flex justify-between items-center pb-4 mb-2 rounded-t border-b">
+                            <h3 className="text-lg font-semibold">Chỉnh Sử<a href=""></a> sản phẩm</h3>
+                            <button type="button" className="text-red-700" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal">
                                 <i className="fa-solid fa-x text-xl"></i>
                             </button>
                         </div>
                         {/* <!-- Modal body --> */}
-                        <form onSubmit={handleAddSubmit}>
+                        <form onSubmit={updateBike}>
                             <div className="grid gap-4 mb-2 sm:grid-cols-2">
                                 <div>
                                     <label htmlFor="brand" className="block mb-1 text-sm font-medium">Hãng xe</label>
@@ -337,6 +214,7 @@ export const ListBike = () => {
                                         type="text"
                                         name="brand"
                                         id="brand"
+                                        value={bike.brand}
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập Hãng xe"
                                         required
@@ -349,6 +227,7 @@ export const ListBike = () => {
                                         type="text"
                                         name="model"
                                         id="model"
+                                        value={bike.model}
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập Mẫu Mã"
                                         required
@@ -363,6 +242,7 @@ export const ListBike = () => {
                                         type="text"
                                         name="price"
                                         id="price"
+                                        value={bike.price}
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập Giá Thuê"
                                         required
@@ -376,6 +256,7 @@ export const ListBike = () => {
                                             name="color"
                                             id="color"
                                             required
+                                            value={bike.color}
                                             onChange={(e) => { updateFields({ color: e.target.value }) }}
                                             className="border rounded-lg block p-2.5"
                                         >
@@ -391,6 +272,7 @@ export const ListBike = () => {
                                             name="type"
                                             id="type"
                                             required
+                                            value={bike.type}
                                             onChange={(e) => { updateFields({ type: e.target.value }) }}
                                             className="border rounded-lg block p-2.5"
                                         >
@@ -407,6 +289,7 @@ export const ListBike = () => {
                                         type="text"
                                         name="year"
                                         id="year"
+                                        value={bike.year}
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập Năm Sản Xuất"
                                         required
@@ -419,6 +302,7 @@ export const ListBike = () => {
                                         type="text"
                                         name="license_plate"
                                         id="license_plate"
+                                        value={bike.license_plate}
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập Biển số Xe"
                                         required
@@ -433,6 +317,7 @@ export const ListBike = () => {
                                         type="text"
                                         name="imgUrl"
                                         id="imgUrl"
+                                        value={bike.imgUrl}
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập Link Ảnh Xe"
                                         required
@@ -441,9 +326,9 @@ export const ListBike = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">
+                            <button type="submit" className="border bg-gray-500 font-medium rounded-lg text-sm px-4 py-2">
                                 <i className="fa-solid fa-plus mr-1"></i>
-                                Thêm Mới
+                                Chỉnh Sửa
                             </button>
                         </form>
                     </div>

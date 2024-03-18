@@ -1,10 +1,8 @@
 // import React from 'react'
 import { useState, useEffect } from 'react';
-import axios from "axios";
 import { axiosClient } from '../apis/axiosClient';
-import { options } from '../helpers/optionModel'
 
-type BranchData = {
+export default interface BranchData {
     _id: string,
     address: string,
 }

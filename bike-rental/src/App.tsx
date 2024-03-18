@@ -11,8 +11,8 @@ import { Info } from './pages/Info';
 import { Confirm } from './pages/Confirm';
 import { RentBikeForm } from './pages/RentBikeForm';
 import { Branch } from './pages/Branch';
-import { Bike_Form_Create } from './pages/Bike_Form_Create';
 import { Branch_Detail } from './pages/Branch_Detail';
+import { Bike_Detail } from './pages/Bike_Detail';
 import { Test } from './pages/Test';
 
 // import '../public/style.css'
@@ -39,7 +39,7 @@ export const App = () => {
                     <Route path='branch' element={<Branch />} />
                     <Route path='branch/:branch_id' element={<Branch_Detail />} />
                     <Route path='branch/:branch_id/bike' element={<ListBike />} />
-                    <Route path='branch/:branch_id/bike/add' element={<Bike_Form_Create />} />
+                    <Route path='branch/:branch_id/bike/:bike_id' element={<Bike_Detail />} />
                 </Route>
             </Routes>
         </BrowserRouter>
