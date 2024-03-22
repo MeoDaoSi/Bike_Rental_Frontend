@@ -5,10 +5,11 @@ import { axiosClient } from "../apis/axiosClient"
 import BranchData from "./Branch"
 
 type UserData = {
-    pickup_location: string,
-    return_location: string,
-    pickup_time: string,
-    return_time: string,
+    pickup_id: string, // save _id of branch
+    pickup_address: string,
+    return_address: string,
+    start_date: string,
+    end_date: string,
 }
 
 type UserFormProps = UserData & {
@@ -21,7 +22,14 @@ const INITIAL_DATA: BranchData[] = [{
     address: ''
 }];
 
-export const Schedule = ({ pickup_location, return_location, pickup_time, return_time, updateFields }: UserFormProps) => {
+export const Schedule = ({
+    pickup_id,
+    pickup_address,
+    return_address,
+    start_date,
+    end_date,
+    updateFields
+}: UserFormProps) => {
 
     // const Navigate = useNavigate();
 
@@ -36,6 +44,8 @@ export const Schedule = ({ pickup_location, return_location, pickup_time, return
     const [branches, setBranches] = useState(INITIAL_DATA)
 
     useEffect(() => {
+        console.log(pickup_id);
+
         const getData = async () => {
             try {
                 const data = await axiosClient.get('/branch');
@@ -60,31 +70,41 @@ export const Schedule = ({ pickup_location, return_location, pickup_time, return
                             <div className="input-box">
                                 <span className="details">Ngày nhận xe</span>
                                 <input
-                                    value={pickup_time}
+                                    value={start_date}
                                     type="date"
-                                    name="pickup_time"
-                                    id="pickup_time"
+                                    name="start_date"
+                                    id="start_date"
                                     required
-                                    onChange={e => updateFields({ pickup_time: e.target.value })}
+                                    onChange={e => updateFields({ start_date: e.target.value })}
                                 />
                             </div>
                             <div className="input-box">
                                 <span className="details">Ngày trả xe</span>
-                                <input value={return_time} type="date" name="return_time" id="return_time" required onChange={e => updateFields({ return_time: e.target.value })} />
+                                <input
+                                    value={end_date}
+                                    type="date"
+                                    name="end_date"
+                                    id="end_date"
+                                    required
+                                    onChange={e => updateFields({ end_date: e.target.value })}
+                                />
                             </div>
                             <div className="input-box">
                                 <span className="details">Điểm nhận xe</span>
                                 <select
-                                    defaultValue={pickup_location ? pickup_location : 'default'}
-                                    name="pickup_location"
-                                    id="pickup_location"
+                                    defaultValue={pickup_address ? pickup_address : 'default'}
+                                    name="pickup_address"
+                                    id="pickup_address"
                                     required
-                                    onChange={e => updateFields({ pickup_location: e.target.value })}
+                                    onChange={e => updateFields({
+                                        pickup_address: e.target.value,
+                                        pickup_id: e.target.selectedOptions[0].getAttribute('data-id')!
+                                    })}
                                 >
                                     <option value="default" disabled>-- Chọn điểm nhận xe --</option>
                                     {
                                         branches.map((branch, index) => (
-                                            <option key={index} value={branch._id}>{branch.address}</option>
+                                            <option key={index} data-id={branch._id} value={branch.address}>{branch.address}</option>
                                         ))
                                     }
                                 </select>
@@ -92,15 +112,15 @@ export const Schedule = ({ pickup_location, return_location, pickup_time, return
                             <div className="input-box">
                                 <span className="details">Điểm trả xe</span>
                                 <select
-                                    defaultValue={return_location ? return_location : 'default'}
-                                    name="return" id="return"
+                                    defaultValue={return_address ? return_address : 'default'}
+                                    name="return_address" id="return_address"
                                     required
-                                    onChange={e => updateFields({ return_location: e.target.value })}
+                                    onChange={e => updateFields({ return_address: e.target.value })}
                                 >
                                     <option value="default" disabled>-- Chọn điểm nhận xe --</option>
                                     {
                                         branches.map((branch, index) => (
-                                            <option key={index} value={branch._id}>{branch.address}</option>
+                                            <option key={index} value={branch.address}>{branch.address}</option>
                                         ))
                                     }
                                 </select>

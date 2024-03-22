@@ -11,10 +11,11 @@ type array = {
 }
 
 type BikeFormProps = array & {
-    pickup_time: string,
-    return_time: string,
-    pickup_location: string,
-    return_location: string,
+    pickup_id: string, // save _id of branch
+    pickup_address: string,
+    return_address: string,
+    start_date: string,
+    end_date: string,
 
     updateFields: (fields: Partial<array>) => void,
 }
@@ -22,13 +23,14 @@ type BikeFormProps = array & {
 const INITIAL_DATA: BikeData[] = [];
 
 export const Motorcycle = ({
-    pickup_time,
-    return_time,
-    pickup_location,
-    return_location,
+    pickup_id,
+    pickup_address,
+    return_address,
+    start_date,
+    end_date,
     updateFields,
     cart,
-    // duration,
+    duration,
     total_price
 }: BikeFormProps) => {
 
@@ -37,23 +39,27 @@ export const Motorcycle = ({
     function handleClick(bike: BikeData) {
         if (!cart.some((item) => item._id === bike._id)) {
             return function () {
-                updateFields({ cart: [...cart, bike], total_price: total_price + bike.price });
+                updateFields({ cart: [...cart, bike], total_price: total_price + bike.price * duration });
             }
         }
     }
 
     function removeCart(bike: BikeData) {
         return function () {
-            updateFields({ cart: cart.filter((item) => item._id !== bike._id), total_price: total_price - bike.price });
+            updateFields({ cart: cart.filter((item) => item._id !== bike._id), total_price: total_price - bike.price * duration });
         }
     }
 
 
     useEffect(() => {
+
+        duration = (new Date(end_date).getTime() - new Date(start_date).getTime()) / (1000 * 3600 * 24);
+        updateFields({ duration: duration });
+
         const getData = async () => {
             try {
                 const data = await axiosClient.get(
-                    `/branch/bike/${pickup_location}/book?${pickup_time}=${pickup_time}&${return_time}=${return_time}`
+                    `/branch/bike/${pickup_id}/book?${start_date}=${start_date}&${end_date}=${end_date}`
                 );
                 console.log(data.data);
                 setBikes(data.data);
@@ -116,13 +122,17 @@ export const Motorcycle = ({
                     <div className="h-64 mx-4 my-4 border">
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold">Thông tin nhận xe</p>
-                            <p className="text-sm mt-1">Từ Ngày: {pickup_time}</p>
-                            <p className="text-sm mt-1">Tại Chi Nhánh: {pickup_location}</p>
+                            <p className="text-sm mt-1">Từ Ngày: {start_date}</p>
+                            <p className="text-sm mt-1">Tại Chi Nhánh: {pickup_address}</p>
                         </div>
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold">Thông tin trả xe</p>
-                            <p className="text-sm mt-1">Đến Ngày: {return_time}</p>
-                            <p className="text-sm mt-1">Tại Chi Nhánh: {return_location}</p>
+                            <p className="text-sm mt-1">Đến Ngày: {end_date}</p>
+                            <p className="text-sm mt-1">Tại Chi Nhánh: {return_address}</p>
+                        </div>
+                        <div className="mx-4 my-2 ">
+                            <p className="mt-3 text-xl font-bold">Thời Gian(Ngày)</p>
+                            <p className="text-xl mt-1">{duration}</p>
                         </div>
                     </div>
                     <div className="h-48 mx-4 my-4">
@@ -134,7 +144,7 @@ export const Motorcycle = ({
                                         <>
                                             <div className='flex mt-3 mx-2'>
                                                 <p key={bike._id} className="bg-white mr-2">{bike.model} - {bike.price} - x1</p>
-                                                <button onClick={removeCart(bike)} className='text-red-500'>x</button>
+                                                <button type='button' onClick={removeCart(bike)} className='text-red-500'>x</button>
                                             </div>
 
                                         </>

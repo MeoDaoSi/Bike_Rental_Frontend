@@ -248,13 +248,13 @@ section {
     top: 0;
     left: 0;
     right: 0;
-    padding: 2rem 9%;
+    padding: 1.5rem 9%;
     z-index: 1000;
     background-color: #ffffff;
 }
 
 .header .logo {
-    font-size: 2.1rem;
+    font-size: 1.6rem;
     color: var(--white);
     font-weight: bold;
 }
@@ -265,12 +265,12 @@ section {
 
 .header .navbar a {
     margin: 0 1rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--white);
 }
 
 .header .navbar a:hover {
-    color: var(--black);
+    color: var(--dark-green);
 }
 
 #login-btn .btn {
