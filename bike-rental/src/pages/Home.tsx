@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { Header } from "../components/Header";
+import { useEffect } from "react";
 
 export const Home = () => {
 
     return (
         <>
+            <Header />
             <section className="home" id="home">
 
                 <h3 data-speed="-2" className="home-parallax">Thuê Xe Máy</h3>

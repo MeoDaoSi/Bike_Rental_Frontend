@@ -129,7 +129,7 @@ form .button {
     margin: 35px 0
 }
 
-form .button input {
+form .button button {
     height: 100%;
     width: 100%;
     border-radius: 5px;
@@ -144,7 +144,7 @@ form .button input {
     background: #1a1a1a;
 }
 
-form .button input:hover {
+form .button button:hover {
     transform: scale(0.99);
     background: #ff6a00;
 }

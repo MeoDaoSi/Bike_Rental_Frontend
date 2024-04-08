@@ -6,6 +6,7 @@ import { Info } from './Info'
 import BikeData from './ListBike'
 import UserData from './User'
 import { axiosClient } from '../apis/axiosClient'
+import { useNavigate } from 'react-router-dom'
 
 type FormData = UserData & {
     pickup_id: string, // save _id of branch
@@ -29,13 +30,14 @@ const INITIAL_DATA: FormData = {
     total_price: 0,
     full_name: '',
     email: '',
-    password: '',
     birth_date: '',
     phone_number: 0,
     address: ''
 }
 
 export const RentBikeForm = () => {
+
+    const Navigate = useNavigate();
     const [data, setData] = useState(INITIAL_DATA);
 
     console.log(data);
@@ -59,10 +61,12 @@ export const RentBikeForm = () => {
         <Info {...data} updateFields={updateFields} />,
     ])
 
-    function submit(e: React.FormEvent) {
+    async function submit(e: React.FormEvent) {
         e.preventDefault();
         if (!isLastStep) return next();
-        console.log('form submitted', data);
+        const contract = await axiosClient.post('/contract', data);
+        console.log(contract);
+        Navigate('/');
     }
     return (
         <>

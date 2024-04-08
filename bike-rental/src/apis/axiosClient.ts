@@ -2,7 +2,10 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000';
 
-const token = JSON.stringify(localStorage.getItem('access_token'))
+const token = localStorage.getItem('access_token');
+
+console.log(token);
+
 
 export const axiosClient = axios.create({
     baseURL: BASE_URL,

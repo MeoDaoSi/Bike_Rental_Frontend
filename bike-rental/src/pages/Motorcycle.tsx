@@ -78,9 +78,9 @@ export const Motorcycle = ({
                     <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">THUÊ XE</h2>
 
                     {
-                        bikes.map((bike) => {
+                        bikes.map((bike, index) => {
                             return (
-                                <div key={bike._id} className="flex border-2 mx-3 my-3 justify-between">
+                                <div key={index} className="flex border-2 mx-3 my-3 justify-between">
 
                                     <div className="flex flex-row">
                                         <div>
@@ -139,15 +139,12 @@ export const Motorcycle = ({
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold bg-orange-400">Giỏ hàng</p>
                             {
-                                cart.map((bike) => {
+                                cart.map((bike, index) => {
                                     return (
-                                        <>
-                                            <div className='flex mt-3 mx-2'>
-                                                <p key={bike._id} className="bg-white mr-2">{bike.model} - {bike.price} - x1</p>
-                                                <button type='button' onClick={removeCart(bike)} className='text-red-500'>x</button>
-                                            </div>
-
-                                        </>
+                                        <div key={index} className='flex mt-3 mx-2'>
+                                            <p key={bike._id} className="bg-white mr-2">{bike.model} - {bike.price} - x1</p>
+                                            <button type='button' onClick={removeCart(bike)} className='text-red-500'>x</button>
+                                        </div>
                                     )
                                 })
                             }
