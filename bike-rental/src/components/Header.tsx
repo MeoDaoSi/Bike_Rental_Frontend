@@ -1,28 +1,17 @@
-import { FunctionComponent, useEffect, useState } from 'react'
-import { NavLink } from "react-router-dom";
-import authUtils from '../utils/authUtils';
+import { FunctionComponent, useContext } from 'react'
+// import authUtils from '../utils/authUtils';
 // import { useNavigate } from 'react-router-dom';
-
-let bool = false
+import { AuthContext } from '../utils/authContext';
 
 export const Header: FunctionComponent = () => {
 
-    const [isAuth, setIsAuth] = useState(false);
+    const { isLoggedIn, logout } = useContext(AuthContext);
 
-    useEffect(() => {
-        const checkAuth = async () => {
-            // window.location.reload();
-            const isAuth = await authUtils.isAuthenticated();
-            if (isAuth) {
-                setIsAuth(true);
-            }
-            console.log(isAuth);
+    console.log(isLoggedIn);
 
-        }
-        checkAuth();
-    }, [])
-
-    console.log(isAuth);
+    const handleLogout = async () => {
+        logout();
+    }
 
 
     return (
@@ -31,20 +20,20 @@ export const Header: FunctionComponent = () => {
 
                 <div id="menu-btn" className="fas fa-bars"></div>
 
-                <NavLink className="logo" to="/"> Bike<span>Book</span></NavLink>
+                <a className="logo" href="/"> Bike<span>Book</span></a>
 
 
 
                 <nav className="navbar">
-                    <NavLink to="/">Trang Chủ</NavLink>
-                    <NavLink to="/rentbike">Dịch Vụ</NavLink>
-                    <NavLink to="/rentbike">Bảng Giá</NavLink>
-                    <NavLink to="/rentbike">Liên Hệ</NavLink>
+                    <a href="/">Trang Chủ</a>
+                    <a href="/rentbike">Dịch Vụ</a>
+                    <a href="/rentbike">Bảng Giá</a>
+                    <a href="/rentbike">Liên Hệ</a>
                 </nav>
 
                 <div id="login-btn">
                     {
-                        isAuth ?
+                        isLoggedIn ?
                             <>
                                 <button className='mr-4'>
                                     <i className="fa-solid fa-bell text-xl text-white"></i>
@@ -61,7 +50,7 @@ export const Header: FunctionComponent = () => {
                                             <a href="profile">Thông Tin</a>
                                         </li>
                                         <li className="hover:bg-gray-100 m-2 rounded">
-                                            <a href="profile">Đăng Xuất</a>
+                                            <button onClick={handleLogout}>Đăng Xuất</button>
                                         </li>
                                     </ul>
                                 </div>

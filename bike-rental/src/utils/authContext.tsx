@@ -1,6 +1,12 @@
-import React, { createContext, useLayoutEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { axiosClient } from "../apis/axiosClient";
+import UserData from "../pages/User";
 // import { useNavigate } from "react-router-dom";
+
+// export interface AuthState {
+//     isAuthenticated?: boolean,
+//     user: Partial<UserData> | null
+// }
 
 type AuthContextProviderProps = {
     children: React.ReactNode;
@@ -12,33 +18,37 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
 
     // const Navigate = useNavigate();
 
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem('access_token') || null);
     const [user, setUser] = useState({});
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         (async () => {
             const token = localStorage.getItem('access_token');
+            console.log(token);
+
             if (token) {
                 await getMe();
             }
-        })
-    })
+        })()
+    }, [])
 
     async function getMe() {
-        try {
-            const rs = await axiosClient.get('/auth/me');
-            setUser(rs.data);
-            setToken(rs.data.access_token);
-        } catch (error) {
-            alert('Error');
-        }
+        await axiosClient.get('/auth/me')
+            .then((rs) => {
+                console.log(rs.data.user);
+
+                setUser(rs.data.user);
+                // setToken(rs.data.token);
+
+                // localStorage.setItem('access_token', rs.data.token);
+            })
+            .catch((error) => {
+                console.log(error);
+
+            })
     }
 
-    async function register({ email = '', password = '', full_name = '', confirmPassword = '' }) {
-        if (password !== confirmPassword) {
-            alert("Mật khẩu không khớp");
-            return;
-        }
+    async function register({ email, password, full_name }: Partial<UserData>) {
         try {
             const rs = await axiosClient.post('/auth/register', {
                 email,
@@ -46,18 +56,23 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
                 full_name: full_name,
             })
             localStorage.setItem('access_token', rs.data.token);
+            console.log(rs.data.token);
+
             setUser(rs.data);
-            setToken(rs.data.access_token);
+            setToken(rs.data.token);
+            console.log(token);
+
+
         } catch (error) {
             alert("Đăng ký thất bại");
         }
     }
 
-    async function login({ email = '', password = '' }) {
+    async function login({ email, password }: Partial<UserData>) {
         try {
             const rs = await axiosClient.post('/auth/login', { email, password });
             localStorage.setItem('access_token', rs.data.access_token);
-            setToken(rs.data.access_token);
+            setToken(rs.data.token);
             setUser(rs.data);
         } catch (error) {
             alert('Error');
@@ -71,9 +86,10 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
     }
 
     const contextValue = {
+        getMe,
         user,
         token,
-        isLogin: !!token,
+        isLoggedIn: !!token,
         login,
         logout,
         register
