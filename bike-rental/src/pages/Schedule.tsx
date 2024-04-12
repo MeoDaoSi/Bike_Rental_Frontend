@@ -12,6 +12,9 @@ type UserData = {
     end_date: string,
 }
 
+type Errors = Partial<Record<keyof UserData, string>>
+type Touched = Partial<Record<keyof UserData, boolean>>
+
 type UserFormProps = UserData & {
 
     updateFields: (fields: Partial<UserData>) => void
@@ -31,15 +34,27 @@ export const Schedule = ({
     updateFields
 }: UserFormProps) => {
 
-    // const Navigate = useNavigate();
+    const validate = (newInputs: UserData): Errors => {
+        const newErrors: Errors = {}
 
-    // const handleClick = (e: React.FormEvent) => {
-    //     e.preventDefault();
+        if (new Date(newInputs.end_date) < new Date(newInputs.start_date)) {
+            newErrors.end_date = "Ngày trả xe không hợp lệ!"
+        }
+        if (newInputs.pickup_address == '') {
+            newErrors.pickup_address = "Vui lòng nhập trường này !"
+        }
 
-    //     console.log('1221');
+        return newErrors
+    }
 
-    //     Navigate('/reservation/bike');
-    // }
+    const [errors, setErrors] = useState<Errors>(validate({
+        pickup_id,
+        pickup_address,
+        return_address,
+        start_date,
+        end_date,
+    }))
+    const [touched, setTouched] = useState<Touched>({})
 
     const [branches, setBranches] = useState(INITIAL_DATA)
 
@@ -75,8 +90,22 @@ export const Schedule = ({
                                     name="start_date"
                                     id="start_date"
                                     required
-                                    onChange={e => updateFields({ start_date: e.target.value })}
+                                    min={new Date().toISOString().split('T')[0]}
+                                    max={(new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
+                                    // set max date field to be around 30 days from the current date
+                                    onChange={e => {
+                                        updateFields({ start_date: e.target.value })
+                                        setErrors(validate({
+                                            pickup_id,
+                                            pickup_address,
+                                            return_address,
+                                            end_date,
+                                            start_date: e.target.value
+                                        }))
+                                    }}
+                                    onBlur={() => setTouched({ ...touched, start_date: true })}
                                 />
+                                {errors.start_date && touched.start_date ? <small className="text-red-500">{errors.start_date}</small> : null}
                             </div>
                             <div className="input-box">
                                 <span className="details">Ngày trả xe</span>
@@ -85,9 +114,23 @@ export const Schedule = ({
                                     type="date"
                                     name="end_date"
                                     id="end_date"
+                                    min={new Date().toISOString().split('T')[0]}
+                                    max={(new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0]}
+                                    // set max date field to be around 30 days from the current date
                                     required
-                                    onChange={e => updateFields({ end_date: e.target.value })}
+                                    onChange={e => {
+                                        updateFields({ end_date: e.target.value })
+                                        setErrors(validate({
+                                            pickup_id,
+                                            pickup_address,
+                                            return_address,
+                                            start_date,
+                                            end_date: e.target.value
+                                        }))
+                                    }}
+                                    onBlur={() => setTouched({ ...touched, end_date: true })}
                                 />
+                                {errors.end_date && touched.end_date ? <small className="text-red-500">{errors.end_date}</small> : null}
                             </div>
                             <div className="input-box">
                                 <span className="details">Điểm nhận xe</span>
@@ -96,10 +139,21 @@ export const Schedule = ({
                                     name="pickup_address"
                                     id="pickup_address"
                                     required
-                                    onChange={e => updateFields({
-                                        pickup_address: e.target.value,
-                                        pickup_id: e.target.selectedOptions[0].getAttribute('data-id')!
-                                    })}
+                                    onChange={e => {
+                                        updateFields({
+                                            pickup_address: e.target.value,
+                                            pickup_id: e.target.selectedOptions[0].getAttribute('data-id')!
+
+                                        })
+                                        setErrors(validate({
+                                            pickup_id,
+                                            pickup_address: e.target.value,
+                                            return_address,
+                                            start_date,
+                                            end_date
+                                        }))
+                                    }}
+                                    onBlur={() => setTouched({ ...touched, pickup_address: true })}
                                 >
                                     <option value="default" disabled>-- Chọn điểm nhận xe --</option>
                                     {
@@ -108,6 +162,7 @@ export const Schedule = ({
                                         ))
                                     }
                                 </select>
+                                {errors.pickup_address && touched.pickup_address ? <small className="text-red-500">{errors.pickup_address}</small> : null}
                             </div>
                             <div className="input-box">
                                 <span className="details">Điểm trả xe</span>

@@ -1,7 +1,9 @@
-import { useEffect, useContext } from 'react'
+import { useContext, useState } from 'react'
 import AuthContext from '../utils/authContext'
 
 export const Profile = () => {
+
+    const [activeTab, setActiveTab] = useState('info');
 
     const { user } = useContext(AuthContext);
 
@@ -34,11 +36,11 @@ export const Profile = () => {
                         </div>
                         <div className='mt-4 text-gray-600 text-xl border-b'>
                             <nav className='flex'>
-                                <div className='m-2 pl-2'>
-                                    <button>Thông Tin</button>
+                                <div className='p-2 ml-2'>
+                                    <button className={activeTab == 'info' ? 'text-blue-600 border-b-4' : 'hover:border-b-4 hover:text-blue-600'}>Thông Tin</button>
                                 </div>
                                 <div className='m-2'>
-                                    <button>Lịch Sử Thuê</button>
+                                    <button className={activeTab == 'history' ? 'text-blue-600 border-b-4' : 'hover:border-b-4 hover:text-blue-600'}>Lịch Sử Thuê</button>
                                 </div>
 
                             </nav>

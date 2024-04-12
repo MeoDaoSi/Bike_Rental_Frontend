@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { axiosClient } from "../apis/axiosClient";
 import UserData from "../pages/User";
+import { toast } from "react-toastify";
 // import { useNavigate } from "react-router-dom";
 
 // export interface AuthState {
@@ -61,21 +62,40 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
             setUser(rs.data);
             setToken(rs.data.token);
             console.log(token);
+            toast.success("Đăng ký thành công", {
+                onClose: () => {
+                    window.location.href = "/";
+                }
+            });
 
-
-        } catch (error) {
-            alert("Đăng ký thất bại");
+        } catch (e: any) {
+            toast.error('Đăng ký thất bại!', {
+                onClose: () => {
+                    window.location.reload();
+                }
+            })
         }
     }
 
     async function login({ email, password }: Partial<UserData>) {
         try {
             const rs = await axiosClient.post('/auth/login', { email, password });
-            localStorage.setItem('access_token', rs.data.access_token);
+            localStorage.setItem('access_token', rs.data.token);
             setToken(rs.data.token);
             setUser(rs.data);
-        } catch (error) {
-            alert('Error');
+            toast.success("Đăng nhập thành công", {
+                onClose: () => {
+                    window.location.href = "/";
+                }
+            });
+        } catch (e) {
+            console.log('test');
+
+            toast.error('Đăng nhập thất bại!', {
+                onClose: () => {
+                    window.location.reload();
+                }
+            });
         }
     }
 

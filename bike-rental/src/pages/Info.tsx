@@ -1,6 +1,8 @@
 // import { useNavigate } from 'react-router-dom';
 import UserData from "./User";
 import BikeData from "./ListBike";
+import { Fragment } from "react";
+
 
 type FormProps = UserData & {
     pickup_address: string,
@@ -12,8 +14,6 @@ type FormProps = UserData & {
     total_price: number
     updateFields: (fields: Partial<UserData>) => void,
 }
-
-// const INITIAL_DATA: BikeData[] = [];
 
 export const Info = ({
     start_date,
@@ -31,9 +31,11 @@ export const Info = ({
     address
 }: FormProps) => {
 
-    // const Navigate = useNavigate();
+    console.log(full_name);
+
 
     return (
+
         <>
             <div className="flex flex-row min-h-screen justify-center px-4">
                 <div className="bg-gray-100 border w-2/3 flex flex-col">
@@ -124,14 +126,14 @@ export const Info = ({
                         <div className="mx-4 my-2 ">
                             <p className="mt-3 text-xl font-bold bg-orange-400">Giỏ hàng</p>
                             {
-                                cart.map((bike) => {
+                                cart.map((bike, index) => {
                                     return (
-                                        <>
+                                        <Fragment key={index}>
                                             <div className='flex mt-3 mx-2'>
-                                                <p key={bike._id} className="bg-white mr-2">{bike.model} - {bike.price} - x1</p>
+                                                <p className="bg-white mr-2">{bike.model} - {bike.price} - x1</p>
                                             </div>
 
-                                        </>
+                                        </Fragment>
                                     )
                                 })
                             }

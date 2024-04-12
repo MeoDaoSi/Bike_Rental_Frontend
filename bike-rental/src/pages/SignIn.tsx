@@ -1,24 +1,20 @@
-import { useState } from "react";
-import { axiosClient } from "../apis/axiosClient";
+import { useState, useContext } from "react";
 import { Header } from "../components/Header";
+
+import { AuthContext } from "../utils/authContext";
 
 export const SignIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const signIn = async (e: React.FormEvent) => {
+    const { login } = useContext(AuthContext);
+
+    const handdleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const res = await axiosClient.post('/auth/login', {
-                email,
-                password,
-            })
-            localStorage.setItem('access_token', res.data.token);
-            alert("Đăng nhập thành công");
-        } catch (error) {
-            alert("Đăng nhập thất bại");
-        }
+
+        await login({ email, password });
+
     }
 
     return (
@@ -29,7 +25,7 @@ export const SignIn = () => {
                     <div className="titled"></div>
                     <div id="usersignin" style={{ display: "block" }} className="content">
                         <h2 className="pt-1">Đăng Nhập</h2>
-                        <form onSubmit={signIn} method="POST">
+                        <form onSubmit={handdleSubmit} method="POST">
                             <div className="user-details">
 
                                 <div className="input-box">

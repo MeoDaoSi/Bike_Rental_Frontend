@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useMultiStepForm } from '../hooks/useMultiStepForm'
 import { Schedule } from './Schedule'
 import { Motorcycle } from './Motorcycle'
@@ -7,6 +7,7 @@ import BikeData from './ListBike'
 import UserData from './User'
 import { axiosClient } from '../apis/axiosClient'
 import { useNavigate } from 'react-router-dom'
+import AuthContext from "../utils/authContext";
 
 type FormData = UserData & {
     pickup_id: string, // save _id of branch
@@ -19,38 +20,28 @@ type FormData = UserData & {
     total_price: number,
 }
 
-const INITIAL_DATA: FormData = {
-    pickup_id: '',
-    pickup_address: '',
-    return_address: '',
-    start_date: '',
-    end_date: '',
-    cart: [],
-    duration: 0,
-    total_price: 0,
-    full_name: '',
-    email: '',
-    birth_date: '',
-    phone_number: 0,
-    address: ''
-}
-
 export const RentBikeForm = () => {
+
+    const { user } = useContext(AuthContext);
+
+    const INITIAL_DATA: FormData = {
+        pickup_id: '',
+        pickup_address: '',
+        return_address: '',
+        start_date: '',
+        end_date: '',
+        cart: [],
+        duration: 0,
+        total_price: 0,
+        full_name: user?.full_name || '',
+        email: user?.email || '',
+        birth_date: user?.birth_date || '',
+        phone_number: user?.phone_number || undefined,
+        address: user?.address || '',
+    }
 
     const Navigate = useNavigate();
     const [data, setData] = useState(INITIAL_DATA);
-
-    console.log(data);
-
-    // const createContract = async () => {
-    //     try {
-    //         const res = await axiosClient.post('/contracts', data);
-    //         console.log(res);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
 
     function updateFields(newFields: Partial<FormData>) {
         setData(prev => ({ ...prev, ...newFields }))
