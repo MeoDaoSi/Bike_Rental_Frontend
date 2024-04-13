@@ -29,6 +29,11 @@ export const Header: FunctionComponent = () => {
                     <a href="/rentbike">Dịch Vụ</a>
                     <a href="/rentbike">Bảng Giá</a>
                     <a href="/rentbike">Liên Hệ</a>
+                    <a className='relative' href="/map">
+                        <i className="fa-solid fa-location-dot mr-1"></i>
+                        Map
+                        <div className="absolute hover:text-orange-500 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-red-500 -top-2 -end-6 dark:border-gray-900">New</div>
+                    </a>
                 </nav>
 
                 <div id="login-btn">

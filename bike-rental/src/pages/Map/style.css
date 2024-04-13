@@ -1,0 +1,28 @@
+/* #sethPhatMap {
+    width: 100%;
+    height: 100%;
+} */
+
+.map-popup-content {
+    width: 300px;
+}
+
+.map-popup-content .left {
+    float: left;
+    width: 40%;
+}
+
+.map-popup-content .left img {
+    width: 100%;
+    height: 100px;
+    margin: -15px 0 -15px -20px;
+}
+
+.map-popup-content .right {
+    float: left;
+    width: 60%;
+}
+
+.clearfix {
+    clear: both;
+}

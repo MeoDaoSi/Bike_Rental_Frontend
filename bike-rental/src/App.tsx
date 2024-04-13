@@ -10,6 +10,7 @@ import { Bike_Detail } from './pages/Bike_Detail';
 import { Test } from './pages/Test';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
+import { Map } from './pages/Map';
 
 // import '../public/style.css'
 import './registerStyle.css'
@@ -17,15 +18,16 @@ import './dashboard.css'
 import { ListBike } from './pages/ListBike';
 
 import { AuthProvider } from './utils/authContext';
+import { AuthAdminProvider } from './utils/authAdminContext';
 
 
 export const App = () => {
     return (
         <BrowserRouter>
 
-            {/* <Routes>
-
-            </Routes> */}
+            <Routes>
+                <Route path='/map' element={<Map />} />
+            </Routes>
 
             <AuthProvider>
                 <Routes>
@@ -38,15 +40,18 @@ export const App = () => {
                 </Routes>
             </AuthProvider>
 
-            {/* <Routes>
-                <Route path='/admin'>
-                    <Route index element={<Admin />} />
-                    <Route path='branch' element={<Branch />} />
-                    <Route path='branch/:branch_id' element={<Branch_Detail />} />
-                    <Route path='branch/:branch_id/bike' element={<ListBike />} />
-                    <Route path='branch/:branch_id/bike/:bike_id' element={<Bike_Detail />} />
-                </Route>
-            </Routes> */}
+            <AuthAdminProvider>
+                <Routes>
+                    <Route path='/admin'>
+                        <Route index element={<Admin />} />
+                        <Route path='branch' element={<Branch />} />
+                        <Route path='branch/:branch_id' element={<Branch_Detail />} />
+                        <Route path='branch/:branch_id/bike' element={<ListBike />} />
+                        <Route path='branch/:branch_id/bike/:bike_id' element={<Bike_Detail />} />
+                    </Route>
+                </Routes>
+            </AuthAdminProvider>
+
         </BrowserRouter>
     )
 }
