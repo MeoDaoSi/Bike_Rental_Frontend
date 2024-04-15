@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { axiosClient } from "../../apis/axiosClient"
 import BranchData from "../Admin/Branch/Branch"
+import { Header } from "../../components/Header"
 
 type UserData = {
     pickup_id: string, // save _id of branch
@@ -43,6 +44,9 @@ export const Schedule = ({
         if (newInputs.pickup_address == '') {
             newErrors.pickup_address = "Vui lòng nhập trường này !"
         }
+        if (newInputs.return_address == '') {
+            newErrors.return_address = "Vui lòng nhập trường này !"
+        }
 
         return newErrors
     }
@@ -76,6 +80,7 @@ export const Schedule = ({
 
     return (
         <>
+            <Header />
             <div className="maincontainer" >
                 <div className="firstcontainer" >
                     <div className="titled" >Chọn thời gian và địa điểm</div>
@@ -170,7 +175,17 @@ export const Schedule = ({
                                     defaultValue={return_address ? return_address : 'default'}
                                     name="return_address" id="return_address"
                                     required
-                                    onChange={e => updateFields({ return_address: e.target.value })}
+                                    onChange={e => {
+                                        updateFields({ return_address: e.target.value })
+                                        setErrors(validate({
+                                            pickup_id,
+                                            pickup_address,
+                                            return_address: e.target.value,
+                                            start_date,
+                                            end_date
+                                        }))
+                                    }}
+                                    onBlur={() => setTouched({ ...touched, return_address: true })}
                                 >
                                     <option value="default" disabled>-- Chọn điểm nhận xe --</option>
                                     {
@@ -179,6 +194,7 @@ export const Schedule = ({
                                         ))
                                     }
                                 </select>
+                                {errors.return_address && touched.return_address ? <small className="text-red-500">{errors.return_address}</small> : null}
                             </div>
 
 

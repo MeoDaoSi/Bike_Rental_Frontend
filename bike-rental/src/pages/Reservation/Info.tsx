@@ -60,7 +60,7 @@ export const Info = ({
                                     type="date"
                                     name="birth_date"
                                     id="birth_date"
-                                    value={birth_date}
+                                    value={birth_date || "2004-01-01"}
                                     required
                                     onChange={e => updateFields({ birth_date: e.target.value })}
                                 />
@@ -72,7 +72,7 @@ export const Info = ({
                                     name="email"
                                     id="email"
                                     value={email}
-                                    placeholder="Enter your email"
+                                    placeholder="Nhập Email"
                                     required
                                     onChange={e => updateFields({ email: e.target.value })}
                                 />

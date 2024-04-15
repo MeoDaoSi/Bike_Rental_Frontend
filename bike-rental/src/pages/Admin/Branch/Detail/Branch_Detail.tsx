@@ -121,7 +121,7 @@ export const Branch_Detail = () => {
                     <div className="relative p-4 bg-white rounded-lg">
                         {/* <!-- Modal header --> */}
                         <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b">
-                            <h3 className="text-lg font-semibold">Thêm sản phẩm</h3>
+                            <h3 className="text-lg font-semibold">Chỉnh Sửa</h3>
                             <button type="button" className="text-red-700" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal">
                                 <i className="fa-solid fa-x text-xl"></i>
                             </button>

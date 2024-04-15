@@ -56,13 +56,14 @@ export const RentBikeForm = () => {
     async function submit(e: React.FormEvent) {
         e.preventDefault();
         if (!isLastStep) return next();
+        if (data.cart.length === 0) return alert('Vui lòng chọn xe để thuê!');
         const contract = await axiosClient.post('/contract', data);
         console.log(contract);
         Navigate('/');
     }
     return (
         <>
-            <div className="flex flex-col justify-center mt-32">
+            <div className="flex flex-col justify-center mt-28">
                 <form onSubmit={submit}>
                     {step}
 

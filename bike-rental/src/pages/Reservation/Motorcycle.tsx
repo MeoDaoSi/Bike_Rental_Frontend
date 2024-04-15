@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // import motorcycle from '../assets/images/motorcycle.png';
 import BikeData from '../Admin/Bike/ListBike';
 import { axiosClient } from '../../apis/axiosClient';
+import { Header } from '../../components/Header';
 
 type array = {
     cart: BikeData[],
@@ -37,6 +38,9 @@ export const Motorcycle = ({
     const [bikes, setBikes] = useState(INITIAL_DATA)
 
     function handleClick(bike: BikeData) {
+        if (cart.length == 2) {
+            return;
+        }
         if (!cart.some((item) => item._id === bike._id)) {
             return function () {
                 updateFields({ cart: [...cart, bike], total_price: total_price + bike.price * duration });
@@ -53,7 +57,7 @@ export const Motorcycle = ({
 
     useEffect(() => {
 
-        duration = (new Date(end_date).getTime() - new Date(start_date).getTime()) / (1000 * 3600 * 24);
+        duration = (new Date(end_date).getTime() - new Date(start_date).getTime()) / (1000 * 3600 * 24) + 1;
         updateFields({ duration: duration });
 
         const getData = async () => {
@@ -73,7 +77,8 @@ export const Motorcycle = ({
 
     return (
         <>
-            <div className="flex flex-row min-h-screen justify-center px-4 py-4">
+            <Header />
+            <div className="flex flex-row min-h-screen justify-center px-4">
                 <div className=" bg-gray-100 border w-2/3 flex flex-col">
                     <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">THUÊ XE</h2>
 
