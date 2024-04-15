@@ -1,21 +1,25 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
 
-import { Admin } from './pages/DashBoard';
-import { RentBikeForm } from './pages/RentBikeForm';
+import { Admin } from './pages/Admin/DashBoard';
+import { RentBikeForm } from './pages/Reservation/RentBikeForm';
 import { Profile } from './pages/Profile';
-import { Branch } from './pages/Branch';
-import { Branch_Detail } from './pages/Branch_Detail';
-import { Bike_Detail } from './pages/Bike_Detail';
+import { Branch } from './pages/Admin/Branch/Branch';
+import { Branch_Detail } from './pages/Admin/Branch/Detail/Branch_Detail';
+import { Bike_Detail } from './pages/Admin/Bike/Detail/Bike_Detail';
 import { Test } from './pages/Test';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { Map } from './pages/Map';
+import { Contract } from './pages/Contract';
+import { Contract_Detail } from './pages/Contract/Contract_Detail';
+import { Login } from './pages/Admin/Login';
+// import { AuthAdmin } from './middlewares/AuthAdmin';
 
 // import '../public/style.css'
 import './registerStyle.css'
 import './dashboard.css'
-import { ListBike } from './pages/ListBike';
+import { ListBike } from './pages/Admin/Bike/ListBike';
 
 import { AuthProvider } from './utils/authContext';
 import { AuthAdminProvider } from './utils/authAdminContext';
@@ -42,12 +46,15 @@ export const App = () => {
 
             <AuthAdminProvider>
                 <Routes>
+                    <Route path='/admin/login' element={<Login />} />
                     <Route path='/admin'>
                         <Route index element={<Admin />} />
                         <Route path='branch' element={<Branch />} />
                         <Route path='branch/:branch_id' element={<Branch_Detail />} />
                         <Route path='branch/:branch_id/bike' element={<ListBike />} />
                         <Route path='branch/:branch_id/bike/:bike_id' element={<Bike_Detail />} />
+                        <Route path='contract' element={<Contract />} />
+                        <Route path='contract/:contract_id' element={<Contract_Detail />} />
                     </Route>
                 </Routes>
             </AuthAdminProvider>

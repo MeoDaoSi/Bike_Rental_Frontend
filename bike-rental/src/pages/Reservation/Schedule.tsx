@@ -1,8 +1,8 @@
 // import React from 'react'
 
 import { useEffect, useState } from "react"
-import { axiosClient } from "../apis/axiosClient"
-import BranchData from "./Branch"
+import { axiosClient } from "../../apis/axiosClient"
+import BranchData from "../Admin/Branch/Branch"
 
 type UserData = {
     pickup_id: string, // save _id of branch

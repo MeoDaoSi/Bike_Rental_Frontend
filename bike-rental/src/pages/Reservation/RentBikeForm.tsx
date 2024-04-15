@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { useMultiStepForm } from '../hooks/useMultiStepForm'
+import { useMultiStepForm } from '../../hooks/useMultiStepForm'
 import { Schedule } from './Schedule'
 import { Motorcycle } from './Motorcycle'
 import { Info } from './Info'
-import BikeData from './ListBike'
-import UserData from './User'
-import { axiosClient } from '../apis/axiosClient'
+import BikeData from '../Admin/Bike/ListBike'
+import UserData from '../Admin/User/User'
+import { axiosClient } from '../../apis/axiosClient'
 import { useNavigate } from 'react-router-dom'
-import AuthContext from "../utils/authContext";
+import AuthContext from "../../utils/authContext";
 
 type FormData = UserData & {
     pickup_id: string, // save _id of branch
@@ -38,6 +38,7 @@ export const RentBikeForm = () => {
         birth_date: user?.birth_date || '',
         phone_number: user?.phone_number || undefined,
         address: user?.address || '',
+        role: 'USER'
     }
 
     const Navigate = useNavigate();

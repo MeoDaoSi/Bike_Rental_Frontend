@@ -6,6 +6,7 @@ export default interface UserData {
     birth_date?: string;
     phone_number: number;
     address?: string;
+    role: string;
 }
 
 const INITIAL_DATA: UserData = {
@@ -15,7 +16,8 @@ const INITIAL_DATA: UserData = {
     password: '',
     birth_date: '',
     phone_number: 0,
-    address: ''
+    address: '',
+    role: 'USER'
 }
 
 export const User = () => {

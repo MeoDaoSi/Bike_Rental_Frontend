@@ -1,6 +1,6 @@
 // import { useNavigate } from 'react-router-dom';
-import UserData from "./User";
-import BikeData from "./ListBike";
+import UserData from "../Admin/User/User";
+import BikeData from "../Admin/Bike/ListBike";
 import { Fragment } from "react";
 
 

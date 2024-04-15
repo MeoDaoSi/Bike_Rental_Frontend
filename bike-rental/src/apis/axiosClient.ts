@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000';
 
-const token = localStorage.getItem('access_token');
+const token = localStorage.getItem('access_token') || localStorage.getItem('admin_token');
 
 console.log(token);
 

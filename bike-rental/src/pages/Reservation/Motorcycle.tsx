@@ -1,8 +1,8 @@
 // import React, { ReactElement, ReactHTMLElement } from 'react';
 import { useEffect, useState } from 'react';
 // import motorcycle from '../assets/images/motorcycle.png';
-import BikeData from './ListBike';
-import { axiosClient } from '../apis/axiosClient';
+import BikeData from '../Admin/Bike/ListBike';
+import { axiosClient } from '../../apis/axiosClient';
 
 type array = {
     cart: BikeData[],
