@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { axiosClient } from '../../apis/axiosClient';
 import BikeData from '../Admin/Bike/ListBike';
 import UserData from '../Admin/User/User';
+import { SideBar } from '../../components/SideBar';
+import { Header } from '../../components/Admin/Header';
+import { TextColor } from '../../helpers/TextColor';
 
 export default interface ContractData {
     _id: string,
@@ -82,64 +85,12 @@ export const Contract = () => {
 
     return (
         <>
-            {/* -----------------------Side Bar-------------------------- */}
-            <div className="sidebar">
-                <a href="/admin">
-                    <div className="logo-details border-b">
-                        <i className=''></i>
-                        <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
-                    </div>
-                </a>
-                <ul className="nav-links">
-                    <li>
-                        <a href="admin/dashboard" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-table-columns text-white"></i>
-                                <span className="allLinks_name">Dashboard</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/location" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-store text-white"></i>
-                                <span className="allLinks_name">Chi Nhánh</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/user" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-users text-white"></i>
-                                <span className="allLinks_name">Người Dùng</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/contract" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-file-contract text-white"></i>
-                                <span className="allLinks_name">Hợp Đồng</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            {/* -----------------------Side Bar-------------------------- */}
+            <SideBar />
 
             <section className="home-section">
-                <nav className="">
-                    <button className='mr-4'>
-                        <i className="fa-solid fa-bell text-xl text-white"></i>
-                    </button>
-                    <button>
-                        <img className="w-10 h-10 rounded-full"
-                            src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
-                            alt="Rounded avatar">
-                        </img>
-                    </button>
 
-                </nav>
+                <Header />
+
                 <h1 className="heading mt-16"><span>Danh Sách Cửa Hàng</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     {/* <!-- Start coding here --> */}
@@ -174,7 +125,7 @@ export const Contract = () => {
                                 <thead className="text-xs uppercase bg-orange-500">
                                     <tr>
                                         <th scope="col" className="px-4 py-4">STT</th>
-                                        <th scope="col" className="px-4 py-3">Email</th>
+                                        <th scope="col" className="px-4 py-3">SDT</th>
                                         <th scope="col" className="px-4 py-3">Xe Thuê</th>
                                         <th scope="col" className="px-4 py-3">Số Lượng</th>
                                         <th scope="col" className="px-4 py-3">Trạng Thái</th>
@@ -190,7 +141,7 @@ export const Contract = () => {
                                         (
                                             <tr className="border-b dark:border-gray-700" key={i + 1}>
                                                 <td className="px-4 py-3">{i + 1}</td>
-                                                <td className="px-4 py-3">{e?.user?.email}</td>
+                                                <td className="px-4 py-3">{e?.user?.phone_number}</td>
                                                 <td className="px-4 py-3">
                                                     {e.bikes.map((element, index) => (
                                                         <div key={index} className="">{element.model}</div>
@@ -198,7 +149,9 @@ export const Contract = () => {
                                                 </td>
 
                                                 <td className="px-4 py-3">{e.bikes.length}</td>
-                                                <td className="px-4 py-3">{e.status}</td>
+                                                <td className={`px-4 py-3`}>
+                                                    {TextColor(e.status)}
+                                                </td>
                                                 <td className="px-4 py-3 flex justify-end">
                                                     <a className='border rounded p-2' href={`/admin/contract/${e._id}`}>Chi tiết</a>
 

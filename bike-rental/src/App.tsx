@@ -12,7 +12,7 @@ import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { Map } from './pages/Map';
 import { Contract } from './pages/Contract';
-import { Contract_Detail } from './pages/Contract/Contract_Detail';
+import { Contract_Detail } from './pages/Contract/Detail/Contract_Detail';
 import { Login } from './pages/Admin/Login';
 // import { AuthAdmin } from './middlewares/AuthAdmin';
 

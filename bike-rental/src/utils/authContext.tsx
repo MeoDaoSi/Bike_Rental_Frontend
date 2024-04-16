@@ -2,12 +2,6 @@ import React, { createContext, useEffect, useState } from "react";
 import { axiosClient } from "../apis/axiosClient";
 import UserData from "../pages/Admin/User/User";
 import { toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
-
-// export interface AuthState {
-//     isAuthenticated?: boolean,
-//     user: Partial<UserData> | null
-// }
 
 type AuthContextProviderProps = {
     children: React.ReactNode;

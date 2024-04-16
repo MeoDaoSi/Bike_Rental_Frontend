@@ -1,12 +1,18 @@
-import { useState, useEffect } from 'react';
-import { axiosClient } from '../../apis/axiosClient';
-import BikeData from '../Admin/Bike/ListBike';
-import UserData from '../Admin/User/User';
+import { useState, useEffect, ReactNode, Fragment } from 'react';
+import { axiosClient } from '../../../apis/axiosClient';
+import BikeData from '../../Admin/Bike/ListBike';
+import UserData from '../../Admin/User/User';
+import { useParams } from 'react-router-dom';
+import { toast } from "react-toastify";
+import { SideBar } from '../../../components/SideBar';
+import { Header } from '../../../components/Admin/Header';
+import { Format_DateTime } from '../../../helpers/Format_DateTime';
+import { Format_Currency } from '../../../helpers/Format_Currency';
 
 export default interface ContractData {
     _id: string,
-    start_date: Date,
-    end_date: Date,
+    start_date: string,
+    end_date: string,
     pickup_address: string,
     return_address: string,
     status: string,
@@ -20,8 +26,8 @@ export default interface ContractData {
 
 const INITIAL_DATA: ContractData = {
     _id: '',
-    start_date: new Date(),
-    end_date: new Date(),
+    start_date: '',
+    end_date: '',
     pickup_address: '',
     return_address: '',
     status: '',
@@ -48,27 +54,17 @@ const INITIAL_DATA: ContractData = {
 
 export const Contract_Detail = () => {
 
-    const [contract, setContract] = useState([INITIAL_DATA]);
+    const params = useParams();
+    const [contract, setContract] = useState(INITIAL_DATA);
 
     const updateFields = (newFields: Partial<ContractData>) => {
         setContract(prev => ({ ...prev, ...newFields }))
     }
 
-    // const handleAddSubmit = async (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     try {
-    //         const res = await axiosClient.post('/branch', branch);
-    //         console.log(res);
-    //         alert('Thêm Thành Công!')
-    //     } catch (error) {
-    //         alert('Error');
-    //     }
-    // }
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axiosClient.get('/contract');
+                const res = await axiosClient.get(`/contract/${params.contract_id}`);
                 console.log(res);
                 setContract(res.data);
 
@@ -82,65 +78,13 @@ export const Contract_Detail = () => {
 
     return (
         <>
-            {/* -----------------------Side Bar-------------------------- */}
-            <div className="sidebar">
-                <a href="/admin">
-                    <div className="logo-details border-b">
-                        <i className=''></i>
-                        <span className='logo_name1'>Bike</span><span className="logo_name">Book</span>
-                    </div>
-                </a>
-                <ul className="nav-links">
-                    <li>
-                        <a href="admin/dashboard" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-table-columns text-white"></i>
-                                <span className="allLinks_name">Dashboard</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/location" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-store text-white"></i>
-                                <span className="allLinks_name">Chi Nhánh</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/user" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-users text-white"></i>
-                                <span className="allLinks_name">Người Dùng</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/contract" className="dashlinks">
-                            <div>
-                                <i className="fa-solid fa-file-contract text-white"></i>
-                                <span className="allLinks_name">Hợp Đồng</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            {/* -----------------------Side Bar-------------------------- */}
+            <SideBar />
 
             <section className="home-section">
-                <nav className="">
-                    <button className='mr-4'>
-                        <i className="fa-solid fa-bell text-xl text-white"></i>
-                    </button>
-                    <button>
-                        <img className="w-10 h-10 rounded-full"
-                            src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
-                            alt="Rounded avatar">
-                        </img>
-                    </button>
 
-                </nav>
-                <h1 className="heading mt-16"><span>Danh Sách Cửa Hàng</span></h1>
+                <Header />
+
+                <h1 className="heading mt-16"><span>Chi Tiết Đặt Xe</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     {/* <!-- Start coding here --> */}
                     <div className="bg-white rounded">
@@ -173,42 +117,58 @@ export const Contract_Detail = () => {
                             <table className="w-full text-sm text-left">
                                 <thead className="text-xs uppercase bg-orange-500">
                                     <tr>
-                                        <th scope="col" className="px-4 py-4">STT</th>
                                         <th scope="col" className="px-4 py-3">Người Thuê</th>
-                                        <th scope="col" className="px-4 py-3">Xe Thuê</th>
+                                        <th scope="col" className="px-4 py-3">SĐT</th>
+                                        <th scope="col" className="px-4 py-3">Thời Gian</th>
+                                        <th scope="col" className="px-4 py-3">Địa Điểm</th>
                                         <th scope="col" className="px-4 py-3">Số Lượng</th>
-                                        <th scope="col" className="px-4 py-3">Trạng Thái</th>
-                                        <th scope="col" className="px-4 py-3">
-                                            <span className="sr-only">Actions</span>
-                                        </th>
+                                        <th scope="col" className="px-4 py-3">Tổng Giá Thuê</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    {
-                                        contract.map((e, i) =>
-                                        (
-                                            <tr className="border-b dark:border-gray-700" key={i + 1}>
-                                                <td className="px-4 py-3">{i + 1}</td>
-                                                <td className="px-4 py-3">{e?.user?.email}</td>
-                                                <td className="px-4 py-3">
-                                                    {e.bikes.map((element, index) => (
-                                                        <div key={index} className="">{element.model}</div>
-                                                    ))}
-                                                </td>
+                                    <tr className="border-b dark:border-gray-700">
+                                        <td className="px-4 py-3">{contract.user?.full_name}</td>
+                                        <td className="px-4 py-3">{contract.user?.phone_number}</td>
+                                        <td className="px-4 py-3">
+                                            {Format_DateTime(contract.start_date)}
+                                            {Format_DateTime(contract.end_date)}
+                                        </td>
+                                        <td className="px-4 py-3">{contract.pickup_address}</td>
+                                        <td className="px-4 py-3">{contract.bikes.length}</td>
+                                        <td className="px-4 py-3">{Format_Currency(contract.total_price)}</td>
 
-                                                <td className="px-4 py-3">{e.bikes.length}</td>
-                                                <td className="px-4 py-3">{e.status}</td>
-                                                <td className="px-4 py-3 flex justify-end">
-                                                    <a className='border rounded p-2' href={`/admin/branch/${e._id}`}>Chi tiết</a>
-
-                                                </td>
-
-                                            </tr>
-                                        )
-                                        )
-                                    }
+                                    </tr>
                                 </tbody>
+                            </table>
+                            <table className="w-full text-sm text-left">
+                                {
+                                    contract.bikes.map((element, index) => (
+                                        <Fragment key={index}>
+                                            <thead className="text-xs uppercase">
+                                                <tr>
+                                                    <th scope="col" className="px-4 py-3">{element.model}</th>
+                                                    <th scope="col" className="px-4 py-3">Biển Số</th>
+                                                    <th scope="col" className="px-4 py-3">Giá Thuê / Ngày</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <td className="px-4 py-3">
+                                                        <img className='h-28' src={element.imgUrl} alt="" />
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {element.license_plate}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {Format_Currency(element.price)}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </Fragment>
+                                    ))
+                                }
                             </table>
                         </div>
                         {/* <nav className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">

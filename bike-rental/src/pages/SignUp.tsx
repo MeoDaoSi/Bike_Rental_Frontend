@@ -1,6 +1,4 @@
 import { useState, useContext } from "react";
-// import { axiosClient } from "../apis/axiosClient";
-// import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../utils/authContext";
 
 type Inputs = {
