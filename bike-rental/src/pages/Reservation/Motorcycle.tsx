@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import BikeData from '../Admin/Bike/ListBike';
 import { axiosClient } from '../../apis/axiosClient';
 import { Header } from '../../components/Header';
+import { Format_Currency } from '../../helpers/Format_Currency';
 
 type array = {
     cart: BikeData[],
@@ -107,7 +108,7 @@ export const Motorcycle = ({
 
                                     <div className="my-3">
                                         <div className="flex flex-col justify-end">
-                                            <div className="text-orange-500 mr-3 mt-3 font-medium text-right">{bike.price}/Ngày</div>
+                                            <div className="text-orange-500 mr-3 mt-3 font-medium text-right">{Format_Currency(bike.price)}/Ngày</div>
                                             <div className="mr-3 my-1 text-right">
                                                 không bao gồm thuế và bảo hiểm
                                             </div>
@@ -147,13 +148,13 @@ export const Motorcycle = ({
                                 cart.map((bike, index) => {
                                     return (
                                         <div key={index} className='flex mt-3 mx-2'>
-                                            <p key={bike._id} className="bg-white mr-2">{bike.model} - {bike.price} - x1</p>
+                                            <p key={bike._id} className="bg-white mr-2">{bike.model} - {Format_Currency(bike.price)} - x1</p>
                                             <button type='button' onClick={removeCart(bike)} className='text-red-500'>x</button>
                                         </div>
                                     )
                                 })
                             }
-                            <h2 className="my-3 border-t-4 text-xl">Tổng giá thuê: {total_price}</h2>
+                            <h2 className="my-3 border-t-4 text-xl">Tổng giá thuê: {Format_Currency(total_price)}</h2>
                         </div>
                     </div>
                 </div>

@@ -23,6 +23,7 @@ import { ListBike } from './pages/Admin/Bike/ListBike';
 
 import { AuthProvider } from './utils/authContext';
 import { AuthAdminProvider } from './utils/authAdminContext';
+import { User } from './pages/Admin/User/User';
 
 
 export const App = () => {
@@ -55,6 +56,7 @@ export const App = () => {
                         <Route path='branch/:branch_id/bike/:bike_id' element={<Bike_Detail />} />
                         <Route path='contract' element={<Contract />} />
                         <Route path='contract/:contract_id' element={<Contract_Detail />} />
+                        <Route path='user' element={<User />} />
                     </Route>
                 </Routes>
             </AuthAdminProvider>

@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import AuthContext from '../utils/authContext'
+import { Header } from '../components/Header';
 
 export const Profile = () => {
 
@@ -12,7 +13,8 @@ export const Profile = () => {
 
     return (
         <>
-            <div className='flex mt-28 bg-gray-200 justify-center'>
+            <Header />
+            <div className='flex mt-24 bg-gray-200 justify-center'>
                 <div className='flex w-full justify-center'>
                     <div className='flex bg-white flex-col w-2/3 '>
                         <div className='relative flex flex-col justify-center'>

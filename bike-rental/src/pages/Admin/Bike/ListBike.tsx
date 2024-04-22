@@ -216,7 +216,7 @@ export const ListBike = () => {
                                                 <td className="px-4 py-3">{bike.price}</td>
                                                 <td className="px-4 py-3 text-2xl">
                                                     {
-                                                        bike.status == 'true' ? <i className="bg-green-500 fa-regular fa-circle"></i> : <i className="bg-red-500 fa-regular fa-circle"></i>
+                                                        bike.status == 'AVAILABLE' ? <i className="bg-green-500 fa-regular fa-circle"></i> : <i className="bg-red-500 fa-regular fa-circle"></i>
                                                     }
                                                 </td>
                                                 <td className="px-4 py-3 text-2xl">

@@ -2,6 +2,7 @@
 import UserData from "../Admin/User/User";
 import BikeData from "../Admin/Bike/ListBike";
 import { Fragment } from "react";
+import { Header } from "../../components/Header";
 
 
 type FormProps = UserData & {
@@ -37,6 +38,7 @@ export const Info = ({
     return (
 
         <>
+            <Header />
             <div className="flex flex-row min-h-screen justify-center px-4">
                 <div className="bg-gray-100 border w-2/3 flex flex-col">
                     <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">THÔNG TIN</h2>
@@ -49,7 +51,7 @@ export const Info = ({
                                     placeholder="Nhập Họ Và Tên"
                                     id="full_name"
                                     name="full_name"
-                                    value={full_name}
+                                    value={full_name || ""}
                                     required
                                     onChange={e => updateFields({ full_name: e.target.value })}
                                 />
@@ -71,7 +73,7 @@ export const Info = ({
                                     type="email"
                                     name="email"
                                     id="email"
-                                    value={email}
+                                    value={email || ""}
                                     placeholder="Nhập Email"
                                     required
                                     onChange={e => updateFields({ email: e.target.value })}

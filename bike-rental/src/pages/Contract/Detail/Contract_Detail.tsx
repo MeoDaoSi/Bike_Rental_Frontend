@@ -8,6 +8,7 @@ import { SideBar } from '../../../components/SideBar';
 import { Header } from '../../../components/Admin/Header';
 import { Format_DateTime } from '../../../helpers/Format_DateTime';
 import { Format_Currency } from '../../../helpers/Format_Currency';
+import { TextColor } from '../../../helpers/TextColor';
 
 export default interface ContractData {
     _id: string,
@@ -24,6 +25,10 @@ export default interface ContractData {
     staff?: Partial<UserData>,
 }
 
+export default interface Contract_Detail {
+    imgUrl: string,
+}
+
 const INITIAL_DATA: ContractData = {
     _id: '',
     start_date: '',
@@ -35,6 +40,7 @@ const INITIAL_DATA: ContractData = {
     duration: 0,
     type: '',
     bikes: [],
+    imgUrl: '',
     user: {
         _id: '',
         full_name: '',
@@ -75,6 +81,36 @@ export const Contract_Detail = () => {
         fetchData();
     }, []);
 
+    const handleAddSubmit = async (e: any) => {
+        e.preventDefault();
+        try {
+            const res = await axiosClient.post(`/contract/${params.contract_id}/address`, contract);
+            console.log(res);
+            toast.success('Thêm Địa Chỉ Thành Công');
+            setContract(INITIAL_DATA);
+        } catch (error) {
+            console.log('Error');
+        }
+    }
+
+    const updateContract = async (e: any) => {
+        e.preventDefault();
+        try {
+            const res = await axiosClient.put(`/contract/${params.contract_id}`, {
+                ...contract,
+            });
+            console.log(res);
+            toast.success('Xác Nhận Thành Công', {
+                onClose: () => {
+                    window.location.reload();
+                }
+            });
+            setContract(INITIAL_DATA);
+        } catch (error) {
+            console.log('Error');
+        }
+    }
+
 
     return (
         <>
@@ -102,13 +138,18 @@ export const Contract_Detail = () => {
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                                 <div className="flex items-center space-x-3 w-full md:w-auto">
-                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2" type="button">
-                                        <i className="fa-solid fa-filter mr-1"></i>
-                                        Filter
+                                    <button id='createProductModal-button' data-modal-toggle='createProductModal' type="button" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-gray-500">
+                                        <i className="fa-solid fa-plus mr-1"></i>
+                                        Thêm Thông Tin
                                     </button>
-                                    <div id="filterDropdown" className="z-10 hidden w-56 rounded bg-gray-500">
-                                        <h1>hello</h1>
-                                    </div>
+                                    <button type="button" id="updateProductModalButton" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-green-500">
+                                        <i className="fa-solid fa-check mr-1"></i>
+                                        Xác Nhận
+                                    </button>
+                                    <button type="button" id="updateProductModalButton" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-red-500">
+                                        <i className="fa-solid fa-x mr-1"></i>
+                                        Từ Chối
+                                    </button>
                                 </div>
                             </div>
 
@@ -122,6 +163,7 @@ export const Contract_Detail = () => {
                                         <th scope="col" className="px-4 py-3">Thời Gian</th>
                                         <th scope="col" className="px-4 py-3">Địa Điểm</th>
                                         <th scope="col" className="px-4 py-3">Số Lượng</th>
+                                        <th scope="col" className="px-4 py-3">Trạng Thái</th>
                                         <th scope="col" className="px-4 py-3">Tổng Giá Thuê</th>
                                     </tr>
                                 </thead>
@@ -136,6 +178,7 @@ export const Contract_Detail = () => {
                                         </td>
                                         <td className="px-4 py-3">{contract.pickup_address}</td>
                                         <td className="px-4 py-3">{contract.bikes.length}</td>
+                                        <td className="px-4 py-3">{TextColor(contract.status)}</td>
                                         <td className="px-4 py-3">{Format_Currency(contract.total_price)}</td>
 
                                     </tr>
@@ -211,7 +254,121 @@ export const Contract_Detail = () => {
                     </div>
                 </div>
             </section>
+            {/* <!-- Create modal --> */}
+            <div id="createProductModal" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div className="relative p-4 w-full max-w-2xl max-h-full">
+                    {/* <!-- Modal content --> */}
+                    <div className="relative p-4 bg-white rounded-lg">
+                        {/* <!-- Modal header --> */}
+                        <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b">
+                            <h3 className="text-lg font-semibold">Thêm Địa Chỉ</h3>
+                            <button type="button" className="text-red-700" data-modal-target="createProductModal" data-modal-toggle="createProductModal">
+                                <i className="fa-solid fa-x text-xl"></i>
+                            </button>
+                        </div>
+                        {/* <!-- Modal body --> */}
+                        <form onSubmit={handleAddSubmit}>
+                            <div className="grid gap-4 mb-4 sm:grid-cols-2">
+                                <div>
+                                    <label htmlFor="address" className="block mb-2 text-sm font-medium">Thêm Thông Tin Người Thuê</label>
+                                    <input
+                                        type="file"
+                                        name="imgUrl"
+                                        accept="image/*"
+                                        id="imgUrl"
+                                        className="border rounded-lg block w-full p-2.5"
+                                        placeholder="Nhập địa chỉ"
+                                        required
+                                        onChange={(e) => { updateFields({ imgUrl: e.target.value }) }}
+                                    />
+                                </div>
+                            </div>
+                            <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">
+                                <i className="fa-solid fa-plus mr-1"></i>
+                                Thêm Mới
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {/* <!-- Update modal --> */}
+            <div id="updateProductModal" aria-hidden="true" className="z-40 hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div className="relative p-4 w-full max-w-2xl max-h-full">
+                    {/* <!-- Modal content --> */}
+                    <div className="relative p-4 bg-white rounded-lg">
+                        {/* <!-- Modal header --> */}
+                        <div className="flex justify-between items-center pb-4 mb-2 rounded-t border-b">
+                            <h3 className="text-lg font-semibold">Xác Nhận Thuê</h3>
+                            <button type="button" className="text-red-700" data-modal-target="updateProductModal" data-modal-toggle="updateProductModal">
+                                <i className="fa-solid fa-x text-xl"></i>
+                            </button>
+                        </div>
+                        {/* <!-- Modal body --> */}
+                        <form onSubmit={updateContract}>
+                            <div className="grid gap-4 mb-2 sm:grid-cols-2">
+                                <div>
+                                    Họ Tên : {contract.user?.full_name}
+                                </div>
+                                <div>
+                                    Email : {contract.user?.email}
+                                </div>
+                            </div>
+                            <div className="grid gap-4 mb-2 sm:grid-cols-2">
+                                <div>
+                                    Số Điện Thoại : {contract.user?.phone_number}
+                                </div>
+                                <div className="flex">
+                                    Địa Chỉ : {contract.user?.address}
+                                </div>
+                            </div>
+                            <div className="grid gap-4 mb-2 sm:grid-cols-2">
+                                <div>
+                                    Địa Chỉ Nhận Xe : {contract.pickup_address}
+                                </div>
+                                <div>
+                                    Địa Chỉ Trả Xe : {contract.return_address}
+                                </div>
+                            </div>
+                            <div className="grid gap-4 mb-2 sm:grid-cols-2">
+                                <div >
+                                    Ngày Thuê : {Format_DateTime(contract.start_date)}
+                                </div>
+                                <div>
+                                    Ngày Trả : {Format_DateTime(contract.end_date)}
+                                </div>
+                            </div>
+                            <div className="grid gap-4 mb-2 sm:grid-cols-2">
+                                <div >
+                                    Tổng Giá Thuê : {Format_Currency(contract.total_price)}
+                                </div>
+                                <label htmlFor="status"></label>
+                                <select
+                                    defaultValue='default'
+                                    name="status"
+                                    id="status"
+                                    required
+                                    onChange={e => {
+                                        updateFields({
+                                            status: e.target.value,
+                                        })
+                                    }}
 
+                                >
+                                    <option value="default" disabled>-- Thay Đổi Trạng Thái --</option>
+                                    <option value="APPROVED">APPROVED</option>
+                                    <option value="PROCESSING">PROCESSING</option>
+                                    <option value="COMPLETED">COMPLETED</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">
+                                <i className="fa-solid fa-check mr-1"></i>
+                                Xác Nhận
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

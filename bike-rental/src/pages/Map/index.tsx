@@ -52,11 +52,11 @@ export const Map = () => {
                                 <Popup className='map-popup-content'>
                                     <>
                                         <div className='left'>
-                                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1SGNN50inDZcOweium4llf4qacFBFgBK9sXW7fxQ_lBm6-Abcww' />
+                                            <img src='https://www.therentalbranch.com/assets/the-rental-branch-logo.png' />
                                         </div>
                                         <div className='right'>
                                             <b className='block'>Đây có gì hot?</b>
-                                            Một Popup có 1 cô gái tên là Lailah
+                                            Chi Nhánh Tại ...
                                         </div><div className='clearfix'></div>
                                     </>
 

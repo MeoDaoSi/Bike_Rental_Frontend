@@ -8,6 +8,7 @@ import UserData from '../Admin/User/User'
 import { axiosClient } from '../../apis/axiosClient'
 import { useNavigate } from 'react-router-dom'
 import AuthContext from "../../utils/authContext";
+import { toast } from 'react-toastify'
 
 type FormData = UserData & {
     pickup_id: string, // save _id of branch
@@ -56,10 +57,14 @@ export const RentBikeForm = () => {
     async function submit(e: React.FormEvent) {
         e.preventDefault();
         if (!isLastStep) return next();
-        if (data.cart.length === 0) return alert('Vui lòng chọn xe để thuê!');
+        if (data.cart.length === 0) return toast.error('Vui lòng chọn xe để đặt!');
         const contract = await axiosClient.post('/contract', data);
-        console.log(contract);
-        Navigate('/');
+        console.log(contract.data);
+        toast.success('Đặt xe thành công!', {
+            onClose: () => {
+                window.location.href = '/';
+            }
+        });
     }
     return (
         <>
