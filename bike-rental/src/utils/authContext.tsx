@@ -43,12 +43,20 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
             })
     }
 
-    async function register({ email, password, full_name }: Partial<UserData>) {
+    async function register({
+        email,
+        password,
+        full_name,
+        phone_number,
+        address,
+    }: Partial<UserData>) {
         try {
             const rs = await axiosClient.post('/auth/register', {
                 email,
                 password,
                 full_name: full_name,
+                phone_number: phone_number,
+                address: address
             })
             localStorage.setItem('access_token', rs.data.token);
             console.log(rs.data.token);

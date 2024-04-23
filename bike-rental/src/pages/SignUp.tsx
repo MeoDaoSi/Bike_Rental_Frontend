@@ -5,6 +5,8 @@ type Inputs = {
     email: string,
     password: string,
     full_name: string,
+    phone_number: number,
+    address: string,
     confirmPassword: string
 }
 type Errors = Partial<Record<keyof Inputs, string>>
@@ -15,6 +17,7 @@ export const SignUp = () => {
     const validate = (newInputs: Inputs): Errors => {
         const newErrors: Errors = {}
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regexPhoneNumber = /(|0[3|5|7|8|9])+([0-9]{8})\b/g;
 
         if (!emailPattern.test(newInputs.email)) {
             newErrors.email = "Vui lòng nhập email hợp lệ!"
@@ -31,15 +34,24 @@ export const SignUp = () => {
         if (newInputs.confirmPassword !== newInputs.password) {
             newErrors.confirmPassword = "Mật khẩu không khớp!"
         }
+        if (!regexPhoneNumber.test(newInputs.phone_number.toString()) || newInputs.phone_number.toString().length > 9) {
+            newErrors.phone_number = "Số điện thoại không hợp lệ!"
+        }
 
         return newErrors
     }
 
-    const [inputs, setInputs] = useState<Inputs>({ email: "", password: "", full_name: "", confirmPassword: "" })
+    const [inputs, setInputs] = useState<Inputs>({
+        email: "",
+        password: "",
+        full_name: "",
+        confirmPassword: "",
+        phone_number: 0,
+        address: ""
+    })
     const [errors, setErrors] = useState<Errors>(validate(inputs))
     const [touched, setTouched] = useState<Touched>({})
 
-    // const Navigate = useNavigate();
     const { register } = useContext(AuthContext);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -49,7 +61,9 @@ export const SignUp = () => {
             await register({
                 full_name: inputs.full_name,
                 email: inputs.email,
-                password: inputs.password
+                password: inputs.password,
+                phone_number: inputs.phone_number,
+                address: inputs.address
             });
 
         }
@@ -96,6 +110,38 @@ export const SignUp = () => {
                                         required
                                     />
                                     {errors.email && touched.email ? <small className="text-red-500">{errors.email}</small> : null}
+                                </div>
+
+                                <div className="input-box">
+                                    <span className="details">Số Điện Thoại</span>
+                                    <input
+                                        type="number"
+                                        value={inputs.phone_number}
+                                        onChange={(e) => {
+                                            setInputs({ ...inputs, phone_number: Number(e.target.value) })
+                                            setErrors(validate({ ...inputs, phone_number: Number(e.target.value) }))
+                                        }}
+                                        placeholder="Nhập SDT của bạn"
+                                        onBlur={() => setTouched({ ...touched, phone_number: true })}
+                                        required
+                                    />
+                                    {errors.phone_number && touched.phone_number ? <small className="text-red-500">{errors.phone_number}</small> : null}
+                                </div>
+
+                                <div className="input-box">
+                                    <span className="details">Nhập địa chỉ</span>
+                                    <input
+                                        type="text"
+                                        value={inputs.address}
+                                        onChange={(e) => {
+                                            setInputs({ ...inputs, address: e.target.value })
+                                            setErrors(validate({ ...inputs, address: e.target.value }))
+                                        }}
+                                        placeholder="Nhập địa chỉ của bạn"
+                                        onBlur={() => setTouched({ ...touched, address: true })}
+                                        required
+                                    />
+                                    {errors.address && touched.address ? <small className="text-red-500">{errors.address}</small> : null}
                                 </div>
 
                                 <div className="input-box">

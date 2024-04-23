@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { axiosClient } from "../../../apis/axiosClient";
 import { SideBar } from "../../../components/SideBar";
 import { Header } from "../../../components/Admin/Header";
+import { Format_DateTime } from "../../../helpers/Format_DateTime";
 
 export default interface UserData {
     _id?: string;
@@ -94,7 +95,6 @@ export const User = () => {
                                     <tr>
                                         <th scope="col" className="px-4 py-4">STT</th>
                                         <th scope="col" className="px-4 py-3">Họ Tên</th>
-                                        <th scope="col" className="px-4 py-3">Ngày Sinh</th>
                                         <th scope="col" className="px-4 py-3">Email</th>
                                         <th scope="col" className="px-4 py-3">Số Điện Thoại</th>
                                         <th scope="col" className="px-4 py-3">Địa Chỉ</th>
@@ -112,11 +112,10 @@ export const User = () => {
                                             <tr className="border-b dark:border-gray-700" key={i + 1}>
                                                 <td className="px-4 py-3">{i + 1}</td>
                                                 <td className="px-4 py-3">{e.full_name}</td>
-                                                <td className="px-4 py-3">{e.birth_date}</td>
                                                 <td className="px-4 py-3">{e.email}</td>
                                                 <td className="px-4 py-3">{e.phone_number}</td>
                                                 <td className="px-4 py-3">{e.address}</td>
-                                                <td className="px-4 py-3">{e.verify ? 'Đã Xác Nhận' : 'Chưa Xác Nhận'}</td>
+                                                <td className="px-4 py-3">{e.verify ? 'Tài Khoản tạo' : 'Chưa Tạo Tài Khoản'}</td>
                                                 <td className="px-4 py-3 flex items-center justify-end">
                                                     <a className='border rounded p-2' href={`/admin/branch/${e._id}`}>Chi tiết</a>
 
