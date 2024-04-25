@@ -11,9 +11,10 @@ import { Test } from './pages/Test';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { Map } from './pages/Map';
-import { Contract } from './pages/Contract';
-import { Contract_Detail } from './pages/Contract/Detail/Contract_Detail';
+import { Contract } from './pages/Admin/Contract';
+import { Contract_Detail } from './pages/Admin/Contract/Detail/Contract_Detail';
 import { Login } from './pages/Admin/Login';
+import { ProfileUser } from './pages/Admin/User/Detail';
 // import { AuthAdmin } from './middlewares/AuthAdmin';
 
 // import '../public/style.css'
@@ -57,6 +58,7 @@ export const App = () => {
                         <Route path='contract' element={<Contract />} />
                         <Route path='contract/:contract_id' element={<Contract_Detail />} />
                         <Route path='user' element={<User />} />
+                        <Route path='user/:user_id' element={<ProfileUser />} />
                     </Route>
                 </Routes>
             </AuthAdminProvider>

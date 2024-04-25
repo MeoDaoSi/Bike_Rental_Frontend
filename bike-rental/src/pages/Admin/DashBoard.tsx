@@ -1,7 +1,32 @@
 import { SideBar } from "../../components/SideBar"
 import { Header } from "../../components/Admin/Header"
+import { useEffect, useState } from "react"
+import { axiosClient } from "../../apis/axiosClient";
 
 export const Admin = () => {
+
+    const [user, setUser] = useState([]);
+    const [branch, setBranch] = useState([]);
+    const [contract, setContract] = useState([]);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const res = await axiosClient.get('/user');
+            setUser(res.data);
+        }
+        getUser();
+        const getBranch = async () => {
+            const res = await axiosClient.get('/branch');
+            setBranch(res.data);
+        }
+        getBranch();
+        const getContract = async () => {
+            const res = await axiosClient.get('/contract');
+            setContract(res.data);
+        }
+        getContract();
+    }, [])
+
     return (
         <>
             <SideBar />
@@ -17,7 +42,7 @@ export const Admin = () => {
                             <div className="flex justify-between mb-6">
                                 <div>
                                     <div className="flex items-center mb-1">
-                                        <div className="text-2xl font-semibold">2</div>
+                                        <div className="text-2xl font-semibold">{user.length}</div>
                                     </div>
                                     <div className="text-sm font-medium text-gray-400">Users</div>
                                 </div>
@@ -57,7 +82,7 @@ export const Admin = () => {
                                 {/* </div> */}
                             </div>
                             <a
-                                href="/gebruikers"
+                                href="/admin/user"
                                 className="text-[#f84525] font-medium text-sm hover:text-red-800"
                             >
                                 View
@@ -67,16 +92,16 @@ export const Admin = () => {
                             <div className="flex justify-between mb-4">
                                 <div>
                                     <div className="flex items-center mb-1">
-                                        <div className="text-2xl font-semibold">100</div>
-                                        <div className="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">
+                                        <div className="text-2xl font-semibold">{branch.length}</div>
+                                        {/* <div className="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">
                                             +30%
-                                        </div>
+                                        </div> */}
                                     </div>
-                                    <div className="text-sm font-medium text-gray-400">Companies</div>
+                                    <div className="text-sm font-medium text-gray-400">Branches</div>
                                 </div>
                             </div>
                             <a
-                                href="/dierenartsen"
+                                href="/admin/branch"
                                 className="text-[#f84525] font-medium text-sm hover:text-red-800"
                             >
                                 View
@@ -85,12 +110,12 @@ export const Admin = () => {
                         <div className="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                             <div className="flex justify-between mb-6">
                                 <div>
-                                    <div className="text-2xl font-semibold mb-1">100</div>
-                                    <div className="text-sm font-medium text-gray-400">Blogs</div>
+                                    <div className="text-2xl font-semibold mb-1">{contract.length}</div>
+                                    <div className="text-sm font-medium text-gray-400">Contracts</div>
                                 </div>
                             </div>
                             <a
-                                href=""
+                                href="/admin/contract"
                                 className="text-[#f84525] font-medium text-sm hover:text-red-800"
                             >
                                 View

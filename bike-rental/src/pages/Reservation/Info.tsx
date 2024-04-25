@@ -1,9 +1,13 @@
 // import { useNavigate } from 'react-router-dom';
 import UserData from "../Admin/User/User";
 import BikeData from "../Admin/Bike/ListBike";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Header } from "../../components/Header";
+import { Format_Currency } from "../../helpers/Format_Currency";
 
+type payment = {
+    payment: boolean
+}
 
 type FormProps = UserData & {
     pickup_address: string,
@@ -13,7 +17,8 @@ type FormProps = UserData & {
     cart: BikeData[],
     duration: number,
     total_price: number
-    updateFields: (fields: Partial<UserData>) => void,
+    updateFields: (fields: Partial<UserData> | payment) => void,
+    payment: boolean
 }
 
 export const Info = ({
@@ -29,10 +34,16 @@ export const Info = ({
     email,
     birth_date,
     phone_number,
-    address
+    address,
+    payment
 }: FormProps) => {
 
-    console.log(full_name);
+    const handleSelectPayment = () => {
+        updateFields({ payment: true });
+    }
+    const handleSelect = () => {
+        updateFields({ payment: false });
+    }
 
 
     return (
@@ -106,6 +117,19 @@ export const Info = ({
                             </div>
                         </div>
                     </div>
+                    <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">Phương Thức Thanh Toán</h2>
+                    <div className="mx-4">
+                        <button onClick={handleSelect} type="button"
+                            className={payment ? "border-2 rounded p-1 hover:bg-gray-400 mr-2" : "border-2 rounded p-1 bg-orange-400 mr-2"}
+                        >Thanh Toán Khi Nhận Xe
+                        </button>
+                        <button onClick={handleSelectPayment} type="button"
+                            className={payment ? "border-2 rounded p-1 bg-orange-400" : "border-2 rounded p-1 hover:bg-gray-400"}
+                        >
+                            Thanh Toán Online
+                        </button>
+                    </div>
+
                 </div>
                 <div className="ml-6 bg-gray-100 border w-96 flex flex-col">
                     <div className="h-64 mx-4 my-4 border">
@@ -139,7 +163,7 @@ export const Info = ({
                                     )
                                 })
                             }
-                            <h2 className="my-3 border-t-4 text-xl">Tổng giá thuê: {total_price}</h2>
+                            <h2 className="my-3 border-t-4 text-xl">Tổng giá thuê: {Format_Currency(total_price)}</h2>
                         </div>
                     </div>
                 </div>

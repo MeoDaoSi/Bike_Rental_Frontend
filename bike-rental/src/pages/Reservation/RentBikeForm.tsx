@@ -19,6 +19,7 @@ type FormData = UserData & {
     cart: BikeData[],
     duration: number,
     total_price: number,
+    payment: boolean
 }
 
 export const RentBikeForm = () => {
@@ -39,7 +40,8 @@ export const RentBikeForm = () => {
         birth_date: user?.birth_date || '',
         phone_number: user?.phone_number || undefined,
         address: user?.address || '',
-        role: 'USER'
+        role: 'USER',
+        payment: false
     }
 
     const Navigate = useNavigate();

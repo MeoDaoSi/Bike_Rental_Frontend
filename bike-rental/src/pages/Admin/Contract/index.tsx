@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { axiosClient } from '../../apis/axiosClient';
-import BikeData from '../Admin/Bike/ListBike';
-import UserData from '../Admin/User/User';
-import { SideBar } from '../../components/SideBar';
-import { Header } from '../../components/Admin/Header';
-import { TextColor } from '../../helpers/TextColor';
+import { axiosClient } from '../../../apis/axiosClient';
+import BikeData from '../Bike/ListBike';
+import UserData from '../User/User';
+import { SideBar } from '../../../components/SideBar';
+import { Header } from '../../../components/Admin/Header';
+import { TextColor } from '../../../helpers/TextColor';
 
 export default interface ContractData {
     _id: string,
@@ -17,6 +17,7 @@ export default interface ContractData {
     duration: number,
     type: string
     bikes: BikeData[],
+    createdAt: Date,
     user?: Partial<UserData>,
     staff?: Partial<UserData>,
 }
@@ -32,6 +33,7 @@ const INITIAL_DATA: ContractData = {
     duration: 0,
     type: '',
     bikes: [],
+    createdAt: new Date(),
     user: {
         _id: '',
         full_name: '',
@@ -91,7 +93,7 @@ export const Contract = () => {
 
                 <Header />
 
-                <h1 className="heading mt-16"><span>Danh Sách Cửa Hàng</span></h1>
+                <h1 className="heading mt-16"><span>Danh Sách Hợp Đồng Cho Thuê</span></h1>
                 <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
                     {/* <!-- Start coding here --> */}
                     <div className="bg-white rounded">

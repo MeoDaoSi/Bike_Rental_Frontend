@@ -11,6 +11,7 @@
     "build-css": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
   "dependencies": {
+    "apexcharts": "^3.49.0",
     "axios": "^1.6.7",
     "leaflet": "^1.9.4",
     "moment": "^2.30.1",

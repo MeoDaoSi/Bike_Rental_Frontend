@@ -1,14 +1,14 @@
 import { useState, useEffect, ReactNode, Fragment } from 'react';
-import { axiosClient } from '../../../apis/axiosClient';
-import BikeData from '../../Admin/Bike/ListBike';
-import UserData from '../../Admin/User/User';
+import { axiosClient } from '../../../../apis/axiosClient';
+import BikeData from '../../Bike/ListBike';
+import UserData from '../../User/User';
 import { useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { SideBar } from '../../../components/SideBar';
-import { Header } from '../../../components/Admin/Header';
-import { Format_DateTime } from '../../../helpers/Format_DateTime';
-import { Format_Currency } from '../../../helpers/Format_Currency';
-import { TextColor } from '../../../helpers/TextColor';
+import { SideBar } from '../../../../components/SideBar';
+import { Header } from '../../../../components/Admin/Header';
+import { Format_DateTime } from '../../../../helpers/Format_DateTime';
+import { Format_Currency } from '../../../../helpers/Format_Currency';
+import { TextColor } from '../../../../helpers/TextColor';
 
 export default interface ContractData {
     _id: string,
@@ -23,6 +23,7 @@ export default interface ContractData {
     bikes: BikeData[],
     user?: Partial<UserData>,
     staff?: Partial<UserData>,
+    createdAt: string,
 }
 
 export default interface Contract_Detail {
@@ -40,6 +41,7 @@ const INITIAL_DATA: ContractData = {
     duration: 0,
     type: '',
     bikes: [],
+    createdAt: '',
     imgUrl: '',
     user: {
         _id: '',
