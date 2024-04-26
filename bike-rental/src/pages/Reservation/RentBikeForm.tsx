@@ -6,9 +6,10 @@ import { Info } from './Info'
 import BikeData from '../Admin/Bike/ListBike'
 import UserData from '../Admin/User/User'
 import { axiosClient } from '../../apis/axiosClient'
-import { useNavigate } from 'react-router-dom'
+import { Router, useNavigate } from 'react-router-dom'
 import AuthContext from "../../utils/authContext";
 import { toast } from 'react-toastify'
+import { lang } from 'moment'
 
 type FormData = UserData & {
     pickup_id: string, // save _id of branch
@@ -61,12 +62,23 @@ export const RentBikeForm = () => {
         if (!isLastStep) return next();
         if (data.cart.length === 0) return toast.error('Vui lòng chọn xe để đặt!');
         const contract = await axiosClient.post('/contract', data);
-        console.log(contract.data);
-        toast.success('Đặt xe thành công!', {
-            onClose: () => {
-                window.location.href = '/';
-            }
-        });
+        if (!data.payment) {
+            toast.success('Đặt xe thành công!', {
+                onClose: () => {
+                    window.location.href = '/';
+                }
+            });
+        } else {
+            const result = await axiosClient.post('/payment/create_payment_url', {
+                contractId: contract.data._id,
+                amount: data.total_price,
+                bankCode: 'VNBANK',
+                language: 'vn',
+            });
+            console.log(result);
+            window.location.href = result.data;
+        }
+
     }
     return (
         <>
