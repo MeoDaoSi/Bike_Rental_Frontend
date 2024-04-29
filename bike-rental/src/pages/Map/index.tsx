@@ -1,6 +1,11 @@
 import './style.css'
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import { useState } from 'react';
+import 'leaflet-routing-machine';
+import LeafletRoutingMachine from './LeafletRoutingMachine';
+// import LeafletGeocoder from './LeafletGeocoder';
+import Locate from './Locate'
+// import * as L from 'leaflet';
 
 export const Map = () => {
 
@@ -14,25 +19,6 @@ export const Map = () => {
             popUp: 'test',
         },
     ]
-
-    function LocationMarker() {
-        const [position, setPosition] = useState(null)
-        const map = useMapEvents({
-            click() {
-                map.locate()
-            },
-            locationfound(e: any) {
-                setPosition(e.latlng)
-                map.flyTo(e.latlng, map.getZoom())
-            },
-        })
-
-        return position === null ? null : (
-            <Marker position={position}>
-                <Popup>You are here</Popup>
-            </Marker>
-        )
-    }
 
     return (
         <>
@@ -65,7 +51,10 @@ export const Map = () => {
                         )
                     })
                 }
-                <LocationMarker />
+                <Locate />
+                {/* <LocationMarker /> */}
+                {/* <LeafletGeocoder /> */}
+                <LeafletRoutingMachine />
             </MapContainer>
         </>
     )
