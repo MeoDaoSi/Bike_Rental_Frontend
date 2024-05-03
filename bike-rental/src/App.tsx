@@ -3,7 +3,8 @@ import { Home } from './pages/Home';
 
 import { Admin } from './pages/Admin/DashBoard';
 import { RentBikeForm } from './pages/Reservation/RentBikeForm';
-import { Profile } from './pages/Profile';
+import { Profile } from './pages/Profile/History';
+import { Info } from './pages/Profile/Info';
 import { Branch } from './pages/Admin/Branch/Branch';
 import { Branch_Detail } from './pages/Admin/Branch/Detail/Branch_Detail';
 import { Bike_Detail } from './pages/Admin/Bike/Detail/Bike_Detail';
@@ -42,7 +43,8 @@ export const App = () => {
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/reservation' element={<RentBikeForm />} />
                     <Route path='/test' element={<Test />} />
-                    <Route path='/profile' element={<Profile />} />
+                    <Route path='/profile/info' element={<Info />} />
+                    <Route path='/profile/history' element={<Profile />} />
                 </Routes>
             </AuthProvider>
 

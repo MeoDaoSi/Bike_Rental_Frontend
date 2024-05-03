@@ -114,7 +114,7 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
         isLoggedIn: !!token,
         login,
         logout,
-        register
+        register,
     };
 
     return (

@@ -52,7 +52,7 @@ export const Header: FunctionComponent = () => {
                                 <div id="filterDropdown" className="z-10 hidden w-48 rounded bg-white border-2">
                                     <ul className="m-2">
                                         <li className="hover:bg-gray-100 m-2 rounded">
-                                            <a href="profile">Thông Tin</a>
+                                            <a href="/profile/info">Thông Tin</a>
                                         </li>
                                         <li className="hover:bg-gray-100 m-2 rounded">
                                             <button onClick={handleLogout}>Đăng Xuất</button>

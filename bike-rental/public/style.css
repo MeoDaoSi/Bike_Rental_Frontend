@@ -33,7 +33,7 @@ html {
 }
 
 section {
-    padding: 2rem 9%;
+    padding: 0.5rem;
     background-color: #f1f1f1;
 }
 
@@ -128,7 +128,7 @@ section {
 
 .reviewsli {
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(202, 172, 172, 0.2);
     border-radius: 7px;
     padding: 30px;
     font-size: 18px;
@@ -822,7 +822,7 @@ section {
     }
 
     section {
-        padding: 2rem;
+        /* padding: 2rem; */
     }
 
 }

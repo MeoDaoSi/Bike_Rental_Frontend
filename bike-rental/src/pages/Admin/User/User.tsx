@@ -12,7 +12,7 @@ export default interface UserData {
     phone_number: number;
     address?: string;
     role: string;
-    verify?: boolean;
+    verified?: boolean;
 }
 
 const INITIAL_DATA: UserData = {
@@ -24,7 +24,7 @@ const INITIAL_DATA: UserData = {
     phone_number: 0,
     address: '',
     role: 'USER',
-    verify: false
+    verified: false
 }
 
 export const User = () => {
@@ -114,7 +114,7 @@ export const User = () => {
                                                 <td className="px-4 py-3">{e.email}</td>
                                                 <td className="px-4 py-3">{`0${e.phone_number}`}</td>
                                                 <td className="px-4 py-3">{e.address}</td>
-                                                <td className="px-4 py-3">{e.verify ? 'Tài Khoản tạo' : 'Chưa Tạo Tài Khoản'}</td>
+                                                <td className="px-4 py-3">{e.verified ? 'Đã Kích Hoạt' : 'Chưa Tạo Tài Khoản'}</td>
                                                 <td className="px-4 py-3 flex items-center justify-end">
                                                     <a className='border rounded p-2' href={`/admin/user/${e._id}`}>Chi Tiết</a>
 

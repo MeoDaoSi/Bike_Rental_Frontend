@@ -20,6 +20,7 @@ const INITIAL_DATA: ContractData = {
     type: '',
     bikes: [],
     createdAt: new Date(),
+    payment: false
 }
 
 export const ProfileUser = () => {
@@ -80,6 +81,7 @@ export const ProfileUser = () => {
                                         <th scope="col" className="px-4 py-3">Trạng Thái</th>
                                         <th scope="col" className="px-4 py-3">Ngày Đặt Xe</th>
                                         <th scope="col" className="px-4 py-3">Tổng Giá Thuê</th>
+                                        <th scope="col" className="px-4 py-3">Thanh Toán</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,6 +99,9 @@ export const ProfileUser = () => {
                                                 <td className="px-4 py-3">{TextColor(e.status)}</td>
                                                 <td className="px-4 py-3">{Format_DateTime(e.createdAt)}</td>
                                                 <td className="px-4 py-3">{Format_Currency(e.total_price)}</td>
+                                                {
+                                                    e.payment ? <td className="px-4 py-3 text-green-500">Đã Thanh Toán</td> : <td className="px-4 py-3">Chưa Thanh Toán</td>
+                                                }
 
                                             </tr>
                                         ))

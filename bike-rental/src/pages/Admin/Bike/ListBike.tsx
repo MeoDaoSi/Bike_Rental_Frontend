@@ -123,7 +123,7 @@ export const ListBike = () => {
                     {/* <!-- Start coding here --> */}
                     <div className="bg-white rounded">
                         <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                            <div className="w-full md:w-1/2">
+                            <div className="w-96">
                                 <form className="flex items-center">
                                     <label htmlFor="simple-search" className="sr-only">Search</label>
                                     <div className="relative w-full">
@@ -135,10 +135,14 @@ export const ListBike = () => {
                                 </form>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                                <div>
+                                    Tổng Xe: {bikes.length}
+                                </div>
                                 <button onClick={addModelButton} type="button" id="createProductModalButton" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-green-500">
                                     <i className="fa-solid fa-plus mr-1"></i>
                                     Thêm
                                 </button>
+
                                 <div className="flex items-center space-x-3 w-full md:w-auto">
                                     <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown" className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium bg-white rounded-lg border border-gray-200 " type="button">
                                         <i className="fa-solid fa-filter mr-2"></i>

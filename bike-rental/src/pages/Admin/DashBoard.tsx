@@ -2,19 +2,15 @@ import { SideBar } from "../../components/SideBar"
 import { Header } from "../../components/Admin/Header"
 import { useEffect, useState } from "react"
 import { axiosClient } from "../../apis/axiosClient";
+import { Format_Currency } from "../../helpers/Format_Currency";
 
 export const Admin = () => {
 
-    const [user, setUser] = useState([]);
     const [branch, setBranch] = useState([]);
     const [contract, setContract] = useState([]);
+    const [revenue, setRevenue] = useState(0);
 
     useEffect(() => {
-        const getUser = async () => {
-            const res = await axiosClient.get('/user');
-            setUser(res.data);
-        }
-        getUser();
         const getBranch = async () => {
             const res = await axiosClient.get('/branch');
             setBranch(res.data);
@@ -25,6 +21,12 @@ export const Admin = () => {
             setContract(res.data);
         }
         getContract();
+        const getRevenue = async () => {
+            const res = await axiosClient.get('/contract/revenue');
+            console.log(res);
+            setRevenue(res.data[0].total);
+        }
+        getRevenue();
     }, [])
 
     return (
@@ -42,24 +44,29 @@ export const Admin = () => {
                             <div className="flex justify-between mb-6">
                                 <div>
                                     <div className="flex items-center mb-1">
-                                        <div className="text-2xl font-semibold">{user.length}</div>
+                                        <div className="text-2xl font-semibold">{Format_Currency(revenue)}</div>
                                     </div>
-                                    <div className="text-sm font-medium text-gray-400">Users</div>
+                                    <div className="text-sm font-medium text-gray-400">Doanh Thu</div>
                                 </div>
-                                {/* <div className="dropdown">
+                                <div className="dropdown">
                                     <button
                                         type="button"
-                                        className="dropdown-toggle text-gray-400 hover:text-gray-600"
+                                        className="dropdown-toggle text-gray-400 hover:text-gray-600 text-sm"
+                                        id="dropdownMenuButton"
+                                        data-dropdown-toggle="filterDropdown"
                                     >
-                                        <i className="ri-more-fill" />
-                                    </button> */}
-                                {/* <ul className="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                                        Last 7 days
+                                        <i className="fa-solid fa-angle-down ml-1"></i>
+                                    </button>
+                                    <ul className="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]"
+                                        id="filterDropdown"
+                                    >
                                         <li>
                                             <a
                                                 href="#"
                                                 className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50"
                                             >
-                                                Profile
+                                                Last 7 days
                                             </a>
                                         </li>
                                         <li>
@@ -67,7 +74,7 @@ export const Admin = () => {
                                                 href="#"
                                                 className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50"
                                             >
-                                                Settings
+                                                Last 7 days
                                             </a>
                                         </li>
                                         <li>
@@ -75,14 +82,14 @@ export const Admin = () => {
                                                 href="#"
                                                 className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50"
                                             >
-                                                Logout
+                                                Last 7 days
                                             </a>
                                         </li>
-                                    </ul> */}
-                                {/* </div> */}
+                                    </ul>
+                                </div>
                             </div>
                             <a
-                                href="/admin/user"
+                                href="/admin/contract"
                                 className="text-[#f84525] font-medium text-sm hover:text-red-800"
                             >
                                 View
