@@ -16,7 +16,8 @@ import { Contract } from './pages/Admin/Contract';
 import { Contract_Detail } from './pages/Admin/Contract/Detail/Contract_Detail';
 import { Login } from './pages/Admin/Login';
 import { ProfileUser } from './pages/Admin/User/Detail';
-// import { AuthAdmin } from './middlewares/AuthAdmin';
+import { AuthAdmin } from './middlewares/AuthAdmin';
+import { AuthUser } from './middlewares/AuthUser';
 
 // import '../public/style.css'
 import './registerStyle.css'
@@ -43,16 +44,18 @@ export const App = () => {
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/reservation' element={<RentBikeForm />} />
                     <Route path='/test' element={<Test />} />
-                    <Route path='/profile/info' element={<Info />} />
-                    <Route path='/profile/history' element={<Profile />} />
+                    <Route path='/profile' element={<AuthUser />}>
+                        <Route path='info' element={<Info />} />
+                        <Route path='history' element={<Profile />} />
+                    </Route>
                 </Routes>
             </AuthProvider>
 
             <AuthAdminProvider>
                 <Routes>
                     <Route path='/admin/login' element={<Login />} />
-                    <Route path='/admin'>
-                        <Route index element={<Admin />} />
+                    <Route path='/admin' element={<AuthAdmin />}>
+                        <Route path='' element={<Admin />} />
                         <Route path='branch' element={<Branch />} />
                         <Route path='branch/:branch_id' element={<Branch_Detail />} />
                         <Route path='branch/:branch_id/bike' element={<ListBike />} />

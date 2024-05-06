@@ -66,6 +66,9 @@ export const ProfileUser = () => {
                                     <div className="">
                                         Số Lượt Đã Thuê: {contract.length}
                                     </div>
+                                    <div className="">
+                                        Tổng Tiền: {contract.length}
+                                    </div>
                                 </div>
                             </div>
 

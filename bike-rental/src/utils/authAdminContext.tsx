@@ -14,7 +14,7 @@ const INITIAL_ADMIN: Partial<UserData> = {
     role: ''
 }
 
-export const AuthAdminContext = createContext<any>({});
+const AuthAdminContext = createContext<any>({});
 
 export const AuthAdminProvider = ({ children }: AuthAdminContextProviderProps) => {
 
@@ -33,7 +33,11 @@ export const AuthAdminProvider = ({ children }: AuthAdminContextProviderProps) =
     }, [])
 
     async function getMe() {
-        await axiosClient.get('/auth/me')
+        await axiosClient.get('/auth/me', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('admin_token')}`
+            }
+        })
             .then((rs) => {
                 console.log(rs.data.user);
 
@@ -48,14 +52,30 @@ export const AuthAdminProvider = ({ children }: AuthAdminContextProviderProps) =
     async function login({ email, password }: Partial<UserData>) {
         try {
             const rs = await axiosClient.post('/auth/login', { email, password });
-            localStorage.setItem('admin_token', rs.data.token);
-            setToken(rs.data.token);
-            setAdmin(rs.data);
-            toast.success("Đăng nhập thành công", {
-                onClose: () => {
-                    window.location.href = "/admin";
-                }
-            });
+
+            console.log(rs.data.user.role);
+
+
+            if (rs.data.user.role == 'ADMIN') {
+                localStorage.setItem('admin_token', rs.data.token);
+                setToken(rs.data.token);
+                console.log(admin);
+                setAdmin(rs.data.user);
+                console.log(admin);
+
+                console.log(rs.data.user.role);
+                toast.success("Đăng nhập thành công", {
+                    onClose: () => {
+                        window.location.href = "/admin";
+                    }
+                });
+            } else {
+                toast.error('Bạn không có quyền truy cập trang này!', {
+                    onClose: () => {
+                        window.location.reload();
+                    }
+                });
+            }
         } catch (e) {
 
             toast.error('Đăng nhập thất bại!', {
@@ -72,18 +92,18 @@ export const AuthAdminProvider = ({ children }: AuthAdminContextProviderProps) =
         setAdmin({});
     }
 
-    const contextValue = {
-        admin,
-        token,
-        isLoggedIn: !!token,
-        isAdmin: admin?.role === 'ADMIN',
-        login,
-        logout,
-    };
-
     return (
-        <AuthAdminContext.Provider value={contextValue}>
+        <AuthAdminContext.Provider value={{
+            admin,
+            token,
+            isLoggedIn: !!token,
+            isAdmin: admin?.role == 'ADMIN',
+            login,
+            logout,
+        }}>
             {children}
         </AuthAdminContext.Provider>
     )
 }
+
+export default AuthAdminContext;

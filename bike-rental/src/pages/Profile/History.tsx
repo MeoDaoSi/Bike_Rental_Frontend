@@ -28,7 +28,6 @@ export const Profile = () => {
     const { user } = useContext(AuthContext);
 
     useLayoutEffect(() => {
-        console.log(user._id);
 
         const getContractByUserId = async () => {
             const contract = await axiosClient.get(`/contract/profile/${user._id}`);

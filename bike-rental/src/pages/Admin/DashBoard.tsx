@@ -147,12 +147,14 @@ export const Admin = () => {
                                         <thead>
                                             <tr>
                                                 <th className="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                    Role
+                                                    Tên
                                                 </th>
                                                 <th className="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                    Amount
+                                                    Số lượt thuê
                                                 </th>
-                                                <th className="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px" />
+                                                <th className="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px" >
+                                                    Doanh Thu
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -247,7 +249,7 @@ export const Admin = () => {
                         </div>
                         <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
                             <div className="flex justify-between mb-4 items-start">
-                                <div className="font-medium">Activities</div>
+                                <div className="font-medium">Hoạt Động</div>
                                 <div className="dropdown">
                                     <button
                                         type="button"

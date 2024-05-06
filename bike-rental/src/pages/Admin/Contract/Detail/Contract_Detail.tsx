@@ -360,6 +360,7 @@ export const Contract_Detail = () => {
                                     <option value="APPROVED">APPROVED</option>
                                     <option value="PROCESSING">PROCESSING</option>
                                     <option value="COMPLETED">COMPLETED</option>
+                                    <option value="REJECTED">REJECTED</option>
                                 </select>
                             </div>
 

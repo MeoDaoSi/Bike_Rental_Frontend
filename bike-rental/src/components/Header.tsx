@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext } from 'react'
 // import authUtils from '../utils/authUtils';
 // import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../utils/authContext';
+import AuthContext from '../utils/authContext';
 
 export const Header: FunctionComponent = () => {
 

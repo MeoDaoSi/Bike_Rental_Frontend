@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Header } from "../components/Header";
 
-import { AuthContext } from "../utils/authContext";
+import AuthContext from "../utils/authContext";
 
 export const SignIn = () => {
 

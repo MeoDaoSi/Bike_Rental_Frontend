@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { AuthContext } from "../utils/authContext";
+import AuthContext from "../utils/authContext";
 
 type Inputs = {
     email: string,

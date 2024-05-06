@@ -1,14 +1,13 @@
 import { useState, useContext } from "react";
 import { Header } from "../../../components/Header";
-import { AuthAdminContext } from "../../../utils/authAdminContext";
-import { Navigate } from "react-router-dom";
+import AuthAdminContext from "../../../utils/authAdminContext";
 
 export const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { login, isAdmin } = useContext(AuthAdminContext);
+    const { login } = useContext(AuthAdminContext);
 
     const handdleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -16,8 +15,6 @@ export const Login = () => {
         await login({ email, password });
 
     }
-
-    if (isAdmin) return <Navigate to="/admin" replace />
 
     return (
         <>
