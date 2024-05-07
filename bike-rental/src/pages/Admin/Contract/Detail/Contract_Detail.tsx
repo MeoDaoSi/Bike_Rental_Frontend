@@ -27,7 +27,7 @@ export default interface ContractData {
 }
 
 export default interface Contract_Detail {
-    imgUrl: string,
+    imgUrl: any,
 }
 
 const INITIAL_DATA: ContractData = {
@@ -42,7 +42,7 @@ const INITIAL_DATA: ContractData = {
     type: '',
     bikes: [],
     createdAt: '',
-    imgUrl: '',
+    imgUrl: {},
     user: {
         _id: '',
         full_name: '',
@@ -85,11 +85,17 @@ export const Contract_Detail = () => {
 
     const handleAddSubmit = async (e: any) => {
         e.preventDefault();
+        console.log(contract.imgUrl);
+        const formData = new FormData();
+        formData.append('file', contract.imgUrl); // Convert the object to a string
+        console.log(formData);
+
         try {
-            const res = await axiosClient.post(`/contract/${params.contract_id}/address`, contract);
+            const res = await fetch(`http://localhost:8888/contract/${params.contract_id}/upload`, {
+                method: 'POST',
+                body: formData,
+            })
             console.log(res);
-            toast.success('Thêm Địa Chỉ Thành Công');
-            setContract(INITIAL_DATA);
         } catch (error) {
             console.log('Error');
         }
@@ -263,28 +269,26 @@ export const Contract_Detail = () => {
                     <div className="relative p-4 bg-white rounded-lg">
                         {/* <!-- Modal header --> */}
                         <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b">
-                            <h3 className="text-lg font-semibold">Thêm Địa Chỉ</h3>
+                            <h3 className="text-lg font-semibold">Thêm Thông Tin Người Thuê</h3>
                             <button type="button" className="text-red-700" data-modal-target="createProductModal" data-modal-toggle="createProductModal">
                                 <i className="fa-solid fa-x text-xl"></i>
                             </button>
                         </div>
                         {/* <!-- Modal body --> */}
-                        <form onSubmit={handleAddSubmit}>
-                            <div className="grid gap-4 mb-4 sm:grid-cols-2">
-                                <div>
-                                    <label htmlFor="address" className="block mb-2 text-sm font-medium">Thêm Thông Tin Người Thuê</label>
-                                    <input
-                                        type="file"
-                                        name="imgUrl"
-                                        accept="image/*"
-                                        id="imgUrl"
-                                        className="border rounded-lg block w-full p-2.5"
-                                        placeholder="Nhập địa chỉ"
-                                        required
-                                        onChange={(e) => { updateFields({ imgUrl: e.target.value }) }}
-                                    />
-                                </div>
-                            </div>
+                        <form onSubmit={handleAddSubmit} encType='multipart/form-data'>
+                            <input
+                                type="file"
+                                name="imgUrl"
+                                accept="image/*"
+                                id="imgUrl"
+                                className="border rounded-lg block w-full p-2.5"
+                                required
+                                onChange={(e) => {
+                                    if (e.target.files) {
+                                        updateFields({ imgUrl: e.target.files[0] });
+                                    }
+                                }}
+                            />
                             <button type="submit" className="border bg-green-500 font-medium rounded-lg text-sm px-4 py-2">
                                 <i className="fa-solid fa-plus mr-1"></i>
                                 Thêm Mới

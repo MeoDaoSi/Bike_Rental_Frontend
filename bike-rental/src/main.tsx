@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom/client'
 import { App } from './App.tsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { MessengerChat } from "react-messenger-chat-plugin";
+// import { MessengerChat } from "react-messenger-chat-plugin";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
   <>
-    <MessengerChat
+    {/* <MessengerChat
       pageId="334884689697859"
-      language="sv_SE"
+      language="en_US"
       themeColor={"#000000"}
-      bottomSpacing={300}
+      bottomSpacing={20}
       loggedInGreeting="loggedInGreeting"
-      loggedOutGreeting="loggedOutGreeting"
+      loggedOutGreeting="Hello, How can we help you?"
       greetingDialogDisplay={"show"}
       debugMode={true}
       onMessengerShow={() => {
@@ -35,7 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       onMessengerLoad={() => {
         console.log("onMessengerLoad");
       }}
-    />
+    /> */}
     <ToastContainer />
     <App />
   </>

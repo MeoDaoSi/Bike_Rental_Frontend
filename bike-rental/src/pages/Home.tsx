@@ -1,8 +1,27 @@
 import { NavLink } from "react-router-dom";
 import { Header } from "../components/Header";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Footer } from "../components/Footer";
+import { Format_Currency } from "../helpers/Format_Currency";
+import { axiosClient } from "../apis/axiosClient";
 
 export const Home = () => {
+
+    const [branch, setBranch] = useState([]);
+    const [contract, setContract] = useState([]);
+
+    useEffect(() => {
+        const getBranch = async () => {
+            const res = await axiosClient.get('/branch');
+            setBranch(res.data);
+        }
+        getBranch();
+        const getContract = async () => {
+            const res = await axiosClient.get('/contract');
+            setContract(res.data);
+        }
+        getContract();
+    }, [])
 
     return (
         <>
@@ -22,15 +41,15 @@ export const Home = () => {
                 <div className="icons">
                     <i className="fas fa-home"></i>
                     <div className="content">
-                        <h3>150+</h3>
-                        <p>branches</p>
+                        <h3>{branch.length}+</h3>
+                        <p>Chi Nhánh</p>
                     </div>
                 </div>
 
                 <div className="icons">
                     <i className="fa-sharp fa-solid fa-person-biking"></i>
                     <div className="content">
-                        <h3>4770+</h3>
+                        <h3>{contract.length}+</h3>
                         <p>Bikes Rented</p>
                     </div>
                 </div>
@@ -59,21 +78,87 @@ export const Home = () => {
                     <div className="popular">
                         <header className="flex flex-col items-center mb-24">
                             <span className="block text-orange-500 font-medium mb-2">BẢNG GIÁ DỊCH VỤ</span>
-                            <h2 className="font-extrabold text-5xl">THUÊ XE ĐẠP</h2>
+                            <h2 className="font-extrabold text-5xl">XE MÁY</h2>
                         </header>
-                        <div className="flex">
-                            <div>
-                                <p>sssss</p>
+                        <div className="flex justify-between">
+                            <div className="mx-2">
+                                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <div>
+                                        <img className="p-8 rounded-t-lg" src="https://cdn.honda.com.vn/motorbike-versions/December2022/VlhEoBOm76qFSuONryD1.png" alt="product image" />
+                                    </div>
+                                    <div className="px-5 pb-5">
+                                        <div>
+                                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">SH350i</h5>
+                                        </div>
+                                        <div className="flex items-center mt-2.5 mb-5">
+                                            <span className="text-xl font-bold text-gray-900 dark:text-white">{Format_Currency(250000)} / ngày</span>
+                                        </div>
+                                        <div className="flex items-center justify-center">
+                                            <a href="/reservation" className="bg-gray-300 hover:bg-orange-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800">Đặt Xe</a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div>
-                                <p>sssss</p>
+                            <div className="mx-2">
+                                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <a href="#">
+                                        <img className="p-8 rounded-t-lg" src="https://cdn.honda.com.vn/motorbike-versions/November2023/GZxuAoXd6O0zJQCqeGAy.png" alt="product image" />
+                                    </a>
+                                    <div className="px-5 pb-5">
+                                        <a href="#">
+                                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Wave RSX</h5>
+                                        </a>
+                                        <div className="flex items-center mt-2.5 mb-5">
+                                            <span className="text-xl font-bold text-gray-900 dark:text-white">{Format_Currency(100000)} / ngày</span>
+                                        </div>
+                                        <div className="flex items-center justify-center">
+                                            <a href="/reservation" className="bg-gray-300 hover:bg-orange-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800">Đặt Xe</a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
-                            <div>
-                                <p>sssss</p>
-                            </div>
+                            <div className="mx-2">
+                                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <a href="#">
+                                        <img className="p-14 rounded-t-lg" src="https://cdn.honda.com.vn/motorbike-versions/January2024/BlUd66TAsY96NR72sWbo.jpg" alt="product image" />
+                                    </a>
+                                    <div className="px-5 pb-5">
+                                        <a href="#">
+                                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Future 125 FI</h5>
+                                        </a>
+                                        <div className="flex items-center mt-2.5 mb-5">
+                                            <span className="text-xl font-bold text-gray-900 dark:text-white">{Format_Currency(130000)} / ngày</span>
+                                        </div>
+                                        <div className="flex items-center justify-center">
+                                            <a href="/reservation" className="bg-gray-300 hover:bg-orange-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800">Đặt Xe</a>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div className="mx-2">
+                                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <a href="#">
+                                        <img className="p-14 rounded-t-lg" src="https://cdn.honda.com.vn/motorbike-versions/September2023/HNtWMUQe1hSi8Nd1H2gU.png" alt="product image" />
+                                    </a>
+                                    <div className="px-5 pb-5">
+                                        <a href="#">
+                                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Vision phiên bản cổ điển</h5>
+                                        </a>
+                                        <div className="flex items-center mt-2.5 mb-5">
+                                            <span className="text-xl font-bold text-gray-900 dark:text-white">{Format_Currency(150000)} / ngày</span>
+                                        </div>
+                                        <div className="flex items-center justify-center">
+                                            <a href="/reservation" className="bg-gray-300 hover:bg-orange-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-800">Đặt Xe</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -81,51 +166,7 @@ export const Home = () => {
                 </div>
             </div>
 
-            <section className="footer" id="footer">
-
-                <div className="box-container">
-
-                    <div className="box">
-                        <h3>our branches</h3>
-                        <a href="#"> <i className="fas fa-map-marker-alt"></i> Mirpur </a>
-                        <a href="#"> <i className="fas fa-map-marker-alt"></i> Farmgate </a>
-                        <a href="#"> <i className="fas fa-map-marker-alt"></i> Badda </a>
-                        <a href="#"> <i className="fas fa-map-marker-alt"></i> Aftabnagar </a>
-                        <a href="#"> <i className="fas fa-map-marker-alt"></i> Uttara </a>
-                    </div>
-
-                    <div className="box">
-                        <h3>quick links</h3>
-                        <a href="#"> <i className="fas fa-arrow-right"></i> home </a>
-                        <a href="#"> <i className="fas fa-arrow-right"></i> vehicles </a>
-                        <a href="#"> <i className="fas fa-arrow-right"></i> services </a>
-                        <a href="#"> <i className="fas fa-arrow-right"></i> featured </a>
-                        <a href="#"> <i className="fas fa-arrow-right"></i> reviews </a>
-                        <a href="#"> <i className="fas fa-arrow-right"></i> contact </a>
-                    </div>
-
-                    <div className="box">
-                        <h3>contact info</h3>
-                        <a href="#"> <i className="fas fa-phone"></i> +123-456-7890 </a>
-                        <a href="#"> <i className="fas fa-phone"></i> +111-222-3333 </a>
-                        <a href="#"> <i className="fas fa-envelope"></i> bikebook@gmail.com </a>
-                        <a href="#"> <i className="fas fa-map-marker-alt"></i> Aftabnagar, Badda, Dhaka </a>
-                    </div>
-
-                    <div className="box">
-                        <h3>contact info</h3>
-                        <a href="#"> <i className="fab fa-facebook-f"></i> facebook </a>
-                        <a href="#"> <i className="fab fa-twitter"></i> twitter </a>
-                        <a href="#"> <i className="fab fa-instagram"></i> instagram </a>
-                        <a href="#"> <i className="fab fa-linkedin"></i> linkedin </a>
-                        <a href="#"> <i className="fab fa-pinterest"></i> pinterest </a>
-                    </div>
-
-                </div>
-
-                <div className="credit"> Made with ❤️ | All rights reserved </div>
-
-            </section>
+            <Footer />
 
         </>
     )

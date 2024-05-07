@@ -28,7 +28,6 @@ import { AuthProvider } from './utils/authContext';
 import { AuthAdminProvider } from './utils/authAdminContext';
 import { User } from './pages/Admin/User/User';
 
-
 export const App = () => {
     return (
         <BrowserRouter>

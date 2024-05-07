@@ -765,7 +765,6 @@ section {
 
 .footer {
     background: var(--green);
-    padding-bottom: 8rem;
 }
 
 .footer .box-container {
@@ -799,7 +798,7 @@ section {
 .footer .credit {
     text-align: center;
     padding: 1.5rem;
-    padding-top: 2.5rem;
+    padding-top: 0.5rem;
     margin-top: 2rem;
     border-top: var(--border);
     font-size: 1.5rem;
