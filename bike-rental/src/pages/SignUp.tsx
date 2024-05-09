@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import AuthContext from "../utils/authContext";
+import { Header } from "../components/Header";
 
 type Inputs = {
     email: string,
@@ -72,7 +73,8 @@ export const SignUp = () => {
 
     return (
         <>
-            <div className="maincontainer">
+            <Header />
+            <div className="maincontainer mt-28">
                 <div className="firstcontainer">
                     <div className="titled"></div>
                     <div id="usersignin" style={{ display: "block" }} className="content">

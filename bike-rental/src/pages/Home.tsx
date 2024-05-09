@@ -76,8 +76,8 @@ export const Home = () => {
             <div className="bg-white">
                 <div className="main max-w-screen-xl mx-auto py-24 bg-white">
                     <div className="popular">
-                        <header className="flex flex-col items-center mb-24">
-                            <span className="block text-orange-500 font-medium mb-2">BẢNG GIÁ DỊCH VỤ</span>
+                        <header className="flex flex-col items-center mb-8">
+                            <span className="block text-orange-500 font-medium">BẢNG GIÁ DỊCH VỤ</span>
                             <h2 className="font-extrabold text-5xl">XE MÁY</h2>
                         </header>
                         <div className="flex justify-between">

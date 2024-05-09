@@ -42,8 +42,6 @@ export const Footer = () => {
 
                 </div>
 
-                <div className="credit"> Made with ❤️ | All rights reserved </div>
-
             </section>
         </>
     )
