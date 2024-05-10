@@ -13,6 +13,7 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
 
     // const Navigate = useNavigate();
 
+    const [isLoading, setIsLoading] = useState(true)
     const [token, setToken] = useState(localStorage.getItem('access_token') || null);
     const [user, setUser] = useState({});
 
@@ -24,6 +25,7 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
             if (token) {
                 await getMe();
             }
+            setIsLoading(false);
         })()
     }, [])
 
@@ -113,9 +115,14 @@ export function AuthProvider({ children }: AuthContextProviderProps) {
         token,
         isLoggedIn: !!token,
         login,
+        isLoading,
         logout,
         register,
     };
+
+    if (isLoading) {
+        return
+    }
 
     return (
         <AuthContext.Provider value={contextValue}>

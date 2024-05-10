@@ -1,16 +1,28 @@
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent, useContext, useState } from 'react'
 // import authUtils from '../utils/authUtils';
 // import { useNavigate } from 'react-router-dom';
 import AuthContext from '../utils/authContext';
+import { Modal } from 'flowbite';
+import { options } from '../helpers/optionModel';
 
 export const Header: FunctionComponent = () => {
 
     const { isLoggedIn, logout } = useContext(AuthContext);
+    const [openModal, setOpenModal] = useState(true);
 
     console.log(isLoggedIn);
 
     const handleLogout = async () => {
         logout();
+    }
+
+    const handle = () => {
+        const $modal = document.getElementById('filterDropdown');
+
+
+        const modal = new Modal($modal, options);
+
+        modal.show();
     }
 
 
@@ -43,21 +55,23 @@ export const Header: FunctionComponent = () => {
                                 <button className='mr-4'>
                                     <i className="fa-solid fa-bell text-xl text-white"></i>
                                 </button>
-                                <button type='button' id='filterDropdownButton' data-dropdown-toggle='filterDropdown' data-model-target='filterDropdown' >
-                                    <img className="w-8 h-8 rounded-full hover:opacity-80"
-                                        src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
-                                        alt="Rounded avatar">
-                                    </img>
-                                </button>
-                                <div id="filterDropdown" className="z-10 hidden w-48 rounded bg-white border-2">
-                                    <ul className="m-2">
-                                        <li className="hover:bg-gray-100 m-2 rounded">
-                                            <a href="/profile/info">Thông Tin</a>
-                                        </li>
-                                        <li className="hover:bg-gray-100 m-2 rounded">
-                                            <button onClick={handleLogout}>Đăng Xuất</button>
-                                        </li>
-                                    </ul>
+                                <div className=''>
+                                    <button onClick={handle} id='filterDropdownButton'  >
+                                        <img className="w-8 h-8 rounded-full hover:opacity-80 "
+                                            src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
+                                            alt="Rounded avatar">
+                                        </img>
+                                    </button>
+                                    <div id="filterDropdown" className="inline fixed z-50 hidden w-32 rounded bg-white border-2">
+                                        <ul className="m-2">
+                                            <li className="hover:bg-gray-100 m-2 rounded">
+                                                <a href="/profile/info">Thông Tin</a>
+                                            </li>
+                                            <li className="hover:bg-gray-100 m-2 rounded">
+                                                <button onClick={handleLogout}>Đăng Xuất</button>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </>
                             :

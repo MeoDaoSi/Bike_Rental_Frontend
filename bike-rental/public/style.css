@@ -249,7 +249,7 @@ section {
     left: 0;
     right: 0;
     padding: 1.5rem 9%;
-    z-index: 1000;
+    z-index: 1;
     background-color: #ffffff;
 }
 

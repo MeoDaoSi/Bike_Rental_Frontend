@@ -1,4 +1,4 @@
-import { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../utils/authContext'
 import { Header } from '../../components/Header';
 import { axiosClient } from '../../apis/axiosClient';
@@ -27,11 +27,16 @@ export const Profile = () => {
     const [contract, setContract] = useState([INITIAL_DATA]);
     const { user } = useContext(AuthContext);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
+
+        console.log(user);
+
 
         const getContractByUserId = async () => {
             const contract = await axiosClient.get(`/contract/profile/${user._id}`);
             setContract(contract.data);
+            console.log(contract.data);
+
 
         }
         getContractByUserId();
