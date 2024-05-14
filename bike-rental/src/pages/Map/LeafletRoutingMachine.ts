@@ -37,7 +37,7 @@ const LeafletRoutingMachine = () => {
 
             L.Routing.control({
                 waypoints: [
-                    L.latLng(position?.lat || 10.029437141007461, position?.lng || 105.77140922863863),
+                    L.latLng(position?.lat, position?.lng),
                     L.latLng(e.latlng.lat, e.latlng.lng)
                 ],
                 lineOptions: {

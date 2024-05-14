@@ -170,7 +170,7 @@ export const ListBike = () => {
                                                             return removeField({ status: e.target.value })
                                                     }}
                                                 />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Có Sẵn (56)</label>
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Có Sẵn</label>
                                             </li>
                                             <li className="flex items-center">
                                                 <input
@@ -185,7 +185,7 @@ export const ListBike = () => {
                                                             return removeField({ status: e.target.value })
                                                     }}
                                                 />
-                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Đã Thuê (56)</label>
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">Đã Thuê</label>
                                             </li>
                                         </ul>
                                     </div>

@@ -64,6 +64,7 @@ export const Contract_Detail = () => {
 
     const params = useParams();
     const [contract, setContract] = useState(INITIAL_DATA);
+    const [contractInfo, setContractInfo] = useState([]);
 
     const updateFields = (newFields: Partial<ContractData>) => {
         setContract(prev => ({ ...prev, ...newFields }))
@@ -81,6 +82,18 @@ export const Contract_Detail = () => {
             }
         }
         fetchData();
+
+        const getInfo = async () => {
+            try {
+                const rs = await axiosClient.get(`/contract/${params.contract_id}/upload`);
+                console.log(rs.data);
+                setContractInfo(rs.data)
+
+            } catch (error) {
+
+            }
+        }
+        getInfo()
     }, []);
 
     const handleAddSubmit = async (e: any) => {
@@ -133,7 +146,7 @@ export const Contract_Detail = () => {
                     {/* <!-- Start coding here --> */}
                     <div className="bg-white rounded">
                         <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                            <div className="w-full md:w-1/2">
+                            <div className="w-full md:w-96">
                                 <form className="flex items-center">
                                     <label htmlFor="simple-search" className="sr-only">Search</label>
                                     <div className="relative w-full">
@@ -146,6 +159,10 @@ export const Contract_Detail = () => {
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                                 <div className="flex items-center space-x-3 w-full md:w-auto">
+                                    <a href={`/admin/contract/${contract._id}/info`} className="flex items-center justify-center cursor-pointer">
+                                        <i className="fa-regular fa-eye mr-1"></i>
+                                        Thông Tin
+                                    </a>
                                     <button id='createProductModal-button' data-modal-toggle='createProductModal' type="button" className="flex border items-center justify-center font-medium rounded-lg text-sm px-4 py-2 bg-gray-500">
                                         <i className="fa-solid fa-plus mr-1"></i>
                                         Thêm Thông Tin
@@ -214,6 +231,26 @@ export const Contract_Detail = () => {
                                                     </td>
                                                     <td className="px-4 py-3">
                                                         {Format_Currency(element.price)}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </Fragment>
+                                    ))
+                                }
+                            </table>
+                            <table className="w-full text-sm text-left">
+                                {
+                                    contractInfo.map((element, index) => (
+                                        <Fragment key={index}>
+                                            <thead className="text-xs uppercase">
+                                                <tr>
+                                                    <th scope="col" className="px-4 py-3">Thông tin</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <td className="px-4 py-3">
+                                                        <img className='h-28' src={`http://localhost:8888/uploads/${(element as { imgUrl: string })?.imgUrl}`} alt="" />
                                                     </td>
                                                 </tr>
                                             </tbody>

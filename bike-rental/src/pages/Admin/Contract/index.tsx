@@ -53,12 +53,27 @@ const INITIAL_DATA: ContractData = {
 
 }
 
+type FilterData = {
+    status?: string
+}
+
+const initFilter: FilterData[] = []
+
 export const Contract = () => {
 
     const [contract, setContract] = useState([INITIAL_DATA]);
 
     const updateFields = (newFields: Partial<ContractData>) => {
         setContract(prev => ({ ...prev, ...newFields }))
+    }
+
+    const [selectedCategories, setSelectedCategories] = useState(initFilter);
+
+    const updateField = (newField: FilterData) => {
+        setSelectedCategories([...selectedCategories, newField]);
+    }
+    const removeField = (field: FilterData) => {
+        setSelectedCategories(selectedCategories.filter((category) => category.status !== field.status))
     }
 
     // const handleAddSubmit = async (e: React.FormEvent) => {
@@ -74,8 +89,15 @@ export const Contract = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            const searchParams = new URLSearchParams();
+            selectedCategories.forEach(category => {
+                if (category.status)
+                    searchParams.append('status', category.status);
+            });
+            console.log(searchParams);
+
             try {
-                const res = await axiosClient.get('/contract');
+                const res = await axiosClient.get(`/contract?${searchParams}`);
                 console.log(res);
                 setContract(res.data);
 
@@ -84,7 +106,7 @@ export const Contract = () => {
             }
         }
         fetchData();
-    }, []);
+    }, [selectedCategories]);
 
 
     return (
@@ -120,8 +142,75 @@ export const Contract = () => {
                                         <i className="fa-solid fa-filter mr-1"></i>
                                         Filter
                                     </button>
-                                    <div id="filterDropdown" className="z-10 hidden w-56 rounded bg-gray-500">
-                                        <h1>hello</h1>
+                                    <div id="filterDropdown" className="z-10 hidden w-56 p-3 bg-white rounded-lg">
+                                        <div className='flex justify-between'>
+                                            <h6 className="mb-3 text-sm font-medium">Category</h6>
+                                            <button className=''>
+                                                <h6 className="mb-3 text-sm font-medium">Clear</h6>
+                                            </button>
+                                        </div>
+                                        <ul className="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                                            <li className="flex items-center">
+                                                <input
+                                                    id="brand_1"
+                                                    type="checkbox"
+                                                    value="COMPLETED"
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={(e) => {
+                                                        if (e.target.checked)
+                                                            return updateField({ status: e.target.value })
+                                                        else
+                                                            return removeField({ status: e.target.value })
+                                                    }}
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">COMPLETE</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input
+                                                    id="brand_2"
+                                                    type="checkbox"
+                                                    value="PROCESSING"
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={(e) => {
+                                                        if (e.target.checked)
+                                                            return updateField({ status: e.target.value })
+                                                        else
+                                                            return removeField({ status: e.target.value })
+                                                    }}
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">PROCESSING</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input
+                                                    id="brand_2"
+                                                    type="checkbox"
+                                                    value="PENDING"
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={(e) => {
+                                                        if (e.target.checked)
+                                                            return updateField({ status: e.target.value })
+                                                        else
+                                                            return removeField({ status: e.target.value })
+                                                    }}
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">PENDING</label>
+                                            </li>
+                                            <li className="flex items-center">
+                                                <input
+                                                    id="brand_2"
+                                                    type="checkbox"
+                                                    value="REJECTED"
+                                                    className="w-4 h-4 rounded 0"
+                                                    onChange={(e) => {
+                                                        if (e.target.checked)
+                                                            return updateField({ status: e.target.value })
+                                                        else
+                                                            return removeField({ status: e.target.value })
+                                                    }}
+                                                />
+                                                <label htmlFor="apple" className="ml-2 text-sm font-medium">REJECTED</label>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +265,7 @@ export const Contract = () => {
                                 </tbody>
                             </table>
                         </div>
-                        {/* <nav className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
                             <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                                 Showing
                                 <span className="font-semibold text-gray-900 dark:text-white">1-10</span>
@@ -187,7 +276,7 @@ export const Contract = () => {
                                 <li>
                                     <a href="#" className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <span className="sr-only">Previous</span>
-                                        Icon
+                                        <i className="fa-solid fa-angle-left"></i>
                                     </a>
                                 </li>
                                 <li>
@@ -208,11 +297,11 @@ export const Contract = () => {
                                 <li>
                                     <a href="#" className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <span className="sr-only">Next</span>
-                                        Icon
+                                        <i className="fa-solid fa-angle-right"></i>
                                     </a>
                                 </li>
                             </ul>
-                        </nav> */}
+                        </div>
                     </div>
                 </div>
             </section>
