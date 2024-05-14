@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode, Fragment } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { axiosClient } from '../../../../apis/axiosClient';
 import BikeData from '../../Bike/ListBike';
 import UserData from '../../User/User';
@@ -24,6 +24,7 @@ export default interface ContractData {
     user?: Partial<UserData>,
     staff?: Partial<UserData>,
     createdAt: string,
+    updatedAt: string,
 }
 
 export default interface Contract_Detail {
@@ -42,6 +43,7 @@ const INITIAL_DATA: ContractData = {
     type: '',
     bikes: [],
     createdAt: '',
+    updatedAt: '',
     imgUrl: {},
     user: {
         _id: '',
@@ -108,7 +110,11 @@ export const Contract_Detail = () => {
                 method: 'POST',
                 body: formData,
             })
-            console.log(res);
+            toast.success('Thêm Thành Công', {
+                onClose: () => {
+                    window.location.reload();
+                }
+            })
         } catch (error) {
             console.log('Error');
         }
@@ -188,6 +194,7 @@ export const Contract_Detail = () => {
                                         <th scope="col" className="px-4 py-3">Thời Gian</th>
                                         <th scope="col" className="px-4 py-3">Địa Điểm</th>
                                         <th scope="col" className="px-4 py-3">Số Lượng</th>
+                                        <th scope="col" className="px-4 py-3">Ngày trả</th>
                                         <th scope="col" className="px-4 py-3">Trạng Thái</th>
                                         <th scope="col" className="px-4 py-3">Tổng Giá Thuê</th>
                                     </tr>
@@ -203,6 +210,7 @@ export const Contract_Detail = () => {
                                         </td>
                                         <td className="px-4 py-3">{contract.pickup_address}</td>
                                         <td className="px-4 py-3">{contract.bikes.length}</td>
+                                        <td className="px-4 py-3">{Format_DateTime(contract.updatedAt)}</td>
                                         <td className="px-4 py-3">{TextColor(contract.status)}</td>
                                         <td className="px-4 py-3">{Format_Currency(contract.total_price)}</td>
 
@@ -218,6 +226,7 @@ export const Contract_Detail = () => {
                                                     <th scope="col" className="px-4 py-3">{element.model}</th>
                                                     <th scope="col" className="px-4 py-3">Biển Số</th>
                                                     <th scope="col" className="px-4 py-3">Giá Thuê / Ngày</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>

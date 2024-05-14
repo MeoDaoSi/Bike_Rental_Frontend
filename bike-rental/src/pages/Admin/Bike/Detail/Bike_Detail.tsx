@@ -123,7 +123,7 @@ export const Bike_Detail = () => {
                                         <td className="px-4 py-3">{bike.license_plate}</td>
                                         <td className="px-4 py-3 text-2xl">
                                             {
-                                                bike.status == 'true' ? <i className="bg-green-500 fa-regular fa-circle"></i> : <i className="bg-red-500 fa-regular fa-circle"></i>
+                                                bike.status == 'AVAILABLE' ? <i className="bg-green-500 fa-regular fa-circle"></i> : <i className="bg-red-500 fa-regular fa-circle"></i>
                                             }
                                         </td>
                                         <td className="px-4 py-3 text-2xl">

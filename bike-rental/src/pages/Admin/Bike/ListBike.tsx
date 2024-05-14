@@ -387,7 +387,6 @@ export const ListBike = () => {
                                         id="license_plate"
                                         className="border rounded-lg block w-full p-2.5"
                                         placeholder="Nhập Biển số Xe"
-                                        required
                                         onChange={(e) => { updateFields({ license_plate: e.target.value }) }}
                                     />
                                 </div>

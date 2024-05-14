@@ -36,7 +36,8 @@ export const Motorcycle = ({
     total_price
 }: BikeFormProps) => {
 
-    const [bikes, setBikes] = useState(INITIAL_DATA)
+    const [bikes, setBikes] = useState(INITIAL_DATA);
+    const [type, setType] = useState('MOTORCYCLE');
 
     function handleClick(bike: BikeData) {
         if (cart.length == 2) {
@@ -64,7 +65,7 @@ export const Motorcycle = ({
         const getData = async () => {
             try {
                 const data = await axiosClient.get(
-                    `/branch/bike/${pickup_id}/book?${start_date}=${start_date}&${end_date}=${end_date}`
+                    `/branch/bike/${pickup_id}/book?${start_date}=${start_date}&${end_date}=${end_date}&type=${type}`
                 );
                 console.log(data.data);
                 setBikes(data.data);
@@ -73,7 +74,7 @@ export const Motorcycle = ({
             }
         }
         getData();
-    }, [])
+    }, [type])
 
 
     return (
@@ -81,7 +82,20 @@ export const Motorcycle = ({
             <Header />
             <div className="flex flex-row min-h-screen justify-center px-4">
                 <div className=" bg-gray-100 border w-2/3 flex flex-col">
-                    <h2 className="mx-3 my-3 border-b-4 inline-block text-xl">THUÊ XE</h2>
+                    <h2 className="flex justify-between mx-3 my-3 border-b-4 text-xl">
+                        THUÊ XE
+                        <select
+                            className='rounded m-1'
+                            name="type"
+                            id="type"
+                            onChange={e => {
+                                setType(e.target.value)
+                            }}
+                        >
+                            <option className='m-1' value="MOTORCYCLE">XE MÁY</option>
+                            <option className='m-1' value="BICYCLE">XE ĐẠP</option>
+                        </select>
+                    </h2>
 
                     {
                         bikes.map((bike, index) => {

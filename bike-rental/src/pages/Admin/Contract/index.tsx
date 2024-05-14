@@ -5,6 +5,7 @@ import UserData from '../User/User';
 import { SideBar } from '../../../components/SideBar';
 import { Header } from '../../../components/Admin/Header';
 import { TextColor } from '../../../helpers/TextColor';
+import { useSearchParams } from 'react-router-dom';
 
 export default interface ContractData {
     _id: string,
@@ -62,6 +63,8 @@ const initFilter: FilterData[] = []
 export const Contract = () => {
 
     const [contract, setContract] = useState([INITIAL_DATA]);
+    const [query, setQuery] = useSearchParams();
+    const [searchValue, setSearchValue] = useState("")
 
     const updateFields = (newFields: Partial<ContractData>) => {
         setContract(prev => ({ ...prev, ...newFields }))
@@ -90,23 +93,35 @@ export const Contract = () => {
     useEffect(() => {
         const fetchData = async () => {
             const searchParams = new URLSearchParams();
+            console.log(searchValue);
+
             selectedCategories.forEach(category => {
                 if (category.status)
                     searchParams.append('status', category.status);
             });
-            console.log(searchParams);
 
             try {
-                const res = await axiosClient.get(`/contract?${searchParams}`);
+                const res = await axiosClient.get(`/contract?${searchParams}&page=${query.get('p')}`);
                 console.log(res);
                 setContract(res.data);
+                if (searchValue) {
+                    const result = contract.filter(e => {
+                        if (e.user?.email?.toLowerCase().includes(searchValue.toLowerCase())) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    console.log(result);
+
+                    setContract(result);
+                }
 
             } catch (error) {
                 console.log('Error');
             }
         }
         fetchData();
-    }, [selectedCategories]);
+    }, [selectedCategories, searchValue]);
 
 
     return (
@@ -123,15 +138,21 @@ export const Contract = () => {
                     <div className="bg-white rounded">
                         <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                             <div className="w-full md:w-1/2">
-                                <form className="flex items-center">
-                                    <label htmlFor="simple-search" className="sr-only">Search</label>
-                                    <div className="relative w-full">
-                                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                            <i className="fa-solid fa-magnifying-glass"></i>
-                                        </div>
-                                        <input type="text" id="simple-search" className="border text-sm rounded-lg block w-full pl-10 p-2" placeholder="Search" required />
+                                <label htmlFor="simple-search" className="sr-only">Search</label>
+                                <div className="relative w-full">
+                                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <i className="fa-solid fa-magnifying-glass"></i>
                                     </div>
-                                </form>
+                                    <input
+                                        type="text"
+                                        id="simple-search"
+                                        className="border text-sm rounded-lg block w-full pl-10 p-2"
+                                        placeholder="Search"
+                                        required
+                                        onChange={(e) => setSearchValue(e.target.value)}
+                                        value={searchValue}
+                                    />
+                                </div>
                             </div>
                             <div className="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                                 <div className="flex items-center space-x-3 w-full md:w-auto">
@@ -267,10 +288,10 @@ export const Contract = () => {
                         </div>
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
                             <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                Showing
-                                <span className="font-semibold text-gray-900 dark:text-white">1-10</span>
-                                of
-                                <span className="font-semibold text-gray-900 dark:text-white">1000</span>
+                                Từ
+                                <span className="font-semibold text-gray-900 dark:text-white mx-1 ">1</span>
+                                đến
+                                <span className="font-semibold text-gray-900 dark:text-white mx-1">10</span>
                             </span>
                             <ul className="inline-flex items-stretch -space-x-px">
                                 <li>
@@ -280,19 +301,19 @@ export const Contract = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                                    <a href="/admin/contract" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                                    <a href="/admin/contract?p=2" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
                                 </li>
                                 <li>
-                                    <a href="#" aria-current="page" className="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                                    <a href="/admin/contract?p=3" aria-current="page" className="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
                                 </li>
                                 <li>
                                     <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+                                    <a href="#" className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">10</a>
                                 </li>
                                 <li>
                                     <a href="#" className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
