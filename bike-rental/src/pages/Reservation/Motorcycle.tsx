@@ -38,6 +38,7 @@ export const Motorcycle = ({
 
     const [bikes, setBikes] = useState(INITIAL_DATA);
     const [type, setType] = useState('MOTORCYCLE');
+    const [ascending, setAscending] = useState('1');
 
     function handleClick(bike: BikeData) {
         if (cart.length == 2) {
@@ -65,7 +66,7 @@ export const Motorcycle = ({
         const getData = async () => {
             try {
                 const data = await axiosClient.get(
-                    `/branch/bike/${pickup_id}/book?${start_date}=${start_date}&${end_date}=${end_date}&type=${type}`
+                    `/branch/bike/${pickup_id}/book?start_date=${start_date}&end_date=${end_date}&type=${type}&price=${ascending}`
                 );
                 console.log(data.data);
                 setBikes(data.data);
@@ -74,7 +75,7 @@ export const Motorcycle = ({
             }
         }
         getData();
-    }, [type])
+    }, [type, ascending])
 
 
     return (
@@ -84,17 +85,30 @@ export const Motorcycle = ({
                 <div className=" bg-gray-100 border w-2/3 flex flex-col">
                     <h2 className="flex justify-between mx-3 my-3 border-b-4 text-xl">
                         THUÊ XE
-                        <select
-                            className='rounded m-1'
-                            name="type"
-                            id="type"
-                            onChange={e => {
-                                setType(e.target.value)
-                            }}
-                        >
-                            <option className='m-1' value="MOTORCYCLE">XE MÁY</option>
-                            <option className='m-1' value="BICYCLE">XE ĐẠP</option>
-                        </select>
+                        <div>
+                            <select
+                                className='rounded m-1'
+                                name="type"
+                                id="type"
+                                onChange={e => {
+                                    setType(e.target.value)
+                                }}
+                            >
+                                <option className='m-1' value="MOTORCYCLE">XE MÁY</option>
+                                <option className='m-1' value="BICYCLE">XE ĐẠP</option>
+                            </select>
+                            <select
+                                className='rounded m-1'
+                                name="ascending"
+                                id="ascending"
+                                onChange={e => {
+                                    setAscending(e.target.value)
+                                }}
+                            >
+                                <option className='m-1' value="1">Giá Tăng Dần</option>
+                                <option className='m-1' value="-1">Giá Giảm Dần</option>
+                            </select>
+                        </div>
                     </h2>
 
                     {
